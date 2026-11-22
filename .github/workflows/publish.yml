@@ -50,8 +50,8 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Build native renderer
         env:
-          MACOSX_DEPLOYMENT_TARGET: "15.0"
-          GEA_MACOS_JOBS: "3"
+          MACOSX_DEPLOYMENT_TARGET: '15.0'
+          GEA_MACOS_JOBS: '3'
         run: |
           npm ci --ignore-scripts
           npm ci --ignore-scripts --prefix ../cli
@@ -62,6 +62,7 @@ jobs:
           npm ci --ignore-scripts --prefix ../compiler
           npm run build --prefix ../compiler
           npm run check
+          npm run format:check
           mkdir -p dist/prebuilt
           npm run render -- fixtures/card.html --width 480 --height 220 --out dist/card.png
           ditto 'dist/macos/html-renderer/Gea HTML Renderer.app' 'dist/prebuilt/Gea HTML Renderer.app'

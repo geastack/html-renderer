@@ -1,6 +1,8 @@
 # Contributing
 
-Run `npm ci --ignore-scripts` and `npm run check` before opening a pull request.
+Run `npm ci --ignore-scripts` to install development dependencies. Use
+`npm run format` to apply ESLint and Prettier fixes, then run
+`npm run format:check` and `npm run check` before opening a pull request.
 
 To build from source on macOS, put the GeaStack `cli`, `compiler`, `core`, and
 `apple` checkouts beside this repository. See the publish workflow for the

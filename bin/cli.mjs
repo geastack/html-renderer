@@ -17,18 +17,28 @@ try {
   })
   const [input] = positionals
   const { out } = values
+
   if (values.help) {
     console.log(usage)
   } else {
-    if (positionals.length !== 1 || !out) throw new Error(usage)
+    if (positionals.length !== 1 || !out) {
+      throw new Error(usage)
+    }
+
     const width = Number(values.width)
     const height = Number(values.height)
     const dpr = Number(values.dpr)
-    if (![width, height].every(n => Number.isSafeInteger(n) && n > 0)) {
+
+    if (![width, height].every((n) => Number.isSafeInteger(n) && n > 0)) {
       throw new Error('Width and height must be positive integers')
     }
-    if (!Number.isFinite(dpr) || dpr <= 0) throw new Error('DPR must be a positive number')
+
+    if (!Number.isFinite(dpr) || dpr <= 0) {
+      throw new Error('DPR must be a positive number')
+    }
+
     const renderer = openRenderer()
+
     try {
       await renderer.capture({ input, out, width, height, dpr })
     } finally {

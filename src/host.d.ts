@@ -1,10 +1,14 @@
-declare function htmlInput(): string
-declare function htmlRead(path: string): string
-declare function htmlResolve(source: string, relative: string): string
-declare function htmlRule(selector: string, property: string, value: string): void
-declare function htmlBeginRules(): void
-declare function htmlEndRules(): void
-declare function htmlFont(family: string, path: string): void
-declare function htmlFail(message: string): void
-declare function htmlMount(root: import('@geastack/core').Element): void
-declare function htmlInline(element: import('@geastack/core').Element, property: string, value: string): void
+import type { Element } from '@geastack/core'
+
+declare global {
+  function htmlInput(): string
+  function htmlRead(path: string): string
+  function htmlResolve(source: string, relative: string): string
+  function htmlRule(selector: string, property: string, value: string): void
+  function htmlBeginRules(): void
+  function htmlEndRules(): void
+  function htmlFont(family: string, path: string): void
+  function htmlFail(message: string): void
+  function htmlMount(root: Element): void
+  function htmlInline(element: Element, property: string, value: string): void
+}
