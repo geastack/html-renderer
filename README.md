@@ -1,39 +1,70 @@
 # Gea HTML Renderer
 
-A macOS prototype that loads local HTML as a Gea document. One TypeScript
-application builds the node tree at runtime, and Gea's existing software
-renderer lays it out and captures a PNG.
+Render local HTML and CSS to PNG with GeaStack's native macOS renderer.
+The Node client keeps a native worker open for repeated captures.
 
-The Node client is available as [`@geastack/html-renderer`](https://www.npmjs.com/package/@geastack/html-renderer).
+## Install from npm
 
-This prototype uses the sibling `cli`, `compiler`, `core`, and `apple`
-checkouts in the GeaStack workspace. The Apple checkout must have runtime
-font registration enabled. The sample includes its Barlow font and license.
+```sh
+npm install @geastack/html-renderer
+```
+
+The [npm package](https://www.npmjs.com/package/@geastack/html-renderer)
+includes the typed Node client and renderer source. It requires a compiled
+macOS renderer executable. If you need to build one, see
+[Build the native renderer](#build-the-native-renderer).
+
+## Render a page
+
+Set `GEA_HTML_RENDERER` to the executable inside the built macOS app bundle.
+Save this example as `capture.mjs` and run `node capture.mjs` with a local
+`page.html` in your working directory.
+
+```js
+import { openRenderer } from '@geastack/html-renderer'
+
+const executable = process.env.GEA_HTML_RENDERER
+if (!executable) throw new Error('Set GEA_HTML_RENDERER to the native executable path')
+
+const renderer = openRenderer(executable)
+try {
+  await renderer.capture({
+    input: './page.html',
+    out: './page.png',
+    width: 1920,
+    height: 1080,
+  })
+} finally {
+  await renderer.close()
+}
+```
+
+Calls to `capture()` run in order. A failed capture rejects its promise and
+the worker can handle the next request. Each capture reloads the document by
+default. Set `reusePage: true` to capture the already mounted page again when
+the input path, viewport, and DPR match.
+
+## Build the native renderer
+
+For this version, build from the source checkout on macOS with the GeaStack
+`cli`, `compiler`, `core`, and `apple` repos beside it. Use the versions
+that include native worker and runtime font support.
+
+From the `html-renderer` checkout:
 
 ```sh
 npm ci
-npm run check
 mkdir -p dist
 npm run render -- fixtures/card.html --width 480 --height 220 --out dist/card.png
-npm run render -- fixtures/card.html --reuse --width 600 --height 220 --out dist/wide.png
+export GEA_HTML_RENDERER="$PWD/dist/macos/html-renderer/Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer"
 ```
 
-The first command that renders builds the loader. With `--reuse`, different
-HTML files and viewport sizes can use the same executable. Asset paths in
-HTML are relative to the HTML file. Font paths in CSS are relative to their
-stylesheet.
+The first render builds the executable. Pass `--reuse` on subsequent CLI
+captures to use that build with a different input file or viewport size.
 
-The loader handles explicitly closed elements, void elements, text, common
-named entities, local images, inline styles, style blocks, linked
-stylesheets, and single-source local `@font-face` rules. It uses Gea's own
-selector, property, layout, and paint support. Browser HTML error recovery,
-JavaScript, remote assets, and nested CSS at-rules are outside this
-prototype's input profile.
+## Persistent worker protocol
 
-## Persistent worker
-
-Build the renderer once using the first command above. Then send one JSON
-request per line to the native renderer through the wrapper.
+For clients that need the wire protocol, send one JSON request per line.
 
 ```sh
 node render.mjs --serve <<'JSON'
@@ -42,44 +73,18 @@ node render.mjs --serve <<'JSON'
 JSON
 ```
 
-Each request returns one JSON reply on stdout. Errors include an `error`
-message and leave the worker available for later requests. Diagnostics go
-to stderr. Close stdin to stop the worker.
+Each request receives one JSON reply on stdout. Errors include an `error`
+message. Diagnostics go to stderr. Close stdin to stop the worker.
 
-By default each request loads the HTML and assets again into a fresh Gea
-tree. The process, framebuffer allocation, and matching font caches can
-survive across requests. Set `reusePage` to capture the currently mounted
-static page again when the input path, viewport, and DPR match. This skips
-reloading the files. Request a normal capture to pick up edits.
+## Supported input
 
-## Node API
-
-Install the typed worker client with npm. Supply the macOS executable built
-from this repository.
-
-```sh
-npm install @geastack/html-renderer
-```
-
-```js
-import { openRenderer } from '@geastack/html-renderer'
-
-const renderer = openRenderer('/absolute/path/to/Gea HTML Renderer')
-try {
-  const result = await renderer.capture({
-    input: '/absolute/path/to/page.html',
-    out: '/absolute/path/to/page.png',
-    width: 480,
-    height: 220,
-  })
-  console.log(result.ms)
-} finally {
-  await renderer.close()
-}
-```
-
-Calls to `capture()` are handled in order. A failed capture rejects its
-promise and leaves the worker available for the next request.
+The loader handles explicitly closed elements, void elements, text, common
+named entities, local images, inline styles, style blocks, linked stylesheets,
+and single-source local `@font-face` rules. HTML assets resolve relative to the
+HTML file. Font paths resolve relative to their stylesheet. Rendering uses
+Gea's selector, property, layout, and paint support. The prototype does not
+execute page JavaScript, fetch remote assets, implement browser HTML error
+recovery, or handle nested CSS at-rules.
 
 ## License
 
