@@ -4,6 +4,8 @@ A macOS prototype that loads local HTML as a Gea document. One TypeScript
 application builds the node tree at runtime, and Gea's existing software
 renderer lays it out and captures a PNG.
 
+The Node client is available as [`@geastack/html-renderer`](https://www.npmjs.com/package/@geastack/html-renderer).
+
 This prototype uses the sibling `cli`, `compiler`, `core`, and `apple`
 checkouts in the GeaStack workspace. The Apple checkout must have runtime
 font registration enabled. The sample includes its Barlow font and license.
@@ -52,8 +54,12 @@ reloading the files. Request a normal capture to pick up edits.
 
 ## Node API
 
-The npm package exposes a typed worker client. Supply the macOS executable
-built from this repository.
+Install the typed worker client with npm. Supply the macOS executable built
+from this repository.
+
+```sh
+npm install @geastack/html-renderer
+```
 
 ```js
 import { openRenderer } from '@geastack/html-renderer'
