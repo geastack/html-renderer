@@ -1,7 +1,5 @@
 name: Publish
 
-# Merging main into `release` publishes every package whose version is not
-# on npm yet. Tests run locally (release:check) before that merge.
 on:
   push:
     branches: [release]
@@ -14,13 +12,94 @@ concurrency: publish
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: macos-15
+    defaults:
+      run:
+        working-directory: html-renderer
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: html-renderer
+      - uses: actions/checkout@v4
+        with:
+          repository: geastack/cli
+          ref: 285e7edaf677e514e3dadf063ac338574b9e9dee
+          path: cli
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: geastack/core
+          ref: 95c04a10360399426ffd9856215a256a46a56022
+          path: core
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: geastack/apple
+          ref: 6a50cda0854451e39a84f2996e1a1c005db60fdf
+          path: apple
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: geastack/compiler
+          ref: f97e0d3a36fd2d7df262df9e1e371f21893bf67d
+          path: compiler
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
+      - name: Build native renderer
+        env:
+          MACOSX_DEPLOYMENT_TARGET: "15.0"
+          GEA_MACOS_JOBS: "3"
+        run: |
+          npm ci --ignore-scripts
+          npm ci --ignore-scripts --prefix ../cli
+          npm ci --ignore-scripts --prefix ../core/packages/core
+          npm ci --ignore-scripts --prefix ../apple
+          npm ci --ignore-scripts --prefix ../apple/packages/geastack-apple
+          npm run build --prefix ../apple/packages/geastack-apple
+          npm ci --ignore-scripts --prefix ../compiler
+          npm run build --prefix ../compiler
+          npm run check
+          mkdir -p dist/prebuilt
+          npm run render -- fixtures/card.html --width 480 --height 220 --out dist/card.png
+          ditto 'dist/macos/html-renderer/Gea HTML Renderer.app' 'dist/prebuilt/Gea HTML Renderer.app'
+          cp ../core/NOTICE dist/prebuilt/NOTICE-core
+          cp ../compiler/NOTICE dist/prebuilt/NOTICE-compiler
+          cp fixtures/fonts/OFL.txt dist/prebuilt/OFL-Barlow.txt
+      - name: Upload the native renderer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          tag="renderer-v$version"
+          asset="gea-html-renderer-darwin-arm64.tar.gz"
+          tar -czf "dist/$asset" -C dist prebuilt
+          url="https://github.com/$GITHUB_REPOSITORY/releases/download/$tag/$asset"
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --target "$GITHUB_SHA" --title "Renderer binaries $version"
+          elif [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq .object.sha)" != "$GITHUB_SHA" ]; then
+            echo "Renderer release tag $tag points to another commit" >&2
+            exit 1
+          fi
+          if gh release view "$tag" --json assets --jq '.assets[].name' | grep -Fxq "$asset"; then
+            gh release download "$tag" --pattern "$asset" --output "dist/$asset" --clobber
+          else
+            gh release upload "$tag" "dist/$asset"
+          fi
+          sha=$(shasum -a 256 "dist/$asset" | cut -d ' ' -f 1)
+          printf '{"darwin-arm64":{"url":"%s","sha256":"%s","executable":"Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer"}}\n' "$url" "$sha" > dist/renderer-assets.json
+      - name: Render from the packed npm package
+        run: |
+          tarball=$(npm pack --pack-destination dist)
+          node -e 'require("node:fs").writeFileSync("dist/package.json", JSON.stringify({private: true, allowScripts: {["file:" + process.argv[1]]: true}}))' "$PWD/dist/$tarball"
+          npm install --prefix dist --no-save --no-package-lock "$PWD/dist/$tarball"
+          test -x 'dist/node_modules/@geastack/html-renderer/dist/prebuilt/Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer'
+          dist/node_modules/.bin/gea-html-render fixtures/card.html --out dist/installed.png
+          sips -g pixelWidth -g pixelHeight dist/installed.png
+          test "$(sips -g pixelWidth dist/installed.png | awk '/pixelWidth:/ {print $2}')" = 1920
+          test "$(sips -g pixelHeight dist/installed.png | awk '/pixelHeight:/ {print $2}')" = 1080
       - run: npm install -g npm@latest
       - run: node .github/scripts/publish.mjs
         env:

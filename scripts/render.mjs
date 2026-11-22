@@ -3,7 +3,7 @@ import { existsSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const root = path.dirname(fileURLToPath(import.meta.url))
+const root = path.resolve(fileURLToPath(new URL('../', import.meta.url)))
 const workspace = path.dirname(root)
 const [input, ...options] = process.argv.slice(2)
 if (input === '--serve') {
@@ -23,7 +23,7 @@ if (input === '--serve') {
   process.exit(worker.status ?? 1)
 }
 if (!input || input === '--help') {
-  console.log('Usage: npm run render -- page.html --out page.png [--width W --height H --dpr N]\n       node render.mjs --serve')
+  console.log('Usage: npm run render -- page.html --out page.png [--width W --height H --dpr N]\n       node scripts/render.mjs --serve')
   process.exit(input ? 0 : 2)
 }
 const inputPath = path.resolve(input)
