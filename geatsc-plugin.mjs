@@ -1,0 +1,20 @@
+import { inertPluginInstance } from '@geastack/compiler/plugin'
+
+const functions = [
+  'htmlInput', 'htmlRead', 'htmlResolve', 'htmlRule', 'htmlBeginRules',
+  'htmlEndRules', 'htmlFont', 'htmlFail', 'htmlMount', 'htmlInline',
+]
+
+export default {
+  name: 'html-renderer-host',
+  instantiate() {
+    return {
+      ...inertPluginInstance,
+      capabilities: {
+        ...inertPluginInstance.capabilities,
+        hostFunctions: new Map(functions.map(name => [name, name])),
+        hostPreambles: new Map(functions.map(name => [name, ['#include "html_host.h"']])),
+      },
+    }
+  },
+}

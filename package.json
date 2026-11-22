@@ -1,0 +1,70 @@
+{
+  "name": "@geastack/html-renderer",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "@geastack/core": "^0.1.54"
+  },
+  "devDependencies": {
+    "@geastack/apple": "^0.2.26",
+    "@geastack/cli": "^0.1.117",
+    "@geastack/compiler": "^1.0.49",
+    "@geastack/geatsc-plugin-gea": "^0.1.28",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.0",
+    "@geajs/core": "^1.5.1",
+    "@geajs/vite-plugin": "^1.5.0"
+  },
+  "gea": {
+    "id": "html-renderer",
+    "name": "Gea HTML Renderer",
+    "entry": "index.ts",
+    "runtime": "gea",
+    "targets": {
+      "macos": true
+    },
+    "nativeSources": [
+      "native/html_host.cpp"
+    ],
+    "compilerPlugins": [
+      "geatsc-plugin.mjs"
+    ]
+  },
+  "description": "Render local HTML and CSS with the native GeaStack renderer",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geastack/html-renderer.git"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "exports": {
+    ".": {
+      "types": "./worker.d.ts",
+      "import": "./worker.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "NOTICE",
+    "README.md",
+    "fixtures",
+    "css.ts",
+    "geatsc-plugin.mjs",
+    "host.d.ts",
+    "index.ts",
+    "native",
+    "render.mjs",
+    "tsconfig.json",
+    "worker.mjs",
+    "worker.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
