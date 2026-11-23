@@ -2,10 +2,12 @@
 #include <string>
 #include "ui/node.h"
 
+void htmlVideo(gea::embedded::ui::NodeHandle node, const std::string &document, const std::string &media);
 std::string htmlInput();
 std::string htmlRead(const std::string &path);
 std::string htmlResolve(const std::string &source, const std::string &relative);
 void htmlRule(const std::string &selector, const std::string &property, const std::string &value);
+void htmlKeyframe(const std::string &name, double offset, const std::string &property, const std::string &value);
 void htmlBeginRules();
 void htmlEndRules();
 void htmlFont(const std::string &family, const std::string &path);

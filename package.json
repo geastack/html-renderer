@@ -1,6 +1,6 @@
 {
   "name": "@geastack/html-renderer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
@@ -10,7 +10,8 @@
     "format": "eslint . --fix && prettier . --write",
     "format:check": "eslint . && prettier . --check",
     "smoke:package": "node scripts/smoke-package.mjs",
-    "visual:diff": "node scripts/visual-diff.mjs"
+    "visual:diff": "node scripts/visual-diff.mjs",
+    "smoke:video": "node scripts/smoke-video.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
