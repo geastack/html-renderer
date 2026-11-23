@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <title>Puzzle result</title>
+  <link rel="stylesheet" href="puzzle-result.css">
+</head>
+<body>
+  <main class="card {{theme}}">
+    <p class="brand">tessel</p>
+    <p class="date">{{date}}</p>
+    <div class="board">{{#tiles}}<div class="cell"><div class="tile {{state}}"></div></div>{{/tiles}}</div>
+    <p class="label puzzle">PUZZLE {{puzzle}}</p>
+    <p class="score">{{score}}</p>
+    <p class="verdict">{{verdict}}</p>
+    <p class="label spread-title">GUESS DISTRIBUTION</p>
+    <div class="spread">{{#spread}}<div class="spread-row"><p class="guess">{{index}}</p><div class="bar {{state}}" style="width: {{width}}px;"></div><p class="count">{{count}}</p></div>{{/spread}}</div>
+    <div class="stat" style="left: 72px;"><p class="value">{{streak}}</p><p class="label">DAY STREAK</p></div>
+    <div class="stat" style="left: 392px;"><p class="value">{{winRate}}%</p><p class="label">WIN RATE</p></div>
+    <div class="stat" style="left: 712px;"><p class="value">{{played}}</p><p class="label">PLAYED</p></div>
+  </main>
+</body>
+</html>

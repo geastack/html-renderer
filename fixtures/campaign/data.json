@@ -1,0 +1,270 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "en-x",
+      "width": 1600,
+      "height": 900,
+      "layout": "x",
+      "lang": "en",
+      "headline": "Native apps in TypeScript",
+      "sub1": "One codebase,",
+      "sub2": "from a $3 chip to an Xbox.",
+      "cta": "Start building"
+    },
+    {
+      "id": "en-linkedin",
+      "width": 1200,
+      "height": 627,
+      "layout": "linkedin",
+      "lang": "en",
+      "headline": "Native apps in TypeScript",
+      "sub1": "One codebase,",
+      "sub2": "from a $3 chip to an Xbox.",
+      "cta": "Start building"
+    },
+    {
+      "id": "en-square",
+      "width": 1080,
+      "height": 1080,
+      "layout": "square",
+      "lang": "en",
+      "headline": "Native apps in TypeScript",
+      "sub1": "One codebase,",
+      "sub2": "from a $3 chip to an Xbox.",
+      "cta": "Start building"
+    },
+    {
+      "id": "en-story",
+      "width": 1080,
+      "height": 1920,
+      "layout": "story",
+      "lang": "en",
+      "headline": "Native apps in TypeScript",
+      "sub1": "One codebase,",
+      "sub2": "from a $3 chip to an Xbox.",
+      "cta": "Start building"
+    },
+    {
+      "id": "de-x",
+      "width": 1600,
+      "height": 900,
+      "layout": "x",
+      "lang": "de",
+      "headline": "Native Apps in TypeScript",
+      "sub1": "Eine Codebasis,",
+      "sub2": "vom 3-Dollar-Chip bis zur Xbox.",
+      "cta": "Jetzt loslegen"
+    },
+    {
+      "id": "de-linkedin",
+      "width": 1200,
+      "height": 627,
+      "layout": "linkedin",
+      "lang": "de",
+      "headline": "Native Apps in TypeScript",
+      "sub1": "Eine Codebasis,",
+      "sub2": "vom 3-Dollar-Chip bis zur Xbox.",
+      "cta": "Jetzt loslegen"
+    },
+    {
+      "id": "de-square",
+      "width": 1080,
+      "height": 1080,
+      "layout": "square",
+      "lang": "de",
+      "headline": "Native Apps in TypeScript",
+      "sub1": "Eine Codebasis,",
+      "sub2": "vom 3-Dollar-Chip bis zur Xbox.",
+      "cta": "Jetzt loslegen"
+    },
+    {
+      "id": "de-story",
+      "width": 1080,
+      "height": 1920,
+      "layout": "story",
+      "lang": "de",
+      "headline": "Native Apps in TypeScript",
+      "sub1": "Eine Codebasis,",
+      "sub2": "vom 3-Dollar-Chip bis zur Xbox.",
+      "cta": "Jetzt loslegen"
+    },
+    {
+      "id": "fr-x",
+      "width": 1600,
+      "height": 900,
+      "layout": "x",
+      "lang": "fr",
+      "headline": "Des apps natives en TypeScript",
+      "sub1": "Une seule base de code,",
+      "sub2": "pour une puce de 3 $ comme pour la Xbox.",
+      "cta": "Lancez-vous"
+    },
+    {
+      "id": "fr-linkedin",
+      "width": 1200,
+      "height": 627,
+      "layout": "linkedin",
+      "lang": "fr",
+      "headline": "Des apps natives en TypeScript",
+      "sub1": "Une seule base de code,",
+      "sub2": "pour une puce de 3 $ comme pour la Xbox.",
+      "cta": "Lancez-vous"
+    },
+    {
+      "id": "fr-square",
+      "width": 1080,
+      "height": 1080,
+      "layout": "square",
+      "lang": "fr",
+      "headline": "Des apps natives en TypeScript",
+      "sub1": "Une seule base de code,",
+      "sub2": "pour une puce de 3 $ comme pour la Xbox.",
+      "cta": "Lancez-vous"
+    },
+    {
+      "id": "fr-story",
+      "width": 1080,
+      "height": 1920,
+      "layout": "story",
+      "lang": "fr",
+      "headline": "Des apps natives en TypeScript",
+      "sub1": "Une seule base de code,",
+      "sub2": "pour une puce de 3 $ comme pour la Xbox.",
+      "cta": "Lancez-vous"
+    },
+    {
+      "id": "es-x",
+      "width": 1600,
+      "height": 900,
+      "layout": "x",
+      "lang": "es",
+      "headline": "Apps nativas en TypeScript",
+      "sub1": "Un solo proyecto,",
+      "sub2": "de un chip de 3 $ a una Xbox.",
+      "cta": "Empieza a crear"
+    },
+    {
+      "id": "es-linkedin",
+      "width": 1200,
+      "height": 627,
+      "layout": "linkedin",
+      "lang": "es",
+      "headline": "Apps nativas en TypeScript",
+      "sub1": "Un solo proyecto,",
+      "sub2": "de un chip de 3 $ a una Xbox.",
+      "cta": "Empieza a crear"
+    },
+    {
+      "id": "es-square",
+      "width": 1080,
+      "height": 1080,
+      "layout": "square",
+      "lang": "es",
+      "headline": "Apps nativas en TypeScript",
+      "sub1": "Un solo proyecto,",
+      "sub2": "de un chip de 3 $ a una Xbox.",
+      "cta": "Empieza a crear"
+    },
+    {
+      "id": "es-story",
+      "width": 1080,
+      "height": 1920,
+      "layout": "story",
+      "lang": "es",
+      "headline": "Apps nativas en TypeScript",
+      "sub1": "Un solo proyecto,",
+      "sub2": "de un chip de 3 $ a una Xbox.",
+      "cta": "Empieza a crear"
+    },
+    {
+      "id": "tr-x",
+      "width": 1600,
+      "height": 900,
+      "layout": "x",
+      "lang": "tr",
+      "headline": "TypeScript ile native uygulamalar",
+      "sub1": "Tek proje,",
+      "sub2": "3 dolar eden bir karttan Xbox'a kadar.",
+      "cta": "Hemen deneyin"
+    },
+    {
+      "id": "tr-linkedin",
+      "width": 1200,
+      "height": 627,
+      "layout": "linkedin",
+      "lang": "tr",
+      "headline": "TypeScript ile native uygulamalar",
+      "sub1": "Tek proje,",
+      "sub2": "3 dolar eden bir karttan Xbox'a kadar.",
+      "cta": "Hemen deneyin"
+    },
+    {
+      "id": "tr-square",
+      "width": 1080,
+      "height": 1080,
+      "layout": "square",
+      "lang": "tr",
+      "headline": "TypeScript ile native uygulamalar",
+      "sub1": "Tek proje,",
+      "sub2": "3 dolar eden bir karttan Xbox'a kadar.",
+      "cta": "Hemen deneyin"
+    },
+    {
+      "id": "tr-story",
+      "width": 1080,
+      "height": 1920,
+      "layout": "story",
+      "lang": "tr",
+      "headline": "TypeScript ile native uygulamalar",
+      "sub1": "Tek proje,",
+      "sub2": "3 dolar eden bir karttan Xbox'a kadar.",
+      "cta": "Hemen deneyin"
+    },
+    {
+      "id": "nl-x",
+      "width": 1600,
+      "height": 900,
+      "layout": "x",
+      "lang": "nl",
+      "headline": "Native apps in TypeScript",
+      "sub1": "Een enkele codebase,",
+      "sub2": "van een chip van 3 dollar tot een Xbox.",
+      "cta": "Begin met bouwen"
+    },
+    {
+      "id": "nl-linkedin",
+      "width": 1200,
+      "height": 627,
+      "layout": "linkedin",
+      "lang": "nl",
+      "headline": "Native apps in TypeScript",
+      "sub1": "Een enkele codebase,",
+      "sub2": "van een chip van 3 dollar tot een Xbox.",
+      "cta": "Begin met bouwen"
+    },
+    {
+      "id": "nl-square",
+      "width": 1080,
+      "height": 1080,
+      "layout": "square",
+      "lang": "nl",
+      "headline": "Native apps in TypeScript",
+      "sub1": "Een enkele codebase,",
+      "sub2": "van een chip van 3 dollar tot een Xbox.",
+      "cta": "Begin met bouwen"
+    },
+    {
+      "id": "nl-story",
+      "width": 1080,
+      "height": 1920,
+      "layout": "story",
+      "lang": "nl",
+      "headline": "Native apps in TypeScript",
+      "sub1": "Een enkele codebase,",
+      "sub2": "van een chip van 3 dollar tot een Xbox.",
+      "cta": "Begin met bouwen"
+    }
+  ]
+}

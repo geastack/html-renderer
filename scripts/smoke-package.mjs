@@ -77,7 +77,7 @@ try {
 
   execFileSync(
     process.execPath,
-    [path.join(installed, 'bin/cli.mjs'), 'fixtures/card.html', '--out', output],
+    [path.join(installed, 'bin/cli.mjs'), 'fixtures/card/card.html', '--out', output],
     { stdio: 'inherit' },
   )
 

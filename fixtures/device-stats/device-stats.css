@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+body { background-color: #08080A; }
+
+.bar { height: 6px; background: linear-gradient(118deg, #2DE2FF 0%, #6E7BF2 52%, #E94BFF 100%); }
+.card { display: flex; flex-direction: column; gap: 0px; height: 544px; padding: 40px 64px; background-color: #08080A; }
+
+.top { display: flex; flex-direction: row; justify-content: flex-start; gap: 0px; }
+.eyebrow { width: 700px; font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; }
+.handle { width: 372px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #8A8A94; }
+
+.hero { display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-end; gap: 0px; padding-top: 12px; }
+.intro { display: flex; flex-direction: column; gap: 0px; width: 562px; }
+.title { font-family: "Hanken ExtraBold"; font-size: 60px; line-height: 66px; color: #F5F5F7; }
+.sub { padding-top: 4px; font-family: "Hanken Medium"; font-size: 24px; line-height: 30px; color: #B4B4BD; }
+.stat { display: flex; flex-direction: column; gap: 0px; width: 145px; padding-left: 24px; border-left: 1px solid #2A2A32; }
+.value { font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 66px; }
+.unit { font-family: "Hanken Medium"; font-size: 24px; line-height: 30px; color: #B4B4BD; }
+
+.boards { display: flex; flex-direction: row; justify-content: flex-start; gap: 0px; padding-top: 48px; }
+.board { display: flex; flex-direction: column; gap: 0px; width: 226px; padding: 14px; background-color: #111114; border: 1px solid #2A2A32; }
+.gutter { width: 16px; height: 1px; }
+.screen { display: flex; flex-direction: column; gap: 0px; height: 192px; padding: 18px; border-radius: 16px; border: 1px solid #FFFFFF1F; }
+.kind { font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; }
+.name { padding-top: 8px; font-family: "Hanken ExtraBold"; font-size: 30px; line-height: 36px; color: #F5F5F7; }
+.reading { font-family: "Hanken Medium"; font-size: 24px; line-height: 30px; color: #B4B4BD; }
+.track { height: 6px; margin-top: 74px; background-color: #FFFFFF1A; border-radius: 3px; }
+.fill { height: 6px; border-radius: 3px; }
+
+.footer { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; padding-top: 48px; }
+.built { width: 228px; font-family: "Hanken Medium"; font-size: 24px; line-height: 30px; color: #B4B4BD; }
+.logo { width: 97px; height: 40px; }
+.note { width: 747px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #8A8A94; }

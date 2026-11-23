@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <title>Year in music</title>
+  <link rel="stylesheet" href="year-in-music.css">
+</head>
+<body>
+  <main class="story" style="background-color: {{background}};"
+    ><div class="header"
+      ><p class="brand" style="color: {{accent}};">tempo</p
+      ><p class="tag">YOUR {{year}} IN MUSIC</p
+    ></div
+    ><div class="hero"
+      ><p class="lead">You listened for</p
+      ><p class="minutes" style="color: {{accent}};">{{minutes}}</p
+      ><p class="lead">minutes. More than {{percentile}}% of listeners.</p
+    ></div
+    ><div class="artist"
+      ><div class="photo" style="background: linear-gradient(135deg, {{artistFrom}} 0%, {{artistTo}} 100%);"></div
+      ><div class="artist-copy"
+        ><p class="label">TOP ARTIST</p
+        ><p class="artist-name">{{artist}}</p
+        ><p class="detail">{{artistHours}} hours together</p
+      ></div
+    ></div
+    ><p class="label section">TOP SONGS</p
+    >{{#songs}}<div class="song"
+      ><p class="rank" style="color: {{accent}};">{{index}}</p
+      ><div class="cover" style="background: linear-gradient(135deg, {{from}} 0%, {{to}} 100%);"></div
+      ><div class="song-copy"
+        ><p class="title">{{title}}</p
+        ><p class="by">{{by}}</p
+      ></div
+    ></div
+    >{{/songs}}<div class="tiles"
+      ><div class="tile"
+        ><p class="label">TOP GENRE</p
+        ><p class="tile-value" style="color: {{accent}};">{{genre}}</p
+      ></div
+      ><div class="tile"
+        ><p class="label">LISTENING STYLE</p
+        ><p class="tile-value" style="color: {{accent}};">{{style}}</p
+      ></div
+    ></div
+    ><div class="spacer"></div
+    ><div class="footer"
+      ><p class="handle">@{{handle}}</p
+      ><p class="note">SHARED FROM TEMPO</p
+    ></div
+  ></main>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "armagan-amcalar",
+      "accent": "#F58A2B",
+      "number": "0001",
+      "photo": [{ "src": "../shared/images/armagan-amcalar.png" }],
+      "initials": [],
+      "name": "Armagan Amcalar",
+      "role": "Founder & Mentor",
+      "projects": "48",
+      "sessions": "1,260",
+      "since": "2016"
+    },
+    {
+      "id": "deniz-kaya",
+      "accent": "#1EC2B8",
+      "number": "0482",
+      "photo": [],
+      "initials": [{ "letters": "DK" }],
+      "name": "Deniz Kaya",
+      "role": "Bootcamp alumni",
+      "projects": "14",
+      "sessions": "96",
+      "since": "2021"
+    },
+    {
+      "id": "priya-raman",
+      "accent": "#FDB714",
+      "number": "0213",
+      "photo": [],
+      "initials": [{ "letters": "PR" }],
+      "name": "Priya Raman",
+      "role": "Mentor",
+      "projects": "31",
+      "sessions": "412",
+      "since": "2019"
+    }
+  ]
+}

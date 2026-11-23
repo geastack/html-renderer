@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+body { margin: 0; }
+
+.card { display: flex; flex-direction: column; width: 936px; height: 1206px; padding: 72px; }
+
+.header { display: flex; flex-direction: row; align-items: center; }
+.brand { flex-grow: 1; font-family: "Hanken ExtraBold"; font-size: 44px; line-height: 52px; }
+.tag { font-family: "JetBrains Mono"; font-size: 24px; line-height: 28px; color: #1F1B1699; }
+
+.grow { flex-grow: 1; }
+
+.mark { display: flex; flex-direction: row; gap: 16px; padding-bottom: 40px; }
+.drop { width: 64px; height: 96px; border-radius: 64px 0px 32px 32px; }
+
+.passage { width: 936px; font-family: "Hanken ExtraBold"; color: #1F1B16; }
+
+.source { display: flex; flex-direction: row; align-items: flex-start; gap: 24px; padding-top: 56px; }
+.rule { width: 48px; height: 6px; border-radius: 3px; margin-top: 19px; }
+.source-copy { display: flex; flex-direction: column; gap: 4px; }
+.book { font-family: "Hanken ExtraBold"; font-size: 36px; line-height: 44px; color: #1F1B16; }
+.author { font-family: "Hanken Medium"; font-size: 32px; line-height: 40px; color: #1F1B16B3; }
+
+.line { width: 936px; height: 2px; background-color: #1F1B161F; }
+
+.footer { display: flex; flex-direction: row; align-items: center; padding-top: 32px; }
+.handle { flex-grow: 1; font-family: "Hanken Medium"; font-size: 28px; line-height: 36px; color: #1F1B16B3; }
+.page { font-family: "JetBrains Mono"; font-size: 24px; line-height: 28px; }

@@ -1,0 +1,138 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "galatasaray-fenerbahce-square",
+      "layout": "square",
+      "width": 1080,
+      "height": 1080,
+      "competition": "CHAMPIONS LEAGUE",
+      "round": "Quarter-final / 1st leg",
+      "status": "FULL TIME",
+      "homeName": "Galatasaray",
+      "homeShort": "GS",
+      "homePrimary": "#A90432",
+      "homeSecondary": "#FDB912",
+      "homeBar": "#E8112D",
+      "awayName": "Fenerbahce",
+      "awayShort": "FB",
+      "awayPrimary": "#0B1F4B",
+      "awaySecondary": "#FFED00",
+      "awayBar": "#FFED00",
+      "homeScore": "3",
+      "awayScore": "0",
+      "homeGoals": [
+        {
+          "minute": "23'"
+        },
+        {
+          "minute": "58'"
+        },
+        {
+          "minute": "87'"
+        }
+      ],
+      "awayGoals": [],
+      "stats": [
+        {
+          "label": "POSSESSION",
+          "home": "61%",
+          "away": "39%",
+          "homeShare": 60.4,
+          "awayShare": 38.6
+        },
+        {
+          "label": "SHOTS",
+          "home": "17",
+          "away": "6",
+          "homeShare": 73.2,
+          "awayShare": 25.8
+        },
+        {
+          "label": "ON TARGET",
+          "home": "8",
+          "away": "1",
+          "homeShare": 88.0,
+          "awayShare": 11.0
+        },
+        {
+          "label": "CORNERS",
+          "home": "7",
+          "away": "2",
+          "homeShare": 77.0,
+          "awayShare": 22.0
+        }
+      ],
+      "date": "Wed 7 Apr 2027",
+      "city": "Istanbul",
+      "note": "Return leg: 14 Apr"
+    },
+    {
+      "id": "galatasaray-fenerbahce-tv",
+      "layout": "tv",
+      "width": 1920,
+      "height": 1080,
+      "competition": "CHAMPIONS LEAGUE",
+      "round": "Quarter-final / 1st leg",
+      "status": "FULL TIME",
+      "homeName": "Galatasaray",
+      "homeShort": "GS",
+      "homePrimary": "#A90432",
+      "homeSecondary": "#FDB912",
+      "homeBar": "#E8112D",
+      "awayName": "Fenerbahce",
+      "awayShort": "FB",
+      "awayPrimary": "#0B1F4B",
+      "awaySecondary": "#FFED00",
+      "awayBar": "#FFED00",
+      "homeScore": "3",
+      "awayScore": "0",
+      "homeGoals": [
+        {
+          "minute": "23'"
+        },
+        {
+          "minute": "58'"
+        },
+        {
+          "minute": "87'"
+        }
+      ],
+      "awayGoals": [],
+      "stats": [
+        {
+          "label": "POSSESSION",
+          "home": "61%",
+          "away": "39%",
+          "homeShare": 60.4,
+          "awayShare": 38.6
+        },
+        {
+          "label": "SHOTS",
+          "home": "17",
+          "away": "6",
+          "homeShare": 73.2,
+          "awayShare": 25.8
+        },
+        {
+          "label": "ON TARGET",
+          "home": "8",
+          "away": "1",
+          "homeShare": 88.0,
+          "awayShare": 11.0
+        },
+        {
+          "label": "CORNERS",
+          "home": "7",
+          "away": "2",
+          "homeShare": 77.0,
+          "awayShare": 22.0
+        }
+      ],
+      "date": "Wed 7 Apr 2027",
+      "city": "Istanbul",
+      "note": "Return leg: 14 Apr"
+    }
+  ]
+}

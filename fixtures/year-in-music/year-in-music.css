@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.story { display: flex; flex-direction: column; gap: 0px; width: 936px; height: 1776px; padding: 72px; }
+
+.header { display: flex; flex-direction: row; align-items: center; gap: 0px; width: 936px; }
+.brand { width: 468px; font-family: "Hanken ExtraBold"; font-size: 48px; line-height: 56px; }
+.tag { width: 468px; text-align: right; font-family: "JetBrains Mono"; font-size: 26px; line-height: 32px; color: #FFFFFF; }
+
+.hero { display: flex; flex-direction: column; gap: 0px; margin-top: 64px; }
+.lead { font-family: "Hanken Medium"; font-size: 44px; line-height: 52px; color: #FFFFFF; }
+.minutes { font-family: "Hanken ExtraBold"; font-size: 168px; line-height: 176px; }
+
+.artist { display: flex; flex-direction: row; align-items: center; gap: 0px; width: 872px; margin-top: 56px; padding: 32px; border-radius: 24px; background-color: #FFFFFF14; }
+.photo { width: 168px; height: 168px; border-radius: 84px; }
+.artist-copy { display: flex; flex-direction: column; gap: 0px; padding-left: 40px; }
+.artist-name { padding-top: 8px; font-family: "Hanken ExtraBold"; font-size: 72px; line-height: 80px; color: #FFFFFF; }
+.detail { padding-top: 4px; font-family: "Hanken Medium"; font-size: 34px; line-height: 40px; color: #FFFFFFB3; }
+
+.label { font-family: "JetBrains Mono"; font-size: 26px; line-height: 32px; color: #FFFFFFB3; }
+.section { margin-top: 56px; }
+
+.song { display: flex; flex-direction: row; align-items: center; gap: 0px; margin-top: 24px; }
+.rank { width: 64px; font-family: "JetBrains Mono"; font-size: 44px; line-height: 52px; }
+.cover { width: 104px; height: 104px; border-radius: 16px; }
+.song-copy { display: flex; flex-direction: column; gap: 0px; padding-left: 32px; }
+.title { font-family: "Hanken ExtraBold"; font-size: 42px; line-height: 50px; color: #FFFFFF; }
+.by { padding-top: 4px; font-family: "Hanken Medium"; font-size: 32px; line-height: 40px; color: #FFFFFFB3; }
+
+.tiles { display: flex; flex-direction: row; gap: 16px; margin-top: 56px; }
+.tile { display: flex; flex-direction: column; gap: 0px; width: 388px; padding: 32px 36px; border-radius: 24px; background-color: #FFFFFF14; }
+.tile-value { font-family: "Hanken ExtraBold"; font-size: 56px; line-height: 64px; padding-top: 8px; }
+
+.spacer { flex-grow: 1; }
+
+.footer { display: flex; flex-direction: row; align-items: center; gap: 0px; width: 936px; padding-top: 32px; border-top: 2px solid #FFFFFF24; }
+.handle { width: 468px; font-family: "JetBrains Mono"; font-size: 28px; line-height: 32px; color: #FFFFFF; }
+.note { width: 468px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 32px; color: #FFFFFFB3; }

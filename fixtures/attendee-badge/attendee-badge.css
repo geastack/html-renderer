@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Barlow";
+  src: url("../shared/fonts/BarlowSemiCondensed-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.page { position: relative; display: flex; flex-direction: column; width: 900px; height: 1300px; background-color: #FFFFFF; }
+
+.header { position: relative; display: flex; flex-direction: column; align-items: center; height: 300px; background-color: #0D1330; }
+.ring { position: absolute; }
+.ring-1 { left: 590px; top: -170px; width: 476px; height: 476px; border: 2px solid #FFFFFF1F; border-radius: 240px; }
+.ring-2 { left: 510px; top: -250px; width: 636px; height: 636px; border: 2px solid #FFFFFF12; border-radius: 320px; }
+.slot { width: 160px; height: 24px; margin-top: 36px; border-radius: 12px; background-color: #FFFFFF; }
+
+.brand { display: flex; flex-direction: row; align-items: center; padding-top: 36px; }
+.mark { position: relative; width: 48px; height: 48px; border-radius: 12px; background-color: #FF6B3D; }
+.mark-core { position: absolute; left: 16px; top: 16px; width: 16px; height: 16px; border-radius: 2px; background-color: #0D1330; transform: rotate(45deg); }
+.wordmark { padding-left: 16px; font-family: "Barlow"; font-size: 40px; line-height: 48px; color: #FFFFFF; }
+.edition { padding-top: 12px; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #B4BBD8; }
+
+.avatar-frame { position: absolute; left: 300px; top: 200px; width: 300px; height: 300px; border-radius: 150px; background-color: #FFFFFF; }
+.photo { position: absolute; left: 312px; top: 212px; width: 276px; height: 276px; border-radius: 138px; }
+.monogram { position: absolute; left: 312px; top: 212px; display: flex; align-items: center; justify-content: center; width: 276px; height: 276px; border-radius: 138px; }
+.initials { font-family: "Hanken ExtraBold"; font-size: 112px; line-height: 120px; color: #FFFFFF; }
+
+.body { display: flex; flex-direction: column; align-items: center; flex-grow: 1; padding: 232px 64px 48px; }
+.name { width: 772px; text-align: center; font-family: "Hanken ExtraBold"; font-size: 80px; line-height: 84px; color: #0D1330; }
+.role { width: 772px; padding-top: 16px; text-align: center; font-family: "Hanken Medium"; font-size: 34px; line-height: 42px; color: #5A6080; }
+.company { width: 772px; text-align: center; font-family: "Hanken ExtraBold"; font-size: 34px; line-height: 42px; color: #0D1330; }
+
+.spacer { flex-grow: 1; }
+
+.pass { display: flex; flex-direction: row; align-items: flex-end; width: 772px; margin-top: 32px; padding-top: 32px; border-top: 2px solid #E4E6EF; }
+.pass-info { display: flex; flex-direction: column; flex-grow: 1; }
+.label { font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #8A90A8; }
+.dates { padding-top: 4px; font-family: "Hanken ExtraBold"; font-size: 40px; line-height: 48px; color: #0D1330; }
+.days { display: flex; flex-direction: row; padding-top: 20px; }
+.day { margin-right: 12px; padding: 6px 14px; border-radius: 8px; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; }
+.day-on { background-color: #0D1330; border: 2px solid #0D1330; color: #FFFFFF; }
+.day-off { border: 2px solid #D5D8E4; color: #A3A8BE; }
+.ticket { padding-top: 16px; }
+
+.qr { display: flex; flex-direction: column; width: 168px; height: 168px; padding: 12px; border: 2px solid #E4E6EF; border-radius: 12px; }
+.qrow { display: flex; flex-direction: row; height: 8px; }
+.qk { width: 8px; height: 8px; background-color: #0D1330; }
+.qw { width: 8px; height: 8px; }
+
+.band { display: flex; align-items: center; justify-content: center; height: 150px; }
+.type { font-family: "Barlow"; font-size: 112px; line-height: 120px; color: #FFFFFF; }
+
+.tone-orange { background: linear-gradient(135deg, #FF8A5C 0%, #D2471F 100%); }
+.tone-blue { background: linear-gradient(135deg, #6C7BFF 0%, #3442C4 100%); }
+.tone-navy { background: linear-gradient(135deg, #2E3870 0%, #0D1330 100%); }

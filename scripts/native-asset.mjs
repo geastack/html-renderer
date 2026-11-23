@@ -35,7 +35,10 @@ const target = { darwin: 'apple', linux: 'linux', win32: 'windows' }[process.pla
 cpSync(path.join(root, '..', target, 'NOTICE'), path.join(bundle, `NOTICE-${target}`))
 cpSync(path.join(root, '..', 'core', 'NOTICE'), path.join(bundle, 'NOTICE-core'))
 cpSync(path.join(root, '..', 'compiler', 'NOTICE'), path.join(bundle, 'NOTICE-compiler'))
-cpSync(path.join(root, 'fixtures', 'fonts', 'OFL.txt'), path.join(bundle, 'OFL-Barlow.txt'))
+cpSync(
+  path.join(root, 'fixtures', 'shared', 'fonts', 'Barlow-OFL.txt'),
+  path.join(bundle, 'OFL-Barlow.txt'),
+)
 
 const archive = `gea-html-renderer-${platform}.tar.gz`
 

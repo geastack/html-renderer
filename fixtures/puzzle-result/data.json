@@ -1,0 +1,60 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "nadia",
+      "theme": "ember",
+      "date": "MON 23 NOV 2026",
+      "puzzle": "412",
+      "score": "4/6",
+      "verdict": "Solved in four.",
+      "streak": "18",
+      "winRate": "94",
+      "played": "132",
+      "tiles": [
+        {"state": "miss"}, {"state": "miss"}, {"state": "near"}, {"state": "miss"}, {"state": "miss"},
+        {"state": "near"}, {"state": "miss"}, {"state": "miss"}, {"state": "hit"}, {"state": "miss"},
+        {"state": "hit"}, {"state": "near"}, {"state": "miss"}, {"state": "hit"}, {"state": "near"},
+        {"state": "hit"}, {"state": "hit"}, {"state": "hit"}, {"state": "hit"}, {"state": "hit"},
+        {"state": "empty"}, {"state": "empty"}, {"state": "empty"}, {"state": "empty"}, {"state": "empty"},
+        {"state": "empty"}, {"state": "empty"}, {"state": "empty"}, {"state": "empty"}, {"state": "empty"}
+      ],
+      "spread": [
+        {"count": "0", "width": 24, "state": "miss"},
+        {"count": "6", "width": 38, "state": "miss"},
+        {"count": "31", "width": 194, "state": "miss"},
+        {"count": "48", "width": 300, "state": "hit"},
+        {"count": "30", "width": 188, "state": "miss"},
+        {"count": "9", "width": 56, "state": "miss"}
+      ]
+    },
+    {
+      "id": "ruben",
+      "theme": "orchid",
+      "date": "MON 23 NOV 2026",
+      "puzzle": "412",
+      "score": "6/6",
+      "verdict": "Phew. Last try.",
+      "streak": "3",
+      "winRate": "81",
+      "played": "47",
+      "tiles": [
+        {"state": "miss"}, {"state": "miss"}, {"state": "miss"}, {"state": "miss"}, {"state": "miss"},
+        {"state": "miss"}, {"state": "near"}, {"state": "miss"}, {"state": "miss"}, {"state": "miss"},
+        {"state": "miss"}, {"state": "miss"}, {"state": "hit"}, {"state": "near"}, {"state": "miss"},
+        {"state": "near"}, {"state": "hit"}, {"state": "hit"}, {"state": "miss"}, {"state": "miss"},
+        {"state": "miss"}, {"state": "hit"}, {"state": "hit"}, {"state": "hit"}, {"state": "miss"},
+        {"state": "hit"}, {"state": "hit"}, {"state": "hit"}, {"state": "hit"}, {"state": "hit"}
+      ],
+      "spread": [
+        {"count": "0", "width": 24, "state": "miss"},
+        {"count": "2", "width": 46, "state": "miss"},
+        {"count": "8", "width": 185, "state": "miss"},
+        {"count": "13", "width": 300, "state": "miss"},
+        {"count": "10", "width": 231, "state": "miss"},
+        {"count": "5", "width": 115, "state": "hit"}
+      ]
+    }
+  ]
+}

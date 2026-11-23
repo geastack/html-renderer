@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <title>Streak card</title>
+  <link rel="stylesheet" href="streak.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};">
+    <p class="brand">steady</p>
+    <p class="handle">@{{handle}}</p>
+    <p class="label hero-label">CURRENT STREAK</p>
+    <p class="number">{{streak}}</p>
+    <p class="unit" style="color: {{accent}};">day streak</p>
+    <p class="best">{{bestNote}}</p>
+    <div class="weekdays"
+      ><p class="weekday">M</p
+      ><p class="weekday">T</p
+      ><p class="weekday">W</p
+      ><p class="weekday">T</p
+      ><p class="weekday">F</p
+      ><p class="weekday">S</p
+      ><p class="weekday">S</p
+    ></div>
+    <div class="calendar">{{#days}}<div class="cell {{state}}"><div class="hole"></div><div class="day" style="background-color: {{accent}};"></div><div class="link" style="background-color: {{accent}};"></div></div>{{/days}}</div>
+    <div class="legend"
+      ><p class="label summary">{{summary}}</p
+      ><div class="key" style="background-color: {{accent}};"></div
+      ><p class="label key-label">TODAY</p
+    ></div>
+    <div class="level"
+      ><div class="badge" style="background-color: {{accent}};"><p class="badge-number" style="color: {{background}};">{{level}}</p></div
+      ><div class="level-copy"><p class="label">CURRENT LEVEL</p><p class="level-name">{{levelName}}</p><div class="track"><div class="fill" style="width: {{progress}}px; background-color: {{accent}};"></div></div><p class="next">{{toNext}} XP to level {{nextLevel}}</p></div
+    ></div>
+  </main>
+</body>
+</html>

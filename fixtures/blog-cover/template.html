@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <title>Blog cover</title>
+  <link rel="stylesheet" href="blog-cover.css">
+</head>
+<body>
+  <main class="page"
+    ><div class="bar"></div
+    ><div class="content"
+      ><div class="header"
+        ><img class="logo" src="../shared/images/gea-logo.png"
+        ><p class="section">/ BLOG</p
+        ><div class="grow"></div
+        ><p class="category" style="color: {{accent}}; border-color: {{accent}};">{{category}}</p
+      ></div
+      ><div class="grow"></div
+      ><p class="title">{{title}}</p
+      ><div class="grow"></div
+      ><div class="footer"
+        >{{#photo}}<img class="avatar" src="{{src}}">{{/photo}}{{#mark}}<div class="avatar mark"></div>{{/mark}}<div class="byline"
+          ><p class="author">{{author}}</p
+          ><div class="meta"
+            ><p class="meta-text">{{date}}</p
+            ><div class="dot"></div
+            ><p class="meta-text">{{readTime}}</p
+          ></div
+        ></div
+        ><div class="grow"></div
+        ><p class="site">geastack.com/blog</p
+      ></div
+    ></div
+  ></main>
+</body>
+</html>

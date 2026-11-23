@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <title>Member badge</title>
+  <link rel="stylesheet" href="member-badge.css">
+</head>
+<body>
+  <main class="page"
+    ><div class="header"
+      ><img class="logo" src="../shared/images/coyotiv-logo-light.png"
+      ><div class="grow"></div
+      ><p class="number">MEMBER NO. {{number}}</p
+    ></div
+    ><div class="grow"></div
+    ><div class="profile"
+      ><div class="ring" style="background-color: {{accent}};"
+        ><div class="gap"
+          >{{#photo}}<img class="avatar" src="{{src}}">{{/photo}}{{#initials}}<div class="avatar initials" style="background-color: {{accent}};"><p class="letters">{{letters}}</p></div>{{/initials}}</div
+      ></div
+      ><p class="eyebrow" style="color: {{accent}};">I'M A COMMUNITY MEMBER</p
+      ><p class="name">{{name}}</p
+      ><div class="role-row"><p class="role" style="background-color: {{accent}};">{{role}}</p></div
+    ></div
+    ><div class="grow"></div
+    ><div class="stats"
+      ><div class="stat"><p class="value">{{projects}}</p><p class="label">projects shipped</p></div
+      ><div class="stat-gap"></div
+      ><div class="stat"><p class="value">{{sessions}}</p><p class="label">sessions attended</p></div
+      ><div class="stat-gap"></div
+      ><div class="stat"><p class="value">{{since}}</p><p class="label">member since</p></div
+    ></div
+    ><div class="stripe"
+      ><div class="band" style="background-color: #66489D;"></div
+      ><div class="band" style="background-color: #C42F8E;"></div
+      ><div class="band" style="background-color: #EE4136;"></div
+      ><div class="band" style="background-color: #F58A2B;"></div
+      ><div class="band" style="background-color: #FDB714;"></div
+      ><div class="band" style="background-color: #8BC53F;"></div
+      ><div class="band" style="background-color: #00AEA7;"></div
+    ></div
+  ></main>
+</body>
+</html>

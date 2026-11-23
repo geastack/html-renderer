@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>Achievement</title>
+  <link rel="stylesheet" href="achievement.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};">
+    <div class="header"><p class="brand" style="color: {{accent}};">parlo</p><p class="tag">ACHIEVEMENT UNLOCKED</p></div>
+    <div class="badge">
+      <div class="spark" style="left: 36px; top: 104px; width: 22px; height: 22px; background-color: {{accent}};"></div>
+      <div class="spark" style="left: 92px; top: 282px; width: 12px; height: 12px; background-color: {{accent}};"></div>
+      <div class="spark" style="left: 494px; top: 76px; width: 14px; height: 14px; background-color: {{accent}};"></div>
+      <div class="spark" style="left: 470px; top: 270px; width: 26px; height: 26px; background-color: {{accent}};"></div>
+      <div class="halo" style="background-color: {{halo}};"><div class="ring" style="background: linear-gradient(135deg, {{badgeFrom}} 0%, {{badgeTo}} 100%);"><div class="core" style="background-color: {{background}};"><p class="core-label" style="color: {{accent}};">LEVEL</p><p class="core-number">{{level}}</p></div></div></div>
+    </div>
+    <p class="headline">Level {{level}} reached</p>
+    <div class="sub"><p class="sub-text">{{course}}</p><div class="dot" style="background-color: {{accent}};"></div><p class="sub-text">{{streak}}-day streak</p></div>
+    <div class="stats"><div class="stat"><p class="value" style="color: {{accent}};">{{totalXp}}</p><p class="label">TOTAL XP</p></div><div class="divider"></div><div class="stat"><p class="value" style="color: {{accent}};">+{{weekXp}}</p><p class="label">XP THIS WEEK</p></div><div class="divider"></div><div class="stat"><p class="value" style="color: {{accent}};">{{lessons}}</p><p class="label">LESSONS DONE</p></div></div>
+    <div class="progress">
+      <div class="progress-head"><p class="progress-label">NEXT: LEVEL {{nextLevel}}</p><p class="progress-value">{{levelXp}} / {{levelGoal}} XP</p></div>
+      <div class="track"><div class="fill" style="width: {{fill}}px; background: linear-gradient(90deg, {{badgeFrom}} 0%, {{badgeTo}} 100%);"></div></div>
+    </div>
+    <div class="footer"><p class="date">{{date}}</p><p class="handle">@{{handle}}</p></div>
+  </main>
+</body>
+</html>
