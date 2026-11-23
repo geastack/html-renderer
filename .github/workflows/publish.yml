@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: geastack/cli
-          ref: 16e5433b1a4590c03bdc599c9b85fc6fac6a
+          ref: 16e5433b1a4590c03bdc599c9b85fc6fac5fac6a
           path: cli
           persist-credentials: false
       - uses: actions/checkout@v4
