@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.card { display: flex; flex-direction: column; gap: 0px; height: 1080px; padding: 48px 64px 56px; }
+
+.header { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; }
+.brand { width: 500px; font-family: "Hanken ExtraBold"; font-size: 44px; line-height: 52px; }
+.week { width: 428px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #FFFFFFB3; }
+
+.hero { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; padding-top: 16px; }
+.ring { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0px; width: 224px; height: 224px; border: 22px solid; border-radius: 134px; }
+.score { font-family: "Hanken ExtraBold"; font-size: 104px; line-height: 104px; color: #FFFFFF; }
+.score-label { font-family: "JetBrains Mono"; font-size: 24px; line-height: 28px; color: #FFFFFFB3; }
+.hero-copy { display: flex; flex-direction: column; gap: 0px; padding-left: 48px; }
+.headline { font-family: "Hanken ExtraBold"; font-size: 76px; line-height: 80px; color: #FFFFFF; }
+.sub { font-family: "Hanken Medium"; font-size: 34px; line-height: 42px; color: #FFFFFFB3; }
+
+.section { font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #FFFFFFB3; padding: 16px 0 0 8px; }
+.chart { display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-end; gap: 0px; height: 320px; }
+.day { display: flex; flex-direction: column; align-items: center; gap: 0px; width: 127px; }
+.hours { font-family: "JetBrains Mono"; font-size: 26px; line-height: 32px; }
+.bar { width: 88px; border-radius: 12px; }
+.weekday { font-family: "Hanken ExtraBold"; font-size: 24px; line-height: 30px; color: #FFFFFF; }
+
+.tiles { display: flex; flex-direction: row; justify-content: flex-start; gap: 0px; padding-top: 8px; }
+.tile { display: flex; flex-direction: column; gap: 0px; width: 258px; padding: 16px 24px; background-color: #FFFFFF12; }
+.value { font-family: "Hanken ExtraBold"; font-size: 52px; line-height: 60px; color: #FFFFFF; }
+.label { font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #FFFFFFB3; }

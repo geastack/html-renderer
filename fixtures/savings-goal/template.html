@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <title>Savings goal</title>
+  <link rel="stylesheet" href="savings-goal.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};"
+    ><div class="header"
+      ><p class="brand">tillo</p
+      ><p class="month" style="color: {{accent}};">{{month}} MILESTONE</p
+    ></div
+    ><div class="grow"></div
+    ><div class="hero"
+      ><p class="lead">You saved</p
+      ><p class="amount" style="color: {{accent}};">EUR {{saved}}</p
+      ><p class="lead">this month</p
+    ></div
+    ><div class="grow"></div
+    ><div class="goal-head"
+      ><p class="goal-name">{{goalName}}</p
+      ><p class="goal-pct" style="color: {{accent}};">{{goalPct}}%</p
+    ></div
+    ><div class="track"><div class="fill" style="width: {{goalFill}}px; background-color: {{accent}};"></div></div
+    ><p class="caption">EUR {{goalSaved}} of EUR {{goalTarget}}</p
+    ><div class="grow"></div
+    ><div class="bottom"
+      ><div class="categories"
+        ><p class="label section">WHERE YOU SAVED</p
+        >{{#categories}}<div class="category"
+          ><p class="rank" style="color: {{accent}};">0{{index}}</p
+          ><p class="category-name">{{name}}</p
+          ><p class="category-amount">EUR {{amount}}</p
+        ></div
+        >{{/categories}}</div
+      ><div class="streak"
+        ><p class="label">SAVING STREAK</p
+        ><div class="streak-row"
+          ><p class="streak-count">{{streak}}</p
+          ><p class="streak-unit">months</p
+        ></div
+        ><div class="months"
+          >{{#months}}<div class="chip" style="background-color: {{fill}};"><p class="chip-letter" style="color: {{ink}};">{{letter}}</p></div
+          >{{/months}}</div
+      ></div
+    ></div
+  ></main>
+</body>
+</html>

@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "Barlow Bold";
+  src: url("../shared/fonts/BarlowSemiCondensed-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+body { background-color: #090A10; }
+p { margin: 0; }
+
+.board { display: flex; flex-direction: column; background: linear-gradient(90deg, #2B0812 0%, #090A10 50%, #07143A 100%); }
+
+.header { display: flex; flex-direction: row; align-items: center; }
+.competition { display: flex; flex-direction: column; }
+.league { font-family: "JetBrains Mono"; color: #FFFFFF; }
+.round { font-family: "Hanken Medium"; color: #FFFFFFB3; }
+.status { font-family: "JetBrains Mono"; color: #090A10; background-color: #FFFFFF; text-align: center; }
+
+.scoreline { display: flex; flex-direction: row; align-items: center; }
+.team { display: flex; flex-direction: column; align-items: center; }
+.crest { position: relative; }
+.half { position: absolute; top: 0px; }
+.monogram { position: absolute; top: 0px; left: 0px; text-align: center; font-family: "Barlow Bold"; color: #FFFFFF; }
+.name { font-family: "Hanken ExtraBold"; color: #FFFFFF; text-align: center; }
+.score { display: flex; flex-direction: row; justify-content: center; align-items: center; }
+.goals { font-family: "Barlow Bold"; color: #FFFFFF; text-align: center; }
+.dash { font-family: "Barlow Bold"; color: #FFFFFF66; text-align: center; }
+
+.scorers { display: flex; flex-direction: row; }
+.side { display: flex; flex-direction: row; justify-content: center; }
+.minute { font-family: "JetBrains Mono"; color: #FFFFFF; text-align: center; }
+
+.stats { display: flex; flex-direction: column; }
+.stat-row { display: flex; flex-direction: row; align-items: center; }
+.value { font-family: "Barlow Bold"; color: #FFFFFF; }
+.value.away { text-align: right; }
+.stat-label { font-family: "JetBrains Mono"; color: #FFFFFFB3; text-align: center; }
+.bar { display: flex; flex-direction: row; justify-content: space-between; background-color: #FFFFFF14; }
+
+.spacer { flex-grow: 1; }
+.footer { display: flex; flex-direction: row; align-items: center; }
+.when { font-family: "Hanken Medium"; color: #FFFFFFB3; }
+.extra { font-family: "JetBrains Mono"; color: #FFFFFFB3; text-align: right; }
+
+.board.square { width: 936px; height: 936px; padding: 72px; }
+.square .competition { width: 696px; }
+.square .league { font-size: 26px; line-height: 32px; }
+.square .round { font-size: 30px; line-height: 38px; padding-top: 6px; }
+.square .status { width: 192px; font-size: 24px; line-height: 52px; height: 52px; border-radius: 26px; margin-left: 48px; }
+.square .scoreline { padding-top: 64px; }
+.square .team { width: 300px; }
+.square .crest { width: 168px; height: 168px; }
+.square .half { width: 84px; height: 168px; }
+.square .half.left { left: 0px; border-radius: 84px 0px 0px 84px; }
+.square .half.right { left: 84px; border-radius: 0px 84px 84px 0px; }
+.square .monogram { width: 168px; height: 168px; font-size: 72px; line-height: 168px; }
+.square .name { width: 300px; font-size: 36px; line-height: 44px; padding-top: 20px; }
+.square .score { width: 336px; }
+.square .goals { width: 120px; font-size: 168px; line-height: 176px; }
+.square .dash { width: 72px; font-size: 120px; line-height: 176px; }
+.square .scorers { padding-top: 24px; }
+.square .side { width: 300px; gap: 12px; }
+.square .side.away { padding-left: 336px; }
+.square .minute { width: 76px; font-size: 24px; line-height: 44px; height: 44px; border-radius: 22px; }
+.square .stats { padding-top: 48px; }
+.square .stat { padding-top: 22px; }
+.square .value { width: 120px; font-size: 40px; line-height: 44px; }
+.square .stat-label { width: 696px; font-size: 24px; line-height: 44px; }
+.square .bar { height: 10px; border-radius: 5px; margin-top: 10px; }
+.square .fill { height: 10px; border-radius: 5px; }
+.square .footer { padding-top: 0px; }
+.square .when { width: 600px; font-size: 26px; line-height: 32px; }
+.square .extra { width: 336px; font-size: 24px; line-height: 32px; }
+
+.board.tv { width: 1728px; height: 888px; padding: 96px; }
+.tv .competition { width: 1440px; }
+.tv .league { font-size: 32px; line-height: 40px; }
+.tv .round { font-size: 40px; line-height: 50px; padding-top: 8px; }
+.tv .status { width: 240px; font-size: 30px; line-height: 64px; height: 64px; border-radius: 32px; margin-left: 48px; }
+.tv .scoreline { padding-top: 64px; }
+.tv .team { width: 560px; }
+.tv .crest { width: 260px; height: 260px; }
+.tv .half { width: 130px; height: 260px; }
+.tv .half.left { left: 0px; border-radius: 130px 0px 0px 130px; }
+.tv .half.right { left: 130px; border-radius: 0px 130px 130px 0px; }
+.tv .monogram { width: 260px; height: 260px; font-size: 112px; line-height: 260px; }
+.tv .name { width: 560px; font-size: 60px; line-height: 70px; padding-top: 28px; }
+.tv .score { width: 608px; }
+.tv .goals { width: 200px; font-size: 200px; line-height: 210px; }
+.tv .dash { width: 120px; font-size: 150px; line-height: 210px; }
+.tv .scorers { padding-top: 32px; }
+.tv .side { width: 560px; gap: 16px; }
+.tv .side.away { padding-left: 608px; }
+.tv .minute { width: 96px; font-size: 30px; line-height: 54px; height: 54px; border-radius: 27px; }
+.tv .stats { display: flex; flex-direction: row; padding-top: 88px; gap: 48px; }
+.tv .stat { width: 396px; }
+.tv .value { width: 96px; font-size: 48px; line-height: 56px; }
+.tv .stat-label { width: 204px; font-size: 24px; line-height: 56px; }
+.tv .bar { height: 12px; border-radius: 6px; margin-top: 12px; }
+.tv .fill { height: 12px; border-radius: 6px; }
+.tv .footer { padding-top: 0px; }
+.tv .when { width: 1200px; font-size: 32px; line-height: 40px; }
+.tv .extra { width: 528px; font-size: 28px; line-height: 40px; }

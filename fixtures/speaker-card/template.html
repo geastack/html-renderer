@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <title>Speaker card</title>
+  <link rel="stylesheet" href="speaker-card.css">
+</head>
+<body style="background-color: #0D1330;">
+  <main class="page"
+    ><div class="ring ring-3"></div
+    ><div class="ring ring-2"></div
+    ><div class="ring ring-1"></div
+    ><div class="halo"></div
+    >{{#photo}}<img class="photo" src="{{src}}" alt="{{name}}"
+    >{{/photo}}{{#monogram}}<div class="monogram tone-{{tone}}"><p class="initials">{{initials}}</p></div
+    >{{/monogram}}<div class="session-row"><p class="session">{{session}}</p></div
+    ><div class="content"
+      ><div class="brand"
+        ><div class="mark"><div class="mark-core"></div></div
+        ><p class="wordmark">EMBEDDED FUTURES SUMMIT</p
+      ></div
+      ><p class="eyebrow">SPEAKER ANNOUNCEMENT</p
+      ><p class="name">{{name}}</p
+      ><p class="role">{{role}}</p
+      ><div class="talk"
+        ><div class="talk-bar"></div
+        ><p class="talk-title">{{talk}}</p
+      ></div
+      ><div class="spacer"></div
+      ><div class="footer"
+        ><p class="meta">9-11 MAR 2027</p
+        ><div class="dot"></div
+        ><p class="meta">MUNICH</p
+        ><div class="dot"></div
+        ><p class="meta">ISARWERK HALL</p
+      ></div
+    ></div
+  ></main>
+</body>
+</html>

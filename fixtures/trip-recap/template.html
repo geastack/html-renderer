@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <title>Trip recap</title>
+  <link rel="stylesheet" href="trip-recap.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};"
+    ><div class="header"
+      ><p class="brand" style="color: {{accent}};">waymark</p
+      ><p class="handle">@{{handle}}</p
+    ></div
+    ><div class="hero"
+      ><p class="lead">Your {{season}} in</p
+      ><p class="place">{{place}}</p
+      ><p class="dates" style="color: {{soft}};">{{dates}}</p
+    ></div
+    ><div class="map" style="background-color: {{panel}};"
+      >{{#legs}}<div class="leg" style="left: {{left}}px; top: {{top}}px; width: {{width}}px; transform: rotate({{deg}}deg); background-color: {{accent}};"></div
+      >{{/legs}}{{#stops}}<div class="dot" style="left: {{dotLeft}}px; top: {{dotTop}}px; width: {{size}}px; height: {{size}}px; border: {{border}}px solid {{accent}}; border-radius: {{radius}}px;"></div
+      ><div class="stop" style="left: {{labelLeft}}px; top: {{labelTop}}px; text-align: {{align}};"
+        ><p class="city">{{name}}</p
+        ><p class="meta" style="color: {{soft}};">{{meta}}</p
+      ></div
+      >{{/stops}}</div
+    ><div class="stats"
+      ><div class="stat" style="background-color: {{panel}};"
+        ><p class="value" style="color: {{accent}};">{{countries}}</p
+        ><p class="label">COUNTRIES</p
+      ></div
+      ><div class="stat" style="background-color: {{panel}};"
+        ><p class="value" style="color: {{accent}};">{{cities}}</p
+        ><p class="label">CITIES</p
+      ></div
+      ><div class="stat" style="background-color: {{panel}};"
+        ><p class="value" style="color: {{accent}};">{{km}}</p
+        ><p class="label">KM TRAVELLED</p
+      ></div
+      ><div class="stat" style="background-color: {{panel}};"
+        ><p class="value" style="color: {{accent}};">{{nights}}</p
+        ><p class="label">NIGHTS AWAY</p
+      ></div
+    ></div
+    ><p class="section">HIGHLIGHTS</p
+    ><div class="pills"
+      >{{#highlights}}<p class="pill" style="color: {{background}}; background-color: {{soft}};">{{text}}</p
+      >{{/highlights}}</div
+  ></main>
+</body>
+</html>

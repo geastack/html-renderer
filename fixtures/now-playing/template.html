@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <title>Now playing</title>
+  <link rel="stylesheet" href="now-playing.css">
+</head>
+<body>
+  <main class="story" style="background: linear-gradient(180deg, {{bgTop}} 0%, {{bgBottom}} 100%);"
+    ><div class="header"
+      ><p class="brand" style="color: {{accent}};">lowtide</p
+      ><div class="live" style="background-color: {{accent}};"></div
+      ><p class="tag">NOW LISTENING</p
+    ></div
+    ><div class="art" style="background: linear-gradient(160deg, {{artFrom}} 0%, {{artTo}} 100%);"
+      ><div class="sun" style="left: {{sunLeft}}px; top: {{sunTop}}px; background-color: {{sun}};"></div
+      ><div class="sea" style="background: linear-gradient(180deg, {{artTo}} 0%, {{sea}} 100%);"></div
+      ><div class="wave-line" style="top: 600px; width: 936px; background-color: {{sun}};"></div
+      ><div class="wave-line" style="top: 660px; left: 120px; width: 696px; background-color: {{artFrom}};"></div
+      ><div class="wave-line" style="top: 720px; left: 240px; width: 456px; background-color: {{sun}};"></div
+    ></div
+    ><div class="copy"
+      ><p class="track">{{track}}</p
+      ><p class="artist">{{artist}}</p
+      ><p class="album">{{album}} / {{year}}</p
+    ></div
+    ><div class="waveform">{{#played}}<div class="bar" style="height: {{h}}px; background-color: {{accent}};"></div>{{/played}}{{#rest}}<div class="bar rest" style="height: {{h}}px;"></div>{{/rest}}</div
+    ><div class="track-bar"><div class="fill" style="width: {{fill}}px; background-color: {{accent}};"></div><div class="knob" style="left: {{knob}}px;"></div></div
+    ><div class="times"><p class="time">{{elapsed}}</p><p class="time time-total">{{total}}</p></div
+    ><div class="spacer"></div
+    ><div class="footer"
+      ><p class="handle">@{{handle}}</p
+      ><p class="note">SHARED FROM LOWTIDE</p
+    ></div
+  ></main>
+</body>
+</html>

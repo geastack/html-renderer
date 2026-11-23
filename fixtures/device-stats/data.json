@@ -1,0 +1,46 @@
+{
+  "width": 1200,
+  "height": 630,
+  "entries": [
+    {
+      "id": "pedalboard",
+      "accent": "#E94BFF",
+      "kind": "MY PEDALBOARD",
+      "handle": "selin.builds",
+      "title": "Night Drive Rig",
+      "sub": "Guitar pedalboard by Selin Kaya",
+      "note": "4 boards in sync over the local network",
+      "stats": [
+        { "value": "4", "unit": "boards", "color": "#2DE2FF" },
+        { "value": "12", "unit": "effects", "color": "#6E7BF2" },
+        { "value": "10", "unit": "ms latency", "color": "#E94BFF" }
+      ],
+      "boards": [
+        { "type": "DRIVE", "name": "Overdrive", "reading": "Gain 7.2", "level": "140px", "color": "#E94BFF", "tint": "#E94BFF33" },
+        { "type": "TIME", "name": "Tape Delay", "reading": "420 ms", "level": "96px", "color": "#6E7BF2", "tint": "#6E7BF233" },
+        { "type": "SPACE", "name": "Hall Reverb", "reading": "Mix 35%", "level": "66px", "color": "#2DE2FF", "tint": "#2DE2FF33" },
+        { "type": "TUNE", "name": "Tuner", "reading": "A 440 Hz", "level": "172px", "color": "#F5F5F7", "tint": "#F5F5F726" }
+      ]
+    },
+    {
+      "id": "weather-station",
+      "accent": "#2DE2FF",
+      "kind": "MY WEATHER STATION",
+      "handle": "jonas.makes",
+      "title": "Rooftop Sky Lab",
+      "sub": "Home weather station by Jonas Berg",
+      "note": "Solar powered, 41 days uptime",
+      "stats": [
+        { "value": "4", "unit": "boards", "color": "#2DE2FF" },
+        { "value": "9", "unit": "sensors", "color": "#6E7BF2" },
+        { "value": "2", "unit": "sec refresh", "color": "#E94BFF" }
+      ],
+      "boards": [
+        { "type": "TEMP", "name": "Outdoor", "reading": "21.4 C, feels 20", "level": "120px", "color": "#2DE2FF", "tint": "#2DE2FF33" },
+        { "type": "WIND", "name": "Anemometer", "reading": "14 km/h NW", "level": "72px", "color": "#6E7BF2", "tint": "#6E7BF233" },
+        { "type": "RAIN", "name": "Rain Gauge", "reading": "3.2 mm today", "level": "40px", "color": "#8FB8FF", "tint": "#8FB8FF2E" },
+        { "type": "AIR", "name": "Air Quality", "reading": "AQI 18, good", "level": "160px", "color": "#E94BFF", "tint": "#E94BFF33" }
+      ]
+    }
+  ]
+}

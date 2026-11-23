@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <title>Course certificate</title>
+  <link rel="stylesheet" href="course-certificate.css">
+</head>
+<body>
+  <main class="page"
+    ><div class="stripe"
+      ><div class="band" style="background-color: #66489D;"></div
+      ><div class="band" style="background-color: #C42F8E;"></div
+      ><div class="band" style="background-color: #EE4136;"></div
+      ><div class="band" style="background-color: #F58A2B;"></div
+      ><div class="band" style="background-color: #FDB714;"></div
+      ><div class="band" style="background-color: #8BC53F;"></div
+      ><div class="band" style="background-color: #00AEA7;"></div
+    ></div
+    ><div class="frame"></div
+    ><div class="content"
+      ><div class="header"
+        ><img class="logo" src="../shared/images/coyotiv-logo.png"
+        ><div class="grow"></div
+        ><p class="cert-id">NO. {{certificateId}}</p
+      ></div
+      ><p class="eyebrow" style="color: {{accent}};">CERTIFICATE OF COMPLETION</p
+      ><p class="lead">This certifies that</p
+      ><p class="learner">{{learner}}</p
+      ><p class="lead">has successfully completed</p
+      ><p class="course" style="color: {{accent}};">{{course}}</p
+      ><div class="stats"
+        ><div class="stat"><p class="label">HOURS</p><p class="value">{{hours}}</p></div
+        ><div class="stat"><p class="label">MODULES</p><p class="value">{{modules}}</p></div
+        ><div class="stat"><p class="label">PROJECTS</p><p class="value">{{projects}}</p></div
+        ><div class="stat date"><p class="label">COMPLETED</p><p class="value">{{completed}}</p></div
+      ></div
+      ><div class="grow"></div
+      ><div class="signature"
+        ><div class="sign-line"></div
+        ><p class="signer">Armagan Amcalar</p
+        ><p class="signer-role">Founder &amp; Lead Instructor</p
+      ></div
+    ></div
+    ><div class="seal"
+      ><div class="ribbon left" style="background-color: {{accent}};"></div
+      ><div class="ribbon right" style="background-color: {{accent}};"></div
+      ><div class="burst" style="background-color: {{accent}};"></div
+      ><div class="burst" style="background-color: {{accent}}; transform: rotate(30deg);"></div
+      ><div class="burst" style="background-color: {{accent}}; transform: rotate(60deg);"></div
+      ><div class="ring"></div
+      ><div class="core" style="background-color: {{accent}};"
+        ><div class="check"></div
+        ><p class="seal-year">{{year}}</p
+      ></div
+    ></div
+  ></main>
+</body>
+</html>

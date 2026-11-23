@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <title>Recipe card</title>
+  <link rel="stylesheet" href="recipe-card.css">
+</head>
+<body>
+  <main class="card"><div class="header"><p class="brand" style="color: {{accent}};">simmerly</p
+      ><p class="tag">RECIPE</p></div
+    ><div class="hero" style="background: linear-gradient(135deg, {{tableFrom}} 0%, {{tableTo}} 100%);"><div class="plank" style="top: 140px;"></div
+      ><div class="plank" style="top: 280px;"></div
+      ><div class="napkin" style="background-color: {{accent}};"></div
+      ><div class="napkin-stripe"></div
+      ><div class="napkin-stripe" style="left: 91px; top: 176px;"></div
+      ><div class="spoon-handle"></div
+      ><div class="spoon-head"></div
+      ><div class="handle {{vessel}}-handle"></div
+      ><div class="rim {{vessel}}-rim"></div
+      ><div class="well {{vessel}}-well"></div
+      ><div class="food {{vessel}}-food" style="background: linear-gradient(135deg, {{foodFrom}} 0%, {{foodTo}} 100%);"></div
+      >{{#scene}}<div class="bit {{kind}}" style="left: {{x}}px; top: {{y}}px; transform: rotate({{r}}deg);"></div>{{/scene}}<p class="course" style="color: {{accent}};">{{course}}</p></div
+    ><p class="dish">{{dish}}</p
+    ><p class="byline">Shared by @{{handle}}</p
+    ><div class="pills"><p class="pill" style="background-color: {{accent}};">{{time}}</p
+      ><p class="pill" style="background-color: {{accent}};">Serves {{servings}}</p
+      ><p class="pill-outline" style="color: {{accent}}; border: 3px solid {{accent}};">{{difficulty}}</p></div
+    ><div class="list-head"><p class="label">INGREDIENTS</p
+      ><p class="count">5 OF {{total}}</p></div
+    >{{#ingredients}}<div class="item"><p class="num" style="color: {{accent}};">0{{index}}</p><p class="name">{{name}}</p><p class="amount">{{amount}}</p></div>{{/ingredients}}<div class="grow"></div
+    ><div class="footer"><p class="cta">FULL METHOD ON SIMMERLY</p
+      ><p class="saves" style="color: {{accent}};">{{saves}} SAVES</p></div></main>
+</body>
+</html>

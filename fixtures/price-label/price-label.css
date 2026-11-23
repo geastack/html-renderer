@@ -1,0 +1,76 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Barlow SemiCondensed";
+  src: url("../shared/fonts/BarlowSemiCondensed-Bold.ttf");
+}
+
+p { margin: 0; }
+body { margin: 0; background-color: #FFFFFF; }
+
+.label { position: relative; width: 600px; height: 360px; background-color: #FFFFFF; }
+.grow { flex-grow: 1; }
+
+.band { position: absolute; left: 0px; top: 0px; display: flex; flex-direction: row; align-items: center; gap: 0px; width: 552px; height: 44px; padding: 0px 24px; }
+.band-text { font-family: "JetBrains Mono"; font-size: 18px; line-height: 24px; color: #FFFFFF; }
+.band-shop { font-family: "Hanken ExtraBold"; font-size: 22px; line-height: 28px; color: #FFFFFF; }
+
+.head { position: absolute; left: 24px; top: 64px; display: flex; flex-direction: row; align-items: center; gap: 0px; width: 552px; height: 104px; }
+.thumb { width: 104px; height: 104px; margin-right: 20px; border-radius: 12px; }
+.info { display: flex; flex-direction: column; gap: 0px; }
+.category { font-family: "JetBrains Mono"; font-size: 18px; line-height: 24px; }
+.name { padding-top: 4px; font-family: "Hanken ExtraBold"; font-size: 32px; line-height: 38px; color: #000000; }
+.spec { padding-top: 4px; font-family: "Hanken Medium"; font-size: 20px; line-height: 26px; }
+
+.foot { position: absolute; left: 24px; top: 192px; display: flex; flex-direction: row; align-items: flex-end; gap: 0px; width: 552px; height: 144px; }
+
+.code { display: flex; flex-direction: column; gap: 0px; }
+.barcode { display: flex; flex-direction: row; align-items: flex-start; gap: 0px; height: 64px; }
+.bar { height: 56px; }
+.guard { height: 64px; }
+.ean { padding-top: 4px; font-family: "JetBrains Mono"; font-size: 18px; line-height: 22px; color: #000000; }
+.sku { font-family: "JetBrains Mono"; font-size: 18px; line-height: 22px; }
+
+.pricing { display: flex; flex-direction: column; align-items: flex-end; gap: 0px; }
+.was-row { display: flex; flex-direction: row; align-items: center; gap: 0px; }
+.old { position: relative; }
+.old-price { font-family: "Hanken Medium"; font-size: 22px; line-height: 28px; }
+.strike { position: absolute; left: -3px; top: 13px; width: 100%; height: 3px; padding-right: 6px; }
+.pill { margin-left: 12px; padding: 2px 10px; border-radius: 6px; font-family: "JetBrains Mono"; font-size: 18px; line-height: 24px; color: #FFFFFF; }
+.now { display: flex; flex-direction: row; align-items: flex-start; gap: 0px; }
+.currency { padding-top: 10px; padding-right: 8px; font-family: "Barlow SemiCondensed"; font-size: 28px; line-height: 32px; color: #000000; }
+.amount { font-family: "Barlow SemiCondensed"; font-size: 104px; line-height: 92px; color: #000000; }
+.unit { font-family: "Hanken Medium"; font-size: 18px; line-height: 24px; }
+
+.colour .band { background-color: #E4472B; }
+.colour .category { color: #E4472B; }
+.colour .spec { color: #5A5A5A; }
+.colour .bar { background-color: #000000; }
+.colour .sku { color: #5A5A5A; }
+.colour .old-price { color: #5A5A5A; }
+.colour .strike { background-color: #5A5A5A; }
+.colour .pill { background-color: #E4472B; }
+.colour .unit { color: #5A5A5A; }
+
+.epaper .band { background-color: #000000; }
+.epaper .category { color: #000000; }
+.epaper .spec { color: #000000; }
+.epaper .bar { background-color: #000000; }
+.epaper .sku { color: #000000; }
+.epaper .old-price { color: #000000; }
+.epaper .strike { background-color: #000000; }
+.epaper .pill { background-color: #000000; }
+.epaper .unit { color: #000000; }

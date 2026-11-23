@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <title>Book review</title>
+  <link rel="stylesheet" href="book-review.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};"><div class="header"><p class="brand" style="color: {{accent}};">dogear</p
+      ><p class="tag">BOOK REVIEW</p></div
+    ><div class="book"><div class="book-art"><div class="book-shadow"></div
+        ><div class="book-pages"></div
+        ><div class="cover" style="background: linear-gradient(160deg, {{coverFrom}} 0%, {{coverTo}} 100%);"></div
+        ><div class="cover-sheen"></div
+        ><div class="cover-spine"></div
+        ><div class="cover-crease"></div
+        ><div class="cover-content"><div class="emblem"><div class="emblem-dot"></div></div
+          ><div class="grow"></div
+          ><p class="cover-title">{{title}}</p
+          ><div class="cover-rule"></div
+          ><p class="cover-author">{{author}}</p></div></div
+      ><div class="book-copy"><p class="label">FINISHED {{finished}}</p
+        ><p class="title">{{title}}</p
+        ><p class="author">by {{author}}</p
+        ><div class="rating">{{#stars}}<div class="star"><div class="star-fill {{kind}}" style="background-color: {{accent}};"></div></div>{{/stars}}<p class="score" style="background-color: {{accent}}; color: {{background}};">{{rating}} / 5</p></div
+        ><div class="meta"><p class="meta-text">{{pages}} pages</p
+          ><div class="dot"></div
+          ><p class="meta-text">read in {{days}} days</p></div></div></div
+    ><div class="review"><div class="quote-row"><div class="bar" style="background-color: {{accent}};"></div
+        ><p class="quote">&quot;{{quote}}&quot;</p></div></div
+    ><div class="footer"><div class="avatar" style="background: linear-gradient(135deg, {{coverFrom}} 0%, {{accent}} 100%);"></div
+      ><p class="handle">@{{handle}}</p
+      ><p class="shelf">{{shelf}}</p></div></main>
+</body>
+</html>

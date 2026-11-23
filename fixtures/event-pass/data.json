@@ -1,0 +1,34 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "lena",
+      "accent": "#FF5A36",
+      "note": "Catch my talk on day two.",
+      "kind": "CONFERENCE PASS",
+      "event": "Copperline Dev Summit 2027",
+      "dates": "14-16 Apr 2027",
+      "city": "Rotterdam",
+      "venue": "Maashaven Hall",
+      "name": "Lena Okafor",
+      "role": "Firmware Lead at Pebblewave",
+      "badge": "SPEAKER",
+      "ticket": "NO. CDS-0427-118"
+    },
+    {
+      "id": "mateo",
+      "accent": "#2337FF",
+      "note": "Who else is heading to Lisbon?",
+      "kind": "FESTIVAL PASS",
+      "event": "Pixel Harbor Design Week 2027",
+      "dates": "3-5 Sep 2027",
+      "city": "Lisbon",
+      "venue": "Doca Pavilion",
+      "name": "Mateo Ruiz",
+      "role": "Product Designer at Orbitkit",
+      "badge": "ALL ACCESS",
+      "ticket": "NO. PHW-0903-542"
+    }
+  ]
+}

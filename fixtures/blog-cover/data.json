@@ -1,0 +1,72 @@
+{
+  "width": 1200,
+  "height": 630,
+  "entries": [
+    {
+      "id": "hue-controller-on-a-smartwatch",
+      "title": "A Philips Hue controller built with TypeScript, running natively on a smartwatch",
+      "category": "ENGINEERING",
+      "accent": "#2DE2FF",
+      "date": "Nov 13, 2026",
+      "readTime": "7 min read",
+      "author": "GeaStack",
+      "photo": [],
+      "mark": [{}]
+    },
+    {
+      "id": "typescript-is-enough",
+      "title": "Agents don't need a new UI language. They need to reuse their knowledge.",
+      "category": "PERSPECTIVE",
+      "accent": "#E94BFF",
+      "date": "Nov 19, 2026",
+      "readTime": "14 min read",
+      "author": "GeaStack",
+      "photo": [],
+      "mark": [{}]
+    },
+    {
+      "id": "scriptc-0-2-3",
+      "title": "scriptc 0.2.3 update: GeaStack is 6.5x faster",
+      "category": "ENGINEERING",
+      "accent": "#2DE2FF",
+      "date": "Oct 5, 2026",
+      "readTime": "8 min read",
+      "author": "Armagan Amcalar",
+      "photo": [{ "src": "../shared/images/armagan-amcalar.png" }],
+      "mark": []
+    },
+    {
+      "id": "the-age-of-personalized-hardware-is-coming",
+      "title": "The Age of Personalized Hardware Is Coming",
+      "category": "PERSPECTIVE",
+      "accent": "#E94BFF",
+      "date": "Jul 2, 2026",
+      "readTime": "6 min read",
+      "author": "Armagan Amcalar",
+      "photo": [{ "src": "../shared/images/armagan-amcalar.png" }],
+      "mark": []
+    },
+    {
+      "id": "parallel-typescript",
+      "title": "Introducing @geastack/parallel",
+      "category": "RELEASE",
+      "accent": "#6E7BF2",
+      "date": "Oct 18, 2026",
+      "readTime": "7 min read",
+      "author": "Armagan Amcalar",
+      "photo": [{ "src": "../shared/images/armagan-amcalar.png" }],
+      "mark": []
+    },
+    {
+      "id": "hono-with-perry",
+      "title": "Compiling Hono with Perry",
+      "category": "ENGINEERING",
+      "accent": "#2DE2FF",
+      "date": "Sep 23, 2026",
+      "readTime": "7 min read",
+      "author": "Armagan Amcalar",
+      "photo": [{ "src": "../shared/images/armagan-amcalar.png" }],
+      "mark": []
+    }
+  ]
+}

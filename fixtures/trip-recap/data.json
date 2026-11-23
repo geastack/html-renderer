@@ -1,0 +1,259 @@
+{
+  "width": 1080,
+  "height": 1350,
+  "entries": [
+    {
+      "id": "ines",
+      "handle": "ines.on.the.road",
+      "season": "summer",
+      "place": "Portugal",
+      "dates": "12 JUL - 03 AUG 2026",
+      "countries": "1",
+      "cities": "5",
+      "km": "1,284",
+      "nights": "22",
+      "background": "#0C2B36",
+      "panel": "#FFFFFF0D",
+      "accent": "#FF7A59",
+      "soft": "#FFD9B8",
+      "highlights": [
+        {
+          "text": "Surf lesson in Lagos"
+        },
+        {
+          "text": "Douro river cruise"
+        },
+        {
+          "text": "9 pastry stops"
+        }
+      ],
+      "legs": [
+        {
+          "left": 64,
+          "top": 175,
+          "width": 240,
+          "deg": "32.76"
+        },
+        {
+          "left": 266,
+          "top": 305,
+          "width": 235,
+          "deg": "-30.71"
+        },
+        {
+          "left": 468,
+          "top": 185,
+          "width": 235,
+          "deg": "30.71"
+        },
+        {
+          "left": 670,
+          "top": 305,
+          "width": 230,
+          "deg": "-28.57"
+        }
+      ],
+      "stops": [
+        {
+          "name": "Porto",
+          "meta": "5 NIGHTS",
+          "x": 64,
+          "y": 178,
+          "above": true,
+          "dotLeft": 45,
+          "dotTop": 159,
+          "size": 22,
+          "border": 8,
+          "radius": 19,
+          "labelLeft": 45,
+          "labelTop": 59,
+          "align": "left"
+        },
+        {
+          "name": "Coimbra",
+          "meta": "2 NIGHTS",
+          "x": 266,
+          "y": 308,
+          "dotLeft": 253,
+          "dotTop": 295,
+          "size": 14,
+          "border": 6,
+          "radius": 13,
+          "labelLeft": 136,
+          "labelTop": 337,
+          "align": "center"
+        },
+        {
+          "name": "Lisbon",
+          "meta": "7 NIGHTS",
+          "x": 468,
+          "y": 188,
+          "above": true,
+          "dotLeft": 455,
+          "dotTop": 175,
+          "size": 14,
+          "border": 6,
+          "radius": 13,
+          "labelLeft": 338,
+          "labelTop": 75,
+          "align": "center"
+        },
+        {
+          "name": "Evora",
+          "meta": "3 NIGHTS",
+          "x": 670,
+          "y": 308,
+          "dotLeft": 657,
+          "dotTop": 295,
+          "size": 14,
+          "border": 6,
+          "radius": 13,
+          "labelLeft": 540,
+          "labelTop": 337,
+          "align": "center"
+        },
+        {
+          "name": "Lagos",
+          "meta": "5 NIGHTS",
+          "x": 872,
+          "y": 198,
+          "above": true,
+          "dotLeft": 853,
+          "dotTop": 179,
+          "size": 22,
+          "border": 8,
+          "radius": 19,
+          "labelLeft": 631,
+          "labelTop": 79,
+          "align": "right"
+        }
+      ]
+    },
+    {
+      "id": "mateo",
+      "handle": "mateo.wanders",
+      "season": "autumn",
+      "place": "Scandinavia",
+      "dates": "04 SEP - 19 SEP 2026",
+      "countries": "3",
+      "cities": "5",
+      "km": "1,962",
+      "nights": "15",
+      "background": "#16123A",
+      "panel": "#FFFFFF0F",
+      "accent": "#5EF2C2",
+      "soft": "#C9C3FF",
+      "highlights": [
+        {
+          "text": "Night train to Oslo"
+        },
+        {
+          "text": "Fjord kayak day"
+        },
+        {
+          "text": "4 saunas"
+        }
+      ],
+      "legs": [
+        {
+          "left": 64,
+          "top": 285,
+          "width": 225,
+          "deg": "-26.34"
+        },
+        {
+          "left": 266,
+          "top": 185,
+          "width": 235,
+          "deg": "30.71"
+        },
+        {
+          "left": 468,
+          "top": 305,
+          "width": 240,
+          "deg": "-32.76"
+        },
+        {
+          "left": 670,
+          "top": 175,
+          "width": 225,
+          "deg": "26.34"
+        }
+      ],
+      "stops": [
+        {
+          "name": "Copenhagen",
+          "meta": "4 NIGHTS",
+          "x": 64,
+          "y": 288,
+          "dotLeft": 45,
+          "dotTop": 269,
+          "size": 22,
+          "border": 8,
+          "radius": 19,
+          "labelLeft": 45,
+          "labelTop": 323,
+          "align": "left"
+        },
+        {
+          "name": "Malmo",
+          "meta": "1 NIGHT",
+          "x": 266,
+          "y": 188,
+          "above": true,
+          "dotLeft": 253,
+          "dotTop": 175,
+          "size": 14,
+          "border": 6,
+          "radius": 13,
+          "labelLeft": 136,
+          "labelTop": 75,
+          "align": "center"
+        },
+        {
+          "name": "Gothenburg",
+          "meta": "3 NIGHTS",
+          "x": 468,
+          "y": 308,
+          "dotLeft": 455,
+          "dotTop": 295,
+          "size": 14,
+          "border": 6,
+          "radius": 13,
+          "labelLeft": 338,
+          "labelTop": 337,
+          "align": "center"
+        },
+        {
+          "name": "Oslo",
+          "meta": "4 NIGHTS",
+          "x": 670,
+          "y": 178,
+          "above": true,
+          "dotLeft": 657,
+          "dotTop": 165,
+          "size": 14,
+          "border": 6,
+          "radius": 13,
+          "labelLeft": 540,
+          "labelTop": 65,
+          "align": "center"
+        },
+        {
+          "name": "Bergen",
+          "meta": "3 NIGHTS",
+          "x": 872,
+          "y": 278,
+          "dotLeft": 853,
+          "dotTop": 259,
+          "size": 22,
+          "border": 8,
+          "radius": 19,
+          "labelLeft": 631,
+          "labelTop": 313,
+          "align": "right"
+        }
+      ]
+    }
+  ]
+}

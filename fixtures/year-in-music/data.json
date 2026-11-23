@@ -1,0 +1,100 @@
+{
+  "width": 1080,
+  "height": 1920,
+  "entries": [
+    {
+      "id": "ece",
+      "handle": "ece.listens",
+      "year": "2026",
+      "background": "#1E1B4B",
+      "accent": "#C6F432",
+      "minutes": "48,210",
+      "percentile": "92",
+      "artist": "Neon Harbor",
+      "artistHours": "312",
+      "artistFrom": "#2DE2FF",
+      "artistTo": "#E94BFF",
+      "genre": "Synthwave",
+      "style": "Night owl",
+      "songs": [
+        {
+          "title": "Midnight Static",
+          "by": "Neon Harbor",
+          "from": "#FF6B6B",
+          "to": "#6E7BF2"
+        },
+        {
+          "title": "Glass Coastline",
+          "by": "Mira Vale",
+          "from": "#2DE2FF",
+          "to": "#1E1B4B"
+        },
+        {
+          "title": "Low Orbit",
+          "by": "Neon Harbor",
+          "from": "#C6F432",
+          "to": "#2DE2FF"
+        },
+        {
+          "title": "Paper Satellites",
+          "by": "The Quiet Arcade",
+          "from": "#E94BFF",
+          "to": "#FFB547"
+        },
+        {
+          "title": "Afterglow FM",
+          "by": "Mira Vale",
+          "from": "#6E7BF2",
+          "to": "#C6F432"
+        }
+      ]
+    },
+    {
+      "id": "jonas",
+      "handle": "jonas.plays",
+      "year": "2026",
+      "background": "#3B0A1E",
+      "accent": "#FFB547",
+      "minutes": "21,764",
+      "percentile": "71",
+      "artist": "Kestrel Lane",
+      "artistHours": "146",
+      "artistFrom": "#FFB547",
+      "artistTo": "#FF4D6D",
+      "genre": "Indie folk",
+      "style": "Commuter",
+      "songs": [
+        {
+          "title": "Harbour Lights",
+          "by": "Kestrel Lane",
+          "from": "#FFB547",
+          "to": "#3B0A1E"
+        },
+        {
+          "title": "Wool and Weather",
+          "by": "Ada Fen",
+          "from": "#7FD1AE",
+          "to": "#2A6F97"
+        },
+        {
+          "title": "Seven Bridges",
+          "by": "Kestrel Lane",
+          "from": "#FF4D6D",
+          "to": "#FFB547"
+        },
+        {
+          "title": "Northbound",
+          "by": "The Linden Set",
+          "from": "#F5F5F7",
+          "to": "#7FD1AE"
+        },
+        {
+          "title": "Kettle On",
+          "by": "Ada Fen",
+          "from": "#2A6F97",
+          "to": "#FF4D6D"
+        }
+      ]
+    }
+  ]
+}

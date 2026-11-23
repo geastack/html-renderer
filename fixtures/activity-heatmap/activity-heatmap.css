@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.card { display: flex; flex-direction: column; gap: 0px; width: 1072px; height: 502px; padding: 64px; }
+
+.header { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; }
+.brand { width: 536px; font-family: "Hanken ExtraBold"; font-size: 34px; line-height: 40px; }
+.handle { width: 536px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 32px; color: #FFFFFFB3; }
+
+.title-row { display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-end; gap: 0px; padding-top: 16px; }
+.headline { width: 736px; font-family: "Hanken ExtraBold"; font-size: 72px; line-height: 80px; color: #FFFFFF; }
+.tag { width: 336px; padding-bottom: 16px; text-align: right; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #FFFFFF; }
+
+.months { position: relative; width: 1072px; height: 28px; margin-top: 32px; }
+.month { position: absolute; top: 0px; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #FFFFFFB3; }
+
+.grid { display: flex; flex-direction: column; gap: 3px; padding-top: 8px; }
+.grid-row { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 3px; height: 16px; }
+.day { width: 84px; height: 16px; font-family: "JetBrains Mono"; font-size: 22px; line-height: 16px; color: #FFFFFFB3; }
+.cell { width: 16px; height: 16px; border-radius: 3px; }
+
+.violet0 { background-color: #FFFFFF14; }
+.violet1 { background-color: #3B2F7A; }
+.violet2 { background-color: #6450C8; }
+.violet3 { background-color: #9479FF; }
+.violet4 { background-color: #D4C8FF; }
+
+.amber0 { background-color: #FFFFFF14; }
+.amber1 { background-color: #5E3514; }
+.amber2 { background-color: #A65D16; }
+.amber3 { background-color: #E8891F; }
+.amber4 { background-color: #FFCB7A; }
+
+.grow { flex-grow: 1; }
+
+.stats { display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-end; gap: 0px; padding-top: 24px; border-top: 2px solid #FFFFFF1F; }
+.stat { display: flex; flex-direction: column; gap: 4px; width: 268px; }
+.value { font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 68px; color: #FFFFFF; }
+.label { font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #FFFFFFB3; }
+
+.legend { display: flex; flex-direction: row; justify-content: flex-end; align-items: center; gap: 6px; width: 268px; }
+.legend-text { font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #FFFFFFB3; }
+.swatch { width: 20px; height: 20px; border-radius: 4px; }

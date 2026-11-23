@@ -1,0 +1,45 @@
+{
+  "width": 900,
+  "height": 1300,
+  "entries": [
+    {
+      "id": "armagan",
+      "name": "Armagan Amcalar",
+      "role": "Founder",
+      "company": "GeaStack",
+      "type": "SPEAKER",
+      "pass": "FULL PASS",
+      "tone": "orange",
+      "dates": "9-11 March 2027",
+      "ticket": "EFS27-SPK-0042",
+      "photo": [{ "src": "../shared/images/armagan-amcalar.png" }],
+      "days": [{ "label": "TUE 9", "state": "on" }, { "label": "WED 10", "state": "on" }, { "label": "THU 11", "state": "on" }]
+    },
+    {
+      "id": "jonas",
+      "name": "Jonas Lindqvist",
+      "role": "Embedded Software Engineer",
+      "company": "Nordfield Instruments",
+      "type": "ATTENDEE",
+      "pass": "2-DAY PASS",
+      "tone": "blue",
+      "dates": "10-11 March 2027",
+      "ticket": "EFS27-ATT-1187",
+      "monogram": [{ "initials": "JL" }],
+      "days": [{ "label": "TUE 9", "state": "off" }, { "label": "WED 10", "state": "on" }, { "label": "THU 11", "state": "on" }]
+    },
+    {
+      "id": "mei",
+      "name": "Mei-Lin Okonkwo-Hartley",
+      "role": "Stage Manager, Main Hall",
+      "company": "Embedded Futures Crew",
+      "type": "CREW",
+      "pass": "ALL ACCESS",
+      "tone": "navy",
+      "dates": "9-11 March 2027",
+      "ticket": "EFS27-CRW-0007",
+      "monogram": [{ "initials": "MO" }],
+      "days": [{ "label": "TUE 9", "state": "on" }, { "label": "WED 10", "state": "on" }, { "label": "THU 11", "state": "on" }]
+    }
+  ]
+}

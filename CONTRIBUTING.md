@@ -10,7 +10,7 @@ host. The publish workflow lists the build dependencies and commands.
 
 ```sh
 mkdir -p dist
-npm run render -- fixtures/card.html --width 480 --height 220 --out dist/card.png
+npm run render -- fixtures/card/card.html --width 480 --height 220 --out dist/card.png
 ```
 
 Pass `--reuse` for subsequent renders with that build. To exercise the worker

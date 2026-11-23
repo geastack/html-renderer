@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <title>Match result</title>
+  <link rel="stylesheet" href="match-result.css">
+</head>
+<body>
+  <main class="board {{layout}}"
+    ><div class="header"
+      ><div class="competition"
+        ><p class="league">{{competition}}</p
+        ><p class="round">{{round}}</p
+      ></div
+      ><p class="status">{{status}}</p
+    ></div
+    ><div class="scoreline"
+      ><div class="team"
+        ><div class="crest"
+          ><div class="half left" style="background-color: {{homePrimary}};"></div
+          ><div class="half right" style="background-color: {{homeSecondary}};"></div
+          ><p class="monogram">{{homeShort}}</p
+        ></div
+        ><p class="name">{{homeName}}</p
+      ></div
+      ><div class="score"
+        ><p class="goals">{{homeScore}}</p
+        ><p class="dash">-</p
+        ><p class="goals">{{awayScore}}</p
+      ></div
+      ><div class="team"
+        ><div class="crest"
+          ><div class="half left" style="background-color: {{awayPrimary}};"></div
+          ><div class="half right" style="background-color: {{awaySecondary}};"></div
+          ><p class="monogram">{{awayShort}}</p
+        ></div
+        ><p class="name">{{awayName}}</p
+      ></div
+    ></div
+    ><div class="scorers"
+      ><div class="side home">{{#homeGoals}}<p class="minute" style="background-color: {{homePrimary}};">{{minute}}</p>{{/homeGoals}}</div
+      ><div class="side away">{{#awayGoals}}<p class="minute" style="background-color: {{awayPrimary}};">{{minute}}</p>{{/awayGoals}}</div
+    ></div
+    ><div class="stats"
+      >{{#stats}}<div class="stat"
+        ><div class="stat-row"
+          ><p class="value home">{{home}}</p
+          ><p class="stat-label">{{label}}</p
+          ><p class="value away">{{away}}</p
+        ></div
+        ><div class="bar"
+          ><div class="fill" style="width: {{homeShare}}%; background-color: {{homeBar}};"></div
+          ><div class="fill" style="width: {{awayShare}}%; background-color: {{awayBar}};"></div
+        ></div
+      ></div>{{/stats}}</div
+    ><div class="spacer"></div
+    ><div class="footer"
+      ><p class="when">{{date}} / {{city}}</p
+      ><p class="extra">{{note}}</p
+    ></div
+  ></main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <title>Sale card</title>
+  <link rel="stylesheet" href="sale-card.css">
+</head>
+<body style="background-color: {{page}};">
+  <main class="card" style="background-color: {{page}};"
+    ><div class="header"
+      ><div class="mark" style="background-color: {{accent}};"></div
+      ><p class="shop">{{shop}}</p
+      ><div class="grow"></div
+      ><p class="campaign" style="color: {{accent}};">{{campaign}}</p
+    ></div
+    ><div class="stage"
+      ><img class="photo" src="{{image}}" width="720" height="720"
+      ><div class="fill fill-left"
+        ><div class="cap cap-top-left" style="background-color: {{edgeLeftTop}};"></div
+        >{{#edgeLeft}}<div style="height: {{h}}px; background: linear-gradient(180deg, {{from}} 0%, {{to}} 100%);"></div>{{/edgeLeft}}<div class="cap cap-bottom-left" style="background-color: {{edgeLeftBottom}};"></div
+      ></div
+      ><div class="fill fill-right"
+        ><div class="cap cap-top-right" style="background-color: {{edgeRightTop}};"></div
+        >{{#edgeRight}}<div style="height: {{h}}px; background: linear-gradient(180deg, {{from}} 0%, {{to}} 100%);"></div>{{/edgeRight}}<div class="cap cap-bottom-right" style="background-color: {{edgeRightBottom}};"></div
+      ></div
+      ><div class="fill fill-left fade" style="background: linear-gradient(90deg, {{edgeBase}} 0%, {{edgeBase}}00 100%);"></div
+      ><div class="fill fill-right fade" style="background: linear-gradient(270deg, {{edgeBase}} 0%, {{edgeBase}}00 100%);"></div
+    ></div
+    ><div class="badge" style="background-color: {{accent}};"
+      ><p class="badge-value" style="color: {{page}};">-{{discount}}%</p
+      ><p class="badge-label" style="color: {{page}};">OFF</p
+    ></div
+    ><p class="category">{{category}}</p
+    ><p class="name">{{name}}</p
+    ><div class="prices"
+      ><p class="amount" style="color: {{accent}};">{{price}}</p
+      ><p class="currency" style="color: {{accent}};">{{currency}}</p
+      ><div class="grow"></div
+      ><div class="deal"
+        ><div class="was"
+          ><div class="old"
+            ><p class="old-price">{{currency}} {{oldPrice}}</p
+            ><div class="strike"></div
+          ></div
+        ></div
+        ><p class="save">You save {{currency}} {{saving}}</p
+      ></div
+    ></div
+    ><div class="rule"></div
+    ><div class="footer"
+      ><p class="ends">Sale ends {{saleEnds}}</p
+      ><div class="grow"></div
+      ><p class="site">{{site}}</p
+    ></div
+  ></main>
+</body>
+</html>

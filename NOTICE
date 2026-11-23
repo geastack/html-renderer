@@ -3,5 +3,19 @@ Copyright 2026 GeaStack
 
 Licensed under the Apache License, Version 2.0. See LICENSE.
 
-The Barlow Semi Condensed fixture font is distributed under the SIL Open Font
-License, Version 1.1. See fixtures/fonts/OFL.txt.
+The fixture fonts are distributed under the SIL Open Font License, Version 1.1:
+
+- Barlow Semi Condensed. See fixtures/shared/fonts/Barlow-OFL.txt.
+- Hanken Grotesk, as static ExtraBold and Medium instances. See
+  fixtures/shared/fonts/HankenGrotesk-OFL.txt.
+- JetBrains Mono. See fixtures/shared/fonts/JetBrainsMono-OFL.txt.
+
+Other fixture images:
+
+- fixtures/shared/images/coyotiv-logo.png and coyotiv-logo-light.png are the
+  Coyotiv logo, a trademark of Coyotiv GmbH, included for the course and
+  community examples.
+- fixtures/shared/images/armagan-amcalar.png is a photo of Armagan Amcalar,
+  founder of GeaStack and Coyotiv, used in the event and community examples.
+- fixtures/shared/images/products/ holds generated product photos of
+  fictional products.

@@ -1,0 +1,72 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "selin",
+      "handle": "selin.reads",
+      "background": "#16203A",
+      "accent": "#FFB547",
+      "coverFrom": "#FF6B6B",
+      "coverTo": "#6E2A8C",
+      "title": "The Lantern Keepers",
+      "author": "Maren Holt",
+      "finished": "NOV 2026",
+      "pages": "412",
+      "days": "9",
+      "rating": "4.5",
+      "shelf": "BOOK 38 OF 2026",
+      "quote": "Slow to start, then impossible to put down. The last hundred pages kept me up until three in the morning.",
+      "stars": [
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "half"
+        }
+      ]
+    },
+    {
+      "id": "tomas",
+      "handle": "tomas.pages",
+      "background": "#10291F",
+      "accent": "#7FE0B0",
+      "coverFrom": "#2A6F97",
+      "coverTo": "#0B1D2E",
+      "title": "Tidewater Ledger",
+      "author": "Idris Calloway",
+      "finished": "OCT 2026",
+      "pages": "288",
+      "days": "4",
+      "rating": "4",
+      "shelf": "BOOK 12 OF 2026",
+      "quote": "A quiet, patient novel about a ferry town. Every chapter felt like a walk along the harbour at dusk.",
+      "stars": [
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "full"
+        },
+        {
+          "kind": "empty"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.story { display: flex; flex-direction: column; gap: 0px; width: 936px; height: 1776px; padding: 72px; }
+
+.header { display: flex; flex-direction: row; align-items: center; gap: 0px; width: 936px; }
+.brand { flex-grow: 1; font-family: "Hanken ExtraBold"; font-size: 48px; line-height: 56px; }
+.live { width: 16px; height: 16px; border-radius: 8px; }
+.tag { padding-left: 16px; font-family: "JetBrains Mono"; font-size: 28px; line-height: 32px; color: #FFFFFF; }
+
+.art { position: relative; width: 936px; height: 936px; margin-top: 40px; border-radius: 24px; }
+.sun { position: absolute; width: 400px; height: 400px; border-radius: 200px; }
+.sea { position: absolute; left: 0px; top: 560px; width: 936px; height: 376px; border-radius: 0px 0px 24px 24px; }
+.wave-line { position: absolute; height: 12px; border-radius: 6px; }
+
+.copy { display: flex; flex-direction: column; gap: 0px; margin-top: 64px; }
+.track { font-family: "Hanken ExtraBold"; font-size: 96px; line-height: 104px; color: #FFFFFF; }
+.artist { padding-top: 8px; font-family: "Hanken Medium"; font-size: 48px; line-height: 56px; color: #FFFFFF; }
+.album { padding-top: 8px; font-family: "Hanken Medium"; font-size: 36px; line-height: 44px; color: #FFFFFFB3; }
+
+.waveform { display: flex; flex-direction: row; align-items: center; gap: 8px; width: 936px; height: 144px; margin-top: 64px; }
+.bar { width: 8px; border-radius: 4px; }
+.rest { background-color: #FFFFFF38; }
+
+.track-bar { position: relative; width: 936px; height: 8px; margin-top: 40px; border-radius: 4px; background-color: #FFFFFF2E; }
+.fill { height: 8px; border-radius: 4px; }
+.knob { position: absolute; top: -8px; width: 24px; height: 24px; border-radius: 12px; background-color: #FFFFFF; }
+
+.times { display: flex; flex-direction: row; align-items: center; gap: 0px; width: 936px; margin-top: 24px; }
+.time { width: 468px; font-family: "JetBrains Mono"; font-size: 30px; line-height: 36px; color: #FFFFFFCC; }
+.time-total { text-align: right; }
+
+.spacer { flex-grow: 1; }
+
+.footer { display: flex; flex-direction: row; align-items: center; gap: 0px; width: 936px; padding-top: 32px; border-top: 2px solid #FFFFFF24; }
+.handle { width: 468px; font-family: "JetBrains Mono"; font-size: 30px; line-height: 36px; color: #FFFFFF; }
+.note { width: 468px; text-align: right; font-family: "JetBrains Mono"; font-size: 26px; line-height: 36px; color: #FFFFFFB3; }

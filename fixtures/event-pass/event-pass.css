@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.page { display: flex; flex-direction: column; gap: 0px; height: 936px; padding: 72px; }
+
+.header { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; }
+.mark { width: 28px; height: 28px; border-radius: 8px; background-color: #FFFFFF; }
+.brand { width: 600px; padding-left: 14px; font-family: "Hanken ExtraBold"; font-size: 34px; line-height: 40px; color: #FFFFFF; }
+.shared { width: 294px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #FFFFFFCC; }
+
+.headline { padding-top: 36px; font-family: "Hanken ExtraBold"; font-size: 104px; line-height: 108px; color: #FFFFFF; }
+.note { padding-top: 4px; font-family: "Hanken Medium"; font-size: 34px; line-height: 42px; color: #FFFFFFE6; }
+
+.ticket { position: relative; display: flex; flex-direction: column; gap: 0px; width: 936px; margin-top: 48px; background-color: #FFFDF8; border-radius: 32px; overflow: hidden; }
+
+.main { display: flex; flex-direction: column; gap: 0px; height: 278px; padding: 40px 48px 32px; }
+.eyebrow { font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; }
+.event { padding-top: 12px; font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 68px; color: #14110F; }
+
+.info { display: flex; flex-direction: row; justify-content: flex-start; gap: 0px; padding-top: 28px; }
+.info-cell { display: flex; flex-direction: column; gap: 0px; }
+.dates { width: 300px; }
+.city { width: 240px; }
+.venue { width: 300px; }
+.label { font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #8C847A; }
+.value { padding-top: 4px; font-family: "Hanken ExtraBold"; font-size: 30px; line-height: 38px; color: #14110F; }
+
+.tear { display: flex; flex-direction: row; justify-content: flex-start; gap: 0px; height: 4px; padding-left: 54px; }
+.dash { width: 16px; height: 4px; background-color: #D6CFC4; border-right: 12px solid #FFFDF8; }
+
+.stub { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; padding: 32px 48px 40px; }
+.attendee { display: flex; flex-direction: column; gap: 0px; width: 595px; }
+.name { padding-top: 6px; font-family: "Hanken ExtraBold"; font-size: 46px; line-height: 52px; color: #14110F; }
+.role { font-family: "Hanken Medium"; font-size: 26px; line-height: 34px; color: #5C554D; }
+.badge-row { display: flex; flex-direction: row; justify-content: flex-start; gap: 0px; padding-top: 16px; }
+.badge { padding: 10px 20px; border-radius: 24px; font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #FFFFFF; }
+.ticket-no { padding-top: 14px; font-family: "JetBrains Mono"; font-size: 24px; line-height: 30px; color: #8C847A; }
+
+.qr { display: flex; flex-direction: column; gap: 0px; width: 189px; height: 189px; padding: 14px; background-color: #FFFFFF; border: 2px solid #E8E2D8; border-radius: 12px; }
+.qrow { display: flex; flex-direction: row; justify-content: flex-start; gap: 0px; height: 9px; }
+.qk { width: 9px; height: 9px; background-color: #14110F; }
+.qw { width: 9px; height: 9px; }
+
+.notch { position: absolute; top: 330px; width: 48px; height: 48px; border-radius: 24px; }
+.left { left: -24px; }
+.right { left: 912px; }

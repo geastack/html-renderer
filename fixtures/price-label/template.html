@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <title>Price label</title>
+  <link rel="stylesheet" href="price-label.css">
+</head>
+<body>
+  <main class="label {{theme}}"
+    ><div class="band"
+      ><p class="band-text">SALE UNTIL {{saleEnds}}</p
+      ><div class="grow"></div
+      ><p class="band-shop">{{shop}}</p
+    ></div
+    ><div class="head"
+      >{{#thumb}}<img class="thumb" src="{{src}}" width="104" height="104">{{/thumb}}<div class="info"
+        ><p class="category">{{category}}</p
+        ><p class="name">{{name}}</p
+        ><p class="spec">{{spec}}</p
+      ></div
+    ></div
+    ><div class="foot"
+      ><div class="code"
+        ><div class="barcode"
+        ><div class="bar guard" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar guard" style="width: 2px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 8px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 6px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 6px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 6px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar guard" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar guard" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 8px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 6px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 6px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 4px; margin-right: 4px;"></div
+        ><div class="bar" style="width: 6px; margin-right: 2px;"></div
+        ><div class="bar" style="width: 2px; margin-right: 4px;"></div
+        ><div class="bar guard" style="width: 2px; margin-right: 2px;"></div
+        ><div class="bar guard" style="width: 2px; margin-right: 0px;"></div
+      ></div
+        ><p class="ean">{{ean}}</p
+        ><p class="sku">SKU {{sku}}</p
+      ></div
+      ><div class="grow"></div
+      ><div class="pricing"
+        ><div class="was-row"
+          ><div class="old"><p class="old-price">{{currency}} {{oldPrice}}</p><div class="strike"></div></div
+          ><p class="pill">-{{discount}}%</p
+        ></div
+        ><div class="now"><p class="currency">{{currency}}</p><p class="amount">{{price}}</p></div
+        ><p class="unit">{{unitPrice}}</p
+      ></div
+    ></div
+  ></main>
+</body>
+</html>
