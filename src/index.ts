@@ -154,10 +154,12 @@ function renderHtml(source: string): void {
       tag !== 'style' &&
       tag !== 'link' &&
       tag !== 'meta' &&
-      tag !== 'title'
+      tag !== 'title' &&
+      tag !== 'source'
     const element = visible ? document.createElement(tag) : root
     let href = ''
     let rel = ''
+    let mediaSource = ''
     let selfClosing: boolean
 
     while (true) {
@@ -232,6 +234,11 @@ function renderHtml(source: string): void {
         rel = value.toLowerCase()
       }
 
+      if ((tag === 'video' || tag === 'source') && key === 'src') {
+        mediaSource = value
+        continue
+      }
+
       if ((visible || tag === 'body') && key.slice(0, 2) !== 'on') {
         if (key === 'src' && tag === 'img') {
           value = htmlResolve(source, value)
@@ -242,6 +249,14 @@ function renderHtml(source: string): void {
         } else {
           element.setAttribute(key, value)
         }
+      }
+    }
+
+    if (mediaSource !== '') {
+      if (tag === 'video' && visible) {
+        htmlVideo(element, source, mediaSource)
+      } else if (tag === 'source' && tags[tags.length - 1] === 'video') {
+        htmlVideo(nodes[nodes.length - 1], source, mediaSource)
       }
     }
 

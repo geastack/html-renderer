@@ -1,7 +1,7 @@
 # Gea HTML Renderer
 
-Render local HTML and CSS to PNG with GeaStack's native renderer.
-The Node client keeps a native worker open for repeated captures.
+Render local HTML and CSS to PNG or MP4 with GeaStack's native renderer.
+The Node client keeps a native worker open for repeated PNG captures.
 
 ![HTML to PNG in 14 ms](fixtures/promo/promo.png)
 
@@ -31,6 +31,35 @@ The release workflow builds for Apple Silicon macOS, Linux x64, and Windows x64.
 Linux builds use the Ubuntu 24.04 runtime and need SDL2, libcurl, FreeType, and
 libpng shared libraries. Headless capture does not require a display server.
 
+## Export MP4
+
+Video export is available in HTML Renderer 0.0.5 and later.
+
+```sh
+npx gea-html-render page.html --width 1280 --height 720 --start 500ms --end 4s --fps 30 --quality 9 --out page.mp4
+```
+
+The command opens the page once and advances CSS animations and local video
+from time zero. It streams frames from `--start` up to but excluding `--end`.
+`--end` is required, `--start` defaults to zero, and `--fps` defaults to 60.
+Use `ms` or `s` suffixes for times, or pass bare values in milliseconds.
+
+Install FFmpeg with `libx264` and put `ffmpeg` on `PATH` or set `GEA_FFMPEG`
+to its executable path. The output is a silent H.264 MP4. Encoding pads each
+odd viewport dimension by one pixel.
+
+Use `--quality 1–10` to control compression. The default is **8**. Use **5**
+for smaller previews or **10** to retain the most detail. Higher quality usually
+means a larger file. Set `--fps` for motion smoothness and use `--width`,
+`--height`, and `--dpr` to control how the page or app is rendered.
+
+Use `<video src="clip.mp4"></video>` or a `<source src="clip.mp4">` directly
+inside `<video>`. The renderer uses the `src` on `<video>` or the first child
+source with a `src`. Media paths are relative to the HTML file. Playback starts
+at page time zero, and the last video frame holds after the clip ends. The output
+contains the rendered video frames only. Playback controls and an audio track
+are outside the export path.
+
 ## Node API
 
 ```js
@@ -49,15 +78,33 @@ the worker can handle the next request. Each capture reloads the document by
 default. Set `reusePage: true` to capture the already mounted page again when
 the input path, viewport, and DPR match.
 
+Use `renderVideo()` to export a clip from Node. The time range is in milliseconds.
+
+```js
+import { renderVideo } from '@geastack/html-renderer'
+
+await renderVideo({
+  input: 'page.html',
+  out: 'page.mp4',
+  start: 500,
+  end: 4000,
+  fps: 30,
+  quality: 9,
+})
+```
+
+After building from source, run `npm run smoke:video` with FFmpeg and FFprobe
+available to verify CSS animation and embedded video export.
+
 ## Supported input
 
 The loader handles explicitly closed elements, void elements, text, common
 named entities, local images, inline styles, style blocks, linked stylesheets,
-and single-source local `@font-face` rules. HTML assets resolve relative to the
-HTML file. Font paths resolve relative to their stylesheet. Rendering uses
-Gea's selector, property, layout, and paint support. The prototype does not
-execute page JavaScript, fetch remote assets, implement browser HTML error
-recovery, or handle nested CSS at-rules.
+single-source local `@font-face` rules, and `@keyframes`. HTML assets resolve
+relative to the HTML file. Font paths resolve relative to their stylesheet.
+Rendering uses Gea's selector, property, layout, animation, and paint support.
+The prototype does not execute page JavaScript, fetch remote assets, implement
+browser HTML error recovery, or handle nested conditional CSS rules.
 
 ## Fixtures
 

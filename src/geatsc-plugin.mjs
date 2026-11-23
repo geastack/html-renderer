@@ -1,10 +1,12 @@
 import { inertPluginInstance } from '@geastack/compiler/plugin'
 
 const functions = [
+  'htmlVideo',
   'htmlInput',
   'htmlRead',
   'htmlResolve',
   'htmlRule',
+  'htmlKeyframe',
   'htmlBeginRules',
   'htmlEndRules',
   'htmlFont',

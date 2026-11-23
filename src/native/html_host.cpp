@@ -2,12 +2,17 @@
 #include "ui/style.h"
 #include "ui/tree_internal.h"
 #include "ui/document.h"
+#include "platform/prerender_video.h"
+#include "image.h"
+#include "video_pipe.h"
 
 #include <cctype>
 #include <cstdio>
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <memory>
+#include <vector>
 #include <system_error>
 #include <stdexcept>
 #include <string_view>
@@ -77,6 +82,107 @@ std::string htmlResolve(const std::string &source, const std::string &relative)
     return utf8Path((pathFromUtf8(source).parent_path() / pathFromUtf8(relative)).lexically_normal());
 }
 
+namespace {
+using gea::embedded::ui::NodeHandle;
+using gea::framework::graphics::ImageStore;
+namespace pixel = gea::framework::graphics::pixel;
+namespace prerender = gea::platform::prerender;
+
+struct Video {
+    NodeHandle node;
+    std::string path;
+    std::unique_ptr<VideoPipe> decoder;
+    std::vector<unsigned char> rgb;
+    pixel::native_t *pixels = nullptr;
+    int width = 0;
+    int height = 0;
+    std::int64_t frame = -1;
+    bool ended = false;
+
+    Video(NodeHandle element, std::string source) : node(element), path(std::move(source)) {}
+
+    void advance(int timeMs)
+    {
+        if (ended) return;
+        const auto target = (static_cast<std::int64_t>(timeMs) * prerender::videoFps + 500) / 1000;
+        bool updated = false;
+        while (frame < target) {
+            auto *stream = decoder->stream();
+            const int magic = std::fgetc(stream);
+            if (magic == EOF) {
+                if (!decoder->finishedSuccessfully() || frame < 0) htmlFail("Cannot decode video: " + path);
+                ended = true;
+                break;
+            }
+
+            int w = 0, h = 0, range = 0;
+            if (magic != 'P' || std::fgetc(stream) != '6' ||
+                std::fscanf(stream, "%d%d%d", &w, &h, &range) != 3 ||
+                std::fgetc(stream) != '\n' || range != 255 || w < 1 || h < 1 || w > 8192 || h > 8192) {
+                htmlFail("Invalid decoded video frame: " + path);
+            }
+            if (!pixels) {
+                const auto count = static_cast<std::size_t>(w) * h;
+                rgb.resize(count * 3);
+                auto *buffer = static_cast<pixel::native_t *>(std::calloc(count, sizeof(pixel::native_t)));
+                if (!buffer) htmlFail("Could not allocate video pixels");
+                const int id = ImageStore::instance().registerBuffer(buffer, w, h, -1, true);
+                if (id < 0) {
+                    std::free(buffer);
+                    htmlFail("Could not register video pixels");
+                }
+                pixels = buffer;
+                width = w;
+                height = h;
+                node.style().imageId(id);
+            }
+            if (w != width || h != height || std::fread(rgb.data(), 1, rgb.size(), stream) != rgb.size())
+                htmlFail("Incomplete or resized video frame: " + path);
+            ++frame;
+            updated = true;
+        }
+        if (updated) {
+            for (std::size_t i = 0; i < rgb.size() / 3; ++i)
+                pixels[i] = pixel::packNative8(rgb[i * 3], rgb[i * 3 + 1], rgb[i * 3 + 2]);
+            auto &tree = gea::embedded::ui::Tree::instance();
+            const int id = node.id();
+            tree.nodes()[id].render.dirty = 1;
+#if GEA_CSS_SCROLLING
+            tree.nodes()[id].render.non_scroll_dirty = 1;
+#endif
+            tree.markNodeDisplayCommandsDirty(id);
+            tree.markDisplayListContentDirty();
+        }
+    }
+};
+
+std::vector<Video> videos;
+}
+
+void htmlVideo(NodeHandle node, const std::string &document, const std::string &media)
+{
+    if (prerender::videoFps == 0) return;
+    for (const auto &video : videos) {
+        if (video.node.id() == node.id()) return;
+    }
+
+    auto path = htmlResolve(document, media);
+    const auto file = pathFromUtf8(path);
+    std::error_code error;
+    if (!fs::is_regular_file(file, error)) htmlFail("Video is not a local file: " + path);
+
+    Video video(node, path);
+    video.decoder = std::make_unique<VideoPipe>(std::vector<std::string>{
+        "-hide_banner", "-loglevel", "error", "-nostdin", "-protocol_whitelist", "file",
+        "-threads", "1", "-max_pixels", "67108864", "-i", path, "-map", "0:v:0", "-vf", "fps=" + std::to_string(prerender::videoFps) + ":start_time=0",
+        "-an", "-threads", "1", "-c:v", "ppm", "-f", "image2pipe", "pipe:1",
+    });
+    videos.push_back(std::move(video));
+    prerender::videoTick = [](int timeMs) {
+        for (auto &video : videos) video.advance(timeMs);
+    };
+}
+
 static bool simpleName(const std::string &text, std::size_t start)
 {
     if (start >= text.size()) return false;
@@ -93,6 +199,11 @@ void htmlRule(const std::string &selector, const std::string &property, const st
     if (simpleName(selector, 0)) sheet.registerElementRule(selector, property, value);
     else if (selector.front() == '.' && simpleName(selector, 1)) sheet.registerRule(selector.substr(1), property, value);
     else sheet.registerSelectorRule(selector, property, value);
+}
+
+void htmlKeyframe(const std::string &name, double offset, const std::string &property, const std::string &value)
+{
+    StyleSheet::instance().registerKeyframeRule(name, static_cast<int>(offset), property, value);
 }
 
 void htmlBeginRules()
