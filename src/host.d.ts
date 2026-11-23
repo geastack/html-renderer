@@ -1,4 +1,4 @@
-import type { Element } from '@geastack/core'
+import type { Element, Node } from '@geastack/core'
 
 declare global {
   function htmlInput(): string
@@ -9,6 +9,7 @@ declare global {
   function htmlEndRules(): void
   function htmlFont(family: string, path: string): void
   function htmlFail(message: string): void
+  function htmlMarkText(node: Node): void
   function htmlMount(root: Element): void
   function htmlInline(element: Element, property: string, value: string): void
 }

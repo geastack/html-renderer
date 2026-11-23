@@ -1,5 +1,6 @@
 #include "html_host.h"
 #include "ui/style.h"
+#include "ui/tree_internal.h"
 #include "ui/document.h"
 
 #include <cctype>
@@ -130,6 +131,11 @@ void htmlFont(const std::string &family, const std::string &path)
     if (!loaded) {
         htmlFail("Cannot load font " + family + " from " + path);
     }
+}
+
+void htmlMarkText(gea::embedded::ui::NodeHandle node)
+{
+    gea::embedded::ui::Tree::instance().setTagName(node.id(), "#text");
 }
 
 void htmlMount(gea::embedded::ui::NodeHandle root)
