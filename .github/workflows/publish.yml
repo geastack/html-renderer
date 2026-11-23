@@ -68,9 +68,12 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Install Linux build dependencies
         if: runner.os == 'Linux'
+        timeout-minutes: 15
         run: |
+          packages=(libsdl2-dev libcurl4-openssl-dev libfreetype-dev libpng-dev)
+          if ! command -v ffmpeg || ! command -v ffprobe; then packages+=(ffmpeg); fi
           sudo apt-get update
-          sudo apt-get install -y libsdl2-dev libcurl4-openssl-dev libfreetype-dev libpng-dev ffmpeg
+          sudo apt-get install -y --no-install-recommends "${packages[@]}"
       - name: Prepare FFmpeg on macOS
         if: runner.os == 'macOS'
         run: |
