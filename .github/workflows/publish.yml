@@ -97,6 +97,12 @@ jobs:
         run: |
           npm ci --ignore-scripts --prefix ../windows/packages/geastack-windows
           npm run build --prefix ../windows/packages/geastack-windows
+      - name: Compile pinned Gea compiler
+        run: |
+          npm ci --ignore-scripts --prefix ../compiler
+          npm run architecture --prefix ../compiler
+          node ../compiler/node_modules/typescript/bin/tsc -p ../compiler/tsconfig.json
+          node ../compiler/scripts/mark-bins-executable.mjs
       - name: Build and test the native renderer
         env:
           MACOSX_DEPLOYMENT_TARGET: '15.0'
@@ -109,8 +115,6 @@ jobs:
           npm ci --ignore-scripts --prefix ../core/packages/core
           npm run check
           npm run format:check
-          npm ci --ignore-scripts --prefix ../compiler
-          npm run build --prefix ../compiler
           mkdir -p dist
           npm run render -- fixtures/card/card.html --width 480 --height 220 --out dist/card.png
           node scripts/native-asset.mjs
