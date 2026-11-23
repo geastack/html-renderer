@@ -107,10 +107,10 @@ jobs:
           npm ci --ignore-scripts
           npm ci --ignore-scripts --prefix ../cli
           npm ci --ignore-scripts --prefix ../core/packages/core
-          npm ci --ignore-scripts --prefix ../compiler
-          npm run build --prefix ../compiler
           npm run check
           npm run format:check
+          npm ci --ignore-scripts --prefix ../compiler
+          npm run build --prefix ../compiler
           mkdir -p dist
           npm run render -- fixtures/card.html --width 480 --height 220 --out dist/card.png
           node scripts/native-asset.mjs
