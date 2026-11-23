@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+body { margin: 0; background-color: #08080A; }
+
+.page { position: relative; width: 1200px; height: 630px; background: linear-gradient(118deg, #08080A 0%, #0B0B0D 55%, #6E7BF21F 100%); }
+.bar { position: absolute; left: 0px; top: 0px; width: 1200px; height: 8px; background: linear-gradient(118deg, #2DE2FF 0%, #6E7BF2 52%, #E94BFF 100%); }
+
+.content { position: absolute; left: 64px; top: 64px; display: flex; flex-direction: column; gap: 0px; width: 1072px; height: 502px; }
+.grow { flex-grow: 1; }
+
+.header { display: flex; flex-direction: row; align-items: center; gap: 0px; height: 56px; }
+.logo { width: 136px; height: 56px; }
+.section { padding-left: 20px; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #8A8A94; }
+.category { padding: 8px 16px; border: 2px solid #2DE2FF; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; }
+
+.title { width: 1040px; font-family: "Hanken ExtraBold"; font-size: 68px; line-height: 76px; color: #F5F5F7; }
+
+.footer { display: flex; flex-direction: row; align-items: center; gap: 0px; height: 64px; }
+.avatar { width: 64px; height: 64px; }
+.mark { background: linear-gradient(118deg, #2DE2FF 0%, #6E7BF2 52%, #E94BFF 100%); }
+.byline { display: flex; flex-direction: column; gap: 0px; padding-left: 20px; }
+.author { font-family: "Hanken ExtraBold"; font-size: 26px; line-height: 32px; color: #F5F5F7; }
+.meta { display: flex; flex-direction: row; align-items: center; gap: 0px; padding-top: 2px; }
+.meta-text { font-family: "Hanken Medium"; font-size: 22px; line-height: 28px; color: #B4B4BD; }
+.dot { width: 6px; height: 6px; margin: 0px 12px; background-color: #6E7BF2; }
+.site { font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #B4B4BD; }

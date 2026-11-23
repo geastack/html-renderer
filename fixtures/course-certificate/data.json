@@ -1,0 +1,30 @@
+{
+  "width": 1600,
+  "height": 1131,
+  "entries": [
+    {
+      "id": "selin-fullstack",
+      "accent": "#66489D",
+      "certificateId": "CYT-FSJ-2026-0481",
+      "learner": "Selin Aydogan",
+      "course": "Full-Stack JavaScript Bootcamp",
+      "hours": "480",
+      "modules": "24",
+      "projects": "12",
+      "completed": "Nov 20, 2026",
+      "year": "2026"
+    },
+    {
+      "id": "jonas-native-uis",
+      "accent": "#00968F",
+      "certificateId": "CYT-NUG-2026-0117",
+      "learner": "Jonas Whitfield",
+      "course": "Native UIs with GeaStack",
+      "hours": "64",
+      "modules": "8",
+      "projects": "4",
+      "completed": "Oct 31, 2026",
+      "year": "2026"
+    }
+  ]
+}

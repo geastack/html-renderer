@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <title>Sleep summary</title>
+  <link rel="stylesheet" href="sleep-summary.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};">
+    <div class="header">
+      <p class="brand" style="color: {{accent}};">hushband</p>
+      <p class="week">{{week}}</p>
+    </div>
+    <div class="hero">
+      <div class="ring" style="border-color: {{accent}};">
+        <p class="score">{{score}}</p>
+        <p class="score-label">SLEEP SCORE</p>
+      </div>
+      <div class="hero-copy">
+        <p class="headline">{{headline}}</p>
+        <p class="sub">{{sub}}</p>
+      </div>
+    </div>
+    <p class="section">HOURS PER NIGHT</p>
+    <div class="chart">
+{{#nights}}
+      <div class="day">
+        <p class="hours" style="color: {{ink}};">{{hours}}</p>
+        <div class="bar" style="height: {{height}}px; background-color: {{tone}};"></div>
+        <p class="weekday">{{day}}</p>
+      </div>
+{{/nights}}
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <p class="value">{{average}}</p>
+        <p class="label">AVERAGE NIGHT</p>
+      </div>
+      <div class="tile">
+        <p class="value" style="color: {{highlight}};">{{best}}</p>
+        <p class="label">BEST NIGHT, {{bestDay}}</p>
+      </div>
+      <div class="tile">
+        <p class="value">{{consistency}}</p>
+        <p class="label">CONSISTENCY</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

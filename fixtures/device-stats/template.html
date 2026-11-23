@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <title>Device stats</title>
+  <link rel="stylesheet" href="device-stats.css">
+</head>
+<body>
+  <div class="bar"></div>
+  <main class="card"
+    ><div class="top"
+      ><p class="eyebrow" style="color: {{accent}};">{{kind}}</p
+      ><p class="handle">@{{handle}}</p
+    ></div
+    ><div class="hero"
+      ><div class="intro"
+        ><p class="title">{{title}}</p
+        ><p class="sub">{{sub}}</p
+      ></div
+      >{{#stats}}<div class="stat"><p class="value" style="color: {{color}};">{{value}}</p><p class="unit">{{unit}}</p></div>{{/stats}}</div
+    ><div class="boards"
+      >{{#boards}}<div class="board"
+        ><div class="screen" style="background: linear-gradient(150deg, {{tint}} 0%, #0B0B0D 70%);"
+          ><p class="kind" style="color: {{color}};">{{type}}</p
+          ><p class="name">{{name}}</p
+          ><p class="reading">{{reading}}</p
+          ><div class="track"><div class="fill" style="width: {{level}}; background-color: {{color}};"></div></div
+        ></div
+      ></div><div class="gutter"></div>{{/boards}}</div
+    ><div class="footer"
+      ><p class="built">Built with GeaStack</p
+      ><img class="logo" src="../shared/images/gea-logo.png" alt="Gea"
+      ><p class="note">{{note}}</p
+    ></div
+  ></main>
+</body>
+</html>

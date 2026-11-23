@@ -1,0 +1,136 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "ayla",
+      "week": "WEEK 47 SUMMARY",
+      "background": "#0F1430",
+      "accent": "#8FA8FF",
+      "highlight": "#FFD27A",
+      "score": "86",
+      "headline": "Restful week",
+      "sub": "Up 6 points on last week",
+      "average": "7h 21m",
+      "best": "8h 30m",
+      "bestDay": "SAT",
+      "consistency": "92%",
+      "nights": [
+        {
+          "day": "Mon",
+          "hours": "7.2h",
+          "height": 160,
+          "tone": "#8FA8FF99",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Tue",
+          "hours": "6.8h",
+          "height": 144,
+          "tone": "#8FA8FF99",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Wed",
+          "hours": "7.5h",
+          "height": 171,
+          "tone": "#8FA8FF99",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Thu",
+          "hours": "7.0h",
+          "height": 152,
+          "tone": "#8FA8FF99",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Fri",
+          "hours": "6.4h",
+          "height": 129,
+          "tone": "#8FA8FF99",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Sat",
+          "hours": "8.5h",
+          "height": 209,
+          "tone": "#FFD27A",
+          "ink": "#FFD27A"
+        },
+        {
+          "day": "Sun",
+          "hours": "8.1h",
+          "height": 194,
+          "tone": "#8FA8FF99",
+          "ink": "#FFFFFFB3"
+        }
+      ]
+    },
+    {
+      "id": "noor",
+      "week": "WEEK 47 SUMMARY",
+      "background": "#2A0E2E",
+      "accent": "#FF8FB1",
+      "highlight": "#FFE08A",
+      "score": "71",
+      "headline": "Getting there",
+      "sub": "Weekends are doing the work",
+      "average": "6h 50m",
+      "best": "8h 12m",
+      "bestDay": "SAT",
+      "consistency": "74%",
+      "nights": [
+        {
+          "day": "Mon",
+          "hours": "6.1h",
+          "height": 118,
+          "tone": "#FF8FB199",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Tue",
+          "hours": "5.8h",
+          "height": 106,
+          "tone": "#FF8FB199",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Wed",
+          "hours": "6.9h",
+          "height": 148,
+          "tone": "#FF8FB199",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Thu",
+          "hours": "6.4h",
+          "height": 129,
+          "tone": "#FF8FB199",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Fri",
+          "hours": "7.8h",
+          "height": 182,
+          "tone": "#FF8FB199",
+          "ink": "#FFFFFFB3"
+        },
+        {
+          "day": "Sat",
+          "hours": "8.2h",
+          "height": 198,
+          "tone": "#FFE08A",
+          "ink": "#FFE08A"
+        },
+        {
+          "day": "Sun",
+          "hours": "6.6h",
+          "height": 137,
+          "tone": "#FF8FB199",
+          "ink": "#FFFFFFB3"
+        }
+      ]
+    }
+  ]
+}

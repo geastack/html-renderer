@@ -1,0 +1,28 @@
+{
+  "width": 1600,
+  "height": 1131,
+  "entries": [
+    {
+      "id": "armagan",
+      "title": "CERTIFICATE OF PRESENTATION",
+      "name": "Armagan Amcalar",
+      "statement": "for presenting the talk \"TypeScript on a $3 chip: native UIs without a browser\" at Embedded Futures Summit 2027, Munich.",
+      "details": [
+        { "label": "DATE", "value": "10 March 2027" },
+        { "label": "SESSION", "value": "Main Stage, 45 min" },
+        { "label": "CERTIFICATE", "value": "EFS27-S-0042" }
+      ]
+    },
+    {
+      "id": "jonas",
+      "title": "CERTIFICATE OF ATTENDANCE",
+      "name": "Jonas Lindqvist",
+      "statement": "for attending Embedded Futures Summit 2027 in Munich and completing a programme of talks, workshops and hands-on hardware labs.",
+      "details": [
+        { "label": "DATES", "value": "10-11 March 2027" },
+        { "label": "HOURS", "value": "14 hours" },
+        { "label": "CERTIFICATE", "value": "EFS27-A-1187" }
+      ]
+    }
+  ]
+}

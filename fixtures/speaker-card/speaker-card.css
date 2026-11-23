@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Barlow";
+  src: url("../shared/fonts/BarlowSemiCondensed-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.page { position: relative; width: 1200px; height: 630px; background-color: #0D1330; }
+
+.ring { position: absolute; border-radius: 400px; }
+.ring-1 { left: 660px; top: 55px; width: 516px; height: 516px; border: 2px solid #FFFFFF26; border-radius: 260px; }
+.ring-2 { left: 600px; top: -5px; width: 636px; height: 636px; border: 2px solid #FFFFFF17; border-radius: 320px; }
+.ring-3 { left: 530px; top: -75px; width: 776px; height: 776px; border: 2px solid #FFFFFF0D; border-radius: 390px; }
+
+.halo { position: absolute; left: 718px; top: 113px; width: 388px; height: 388px; border: 8px solid #FF6B3D; border-radius: 202px; }
+.photo { position: absolute; left: 738px; top: 133px; width: 364px; height: 364px; border-radius: 182px; }
+.monogram { position: absolute; left: 738px; top: 133px; display: flex; align-items: center; justify-content: center; width: 364px; height: 364px; border-radius: 182px; }
+.initials { font-family: "Hanken ExtraBold"; font-size: 144px; line-height: 150px; color: #FFFFFF; }
+.tone-blue { background: linear-gradient(135deg, #6C7BFF 0%, #3442C4 100%); }
+.tone-orange { background: linear-gradient(135deg, #FF8A5C 0%, #D2471F 100%); }
+
+.session-row { position: absolute; left: 718px; top: 478px; display: flex; flex-direction: row; justify-content: center; width: 404px; }
+.session { padding: 10px 20px; border-radius: 8px; background-color: #FFFFFF; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #0D1330; }
+
+.content { position: absolute; left: 64px; top: 56px; display: flex; flex-direction: column; width: 600px; height: 518px; }
+
+.brand { display: flex; flex-direction: row; align-items: center; }
+.mark { position: relative; width: 40px; height: 40px; border-radius: 10px; background-color: #FF6B3D; }
+.mark-core { position: absolute; left: 13px; top: 13px; width: 14px; height: 14px; border-radius: 2px; background-color: #0D1330; transform: rotate(45deg); }
+.wordmark { padding-left: 16px; font-family: "Barlow"; font-size: 30px; line-height: 36px; color: #FFFFFF; }
+
+.eyebrow { padding-top: 40px; font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #FF6B3D; }
+.name { width: 600px; padding-top: 16px; font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 68px; color: #FFFFFF; }
+.role { width: 600px; padding-top: 8px; font-family: "Hanken Medium"; font-size: 28px; line-height: 36px; color: #B4BBD8; }
+
+.talk { display: flex; flex-direction: row; padding-top: 32px; }
+.talk-bar { width: 6px; border-radius: 3px; background-color: #FF6B3D; }
+.talk-title { width: 560px; padding-left: 24px; font-family: "Hanken ExtraBold"; font-size: 30px; line-height: 38px; color: #FFFFFF; }
+
+.spacer { flex-grow: 1; }
+
+.footer { display: flex; flex-direction: row; align-items: center; }
+.meta { font-family: "JetBrains Mono"; font-size: 22px; line-height: 28px; color: #B4BBD8; }
+.dot { width: 8px; height: 8px; margin: 0 16px; border-radius: 4px; background-color: #FF6B3D; }

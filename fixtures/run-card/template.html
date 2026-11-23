@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <title>Run card</title>
+  <link rel="stylesheet" href="run-card.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};">
+    <p class="brand" style="color: {{accent}};">loopline</p>
+    <p class="handle">@{{handle}}</p>
+    <div class="map">
+      <div class="grid-line column" style="left: 117px;"></div>
+      <div class="grid-line column" style="left: 234px;"></div>
+      <div class="grid-line column" style="left: 351px;"></div>
+      <div class="grid-line column" style="left: 468px;"></div>
+      <div class="grid-line column" style="left: 585px;"></div>
+      <div class="grid-line column" style="left: 702px;"></div>
+      <div class="grid-line column" style="left: 819px;"></div>
+      <div class="grid-line row" style="top: 100px;"></div>
+      <div class="grid-line row" style="top: 200px;"></div>
+      <div class="grid-line row" style="top: 300px;"></div>
+{{#segments}}
+      <div class="segment" style="left: {{left}}px; top: {{top}}px; width: {{width}}px; transform: rotate({{angle}}deg); background-color: {{accent}};"></div>
+{{/segments}}
+      <div class="marker" style="left: {{startX}}px; top: {{startY}}px; background-color: {{background}};"></div>
+      <div class="marker" style="left: {{finishX}}px; top: {{finishY}}px; background-color: {{accent}};"></div>
+      <div class="legend"
+        ><div class="key" style="background-color: {{background}};"></div
+        ><p class="key-text">START</p
+        ><div class="key key-gap" style="background-color: {{accent}};"></div
+        ><p class="key-text">FINISH</p
+      ></div>
+      <div class="scale"
+        ><p class="key-text">{{scaleLabel}}</p
+        ><div class="scale-bar" style="width: {{scaleWidth}}px;"></div
+      ></div>
+    </div>
+    <div class="meta"><p class="meta-text">{{date}}</p><div class="meta-dot" style="background-color: {{accent}};"></div><p class="meta-text">{{title}}</p></div>
+    <div class="distance"><p class="distance-value">{{distance}}</p><p class="distance-unit" style="color: {{accent}};">km</p></div>
+    <div class="divider"></div>
+    <div class="stat" style="left: 72px;"><p class="label">PACE</p><p class="value">{{pace}}</p></div>
+    <div class="stat" style="left: 384px;"><p class="label">TIME</p><p class="value">{{time}}</p></div>
+    <div class="stat" style="left: 696px;"><p class="label">ELEVATION</p><p class="value">{{elevation}}</p></div>
+  </main>
+</body>
+</html>

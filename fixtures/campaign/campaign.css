@@ -1,0 +1,126 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+body { background-color: #08080A; }
+
+.card { position: relative; display: flex; flex-direction: column; gap: 0px; background-color: #08080A; }
+.bar { position: absolute; left: 0px; top: 0px; height: 8px; background: linear-gradient(118deg, #2DE2FF 0%, #6E7BF2 52%, #E94BFF 100%); }
+.grow { flex-grow: 1; }
+
+.top { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; }
+.eyebrow { font-family: "JetBrains Mono"; color: #6E7BF2; }
+
+.headline { font-family: "Hanken ExtraBold"; color: #F5F5F7; }
+.subline { display: flex; flex-direction: column; gap: 0px; }
+.sub { font-family: "Hanken Medium"; color: #B4B4BD; }
+
+.stack { display: flex; flex-direction: column; gap: 0px; }
+.step { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; }
+.step-label { font-family: "JetBrains Mono"; color: #08080A; }
+.s1 { background-color: #2DE2FF; }
+.s2 { background-color: #46BAFA; }
+.s3 { background-color: #5F93F5; }
+.s4 { background-color: #8373F4; }
+.s5 { background-color: #B65FFA; }
+.s6 { background-color: #E94BFF; }
+
+.cta { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; }
+.button { font-family: "Hanken ExtraBold"; color: #08080A; background: linear-gradient(118deg, #2DE2FF 0%, #6E7BF2 52%, #E94BFF 100%); }
+.url { font-family: "JetBrains Mono"; color: #F5F5F7; }
+
+/* X / Twitter 1600x900: copy left, stack right */
+.card.x { width: 1424px; height: 740px; padding: 80px 88px; }
+.card.x .bar { width: 1600px; }
+.card.x .logo { width: 194px; height: 80px; }
+.card.x .eyebrow { display: none; }
+.card.x .headline { width: 840px; padding-top: 40px; font-size: 88px; line-height: 92px; }
+.card.x .subline { width: 840px; padding-top: 24px; }
+.card.x .sub { font-size: 40px; line-height: 50px; }
+.card.x .stack { position: absolute; left: 1032px; top: 186px; width: 480px; align-items: flex-end; }
+.card.x .step { height: 72px; margin-top: 12px; padding: 0 24px; }
+.card.x .step-label { font-size: 34px; line-height: 40px; }
+.card.x .s1 { width: 172px; }
+.card.x .s2 { width: 224px; }
+.card.x .s3 { width: 276px; }
+.card.x .s4 { width: 328px; }
+.card.x .s5 { width: 380px; }
+.card.x .s6 { width: 432px; }
+.card.x .button { padding: 20px 32px; font-size: 34px; line-height: 40px; }
+.card.x .url { padding-left: 32px; font-size: 34px; line-height: 40px; }
+
+/* LinkedIn 1200x627: compact landscape */
+.card.linkedin { width: 1072px; height: 515px; padding: 56px 64px; }
+.card.linkedin .bar { width: 1200px; height: 6px; }
+.card.linkedin .logo { width: 136px; height: 56px; }
+.card.linkedin .eyebrow { display: none; }
+.card.linkedin .headline { width: 640px; padding-top: 32px; font-size: 62px; line-height: 66px; }
+.card.linkedin .subline { width: 640px; padding-top: 16px; }
+.card.linkedin .sub { font-size: 28px; line-height: 36px; }
+.card.linkedin .stack { position: absolute; left: 776px; top: 132px; width: 360px; align-items: flex-end; }
+.card.linkedin .step { height: 48px; margin-top: 8px; padding: 0 16px; }
+.card.linkedin .step-label { font-size: 24px; line-height: 30px; }
+.card.linkedin .s1 { width: 108px; }
+.card.linkedin .s2 { width: 148px; }
+.card.linkedin .s3 { width: 188px; }
+.card.linkedin .s4 { width: 228px; }
+.card.linkedin .s5 { width: 268px; }
+.card.linkedin .s6 { width: 308px; }
+.card.linkedin .button { padding: 14px 24px; font-size: 24px; line-height: 30px; }
+.card.linkedin .url { padding-left: 24px; font-size: 24px; line-height: 30px; }
+
+/* Instagram 1080x1080: copy on top, stack across the middle */
+.card.square { width: 936px; height: 936px; padding: 72px; }
+.card.square .bar { width: 1080px; }
+.card.square .logo { width: 170px; height: 70px; }
+.card.square .eyebrow { font-size: 24px; line-height: 30px; }
+.card.square .lead { display: none; }
+.card.square .headline { width: 936px; padding-top: 56px; font-size: 80px; line-height: 84px; }
+.card.square .subline { width: 936px; padding-top: 20px; }
+.card.square .sub { font-size: 32px; line-height: 42px; }
+.card.square .stack { padding-top: 40px; }
+.card.square .step { height: 52px; margin-top: 8px; padding: 0 20px; }
+.card.square .step-label { font-size: 24px; line-height: 30px; }
+.card.square .s1 { width: 200px; }
+.card.square .s2 { width: 340px; }
+.card.square .s3 { width: 480px; }
+.card.square .s4 { width: 620px; }
+.card.square .s5 { width: 760px; }
+.card.square .s6 { width: 896px; }
+.card.square .button { padding: 18px 28px; font-size: 30px; line-height: 36px; }
+.card.square .url { padding-left: 28px; font-size: 30px; line-height: 36px; }
+
+/* Stories 1080x1920: tall stack; top 250px and bottom 300px kept clear of the story UI */
+.card.story { width: 936px; height: 1370px; padding: 250px 72px 300px; }
+.card.story .bar { width: 1080px; height: 12px; }
+.card.story .logo { width: 194px; height: 80px; }
+.card.story .eyebrow { font-size: 28px; line-height: 34px; }
+.card.story .lead { display: none; }
+.card.story .headline { width: 936px; padding-top: 56px; font-size: 104px; line-height: 108px; }
+.card.story .subline { width: 936px; padding-top: 32px; }
+.card.story .sub { font-size: 44px; line-height: 56px; }
+.card.story .stack { padding-top: 48px; }
+.card.story .step { height: 80px; margin-top: 12px; padding: 0 28px; }
+.card.story .step-label { font-size: 34px; line-height: 40px; }
+.card.story .s1 { width: 280px; }
+.card.story .s2 { width: 400px; }
+.card.story .s3 { width: 520px; }
+.card.story .s4 { width: 640px; }
+.card.story .s5 { width: 760px; }
+.card.story .s6 { width: 880px; }
+.card.story .cta { flex-direction: column; align-items: flex-start; }
+.card.story .button { width: 872px; padding: 30px 32px; text-align: center; font-size: 40px; line-height: 48px; }
+.card.story .url { width: 936px; padding-top: 28px; text-align: center; font-size: 36px; line-height: 44px; }

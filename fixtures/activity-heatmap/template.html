@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <title>Activity heatmap</title>
+  <link rel="stylesheet" href="activity-heatmap.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{background}};"><div class="header"><p class="brand" style="color: {{accent}};">stillwater</p
+      ><p class="handle">@{{handle}}</p></div
+    ><div class="title-row"><p class="headline">A year of showing up</p
+      ><p class="tag">YOUR 2026 IN PRACTICE</p></div
+    ><div class="months"><p class="month" style="left: 87px;">Jan</p
+      ><p class="month" style="left: 163px;">Feb</p
+      ><p class="month" style="left: 239px;">Mar</p
+      ><p class="month" style="left: 334px;">Apr</p
+      ><p class="month" style="left: 410px;">May</p
+      ><p class="month" style="left: 505px;">Jun</p
+      ><p class="month" style="left: 581px;">Jul</p
+      ><p class="month" style="left: 657px;">Aug</p
+      ><p class="month" style="left: 752px;">Sep</p
+      ><p class="month" style="left: 828px;">Oct</p
+      ><p class="month" style="left: 904px;">Nov</p
+      ><p class="month" style="left: 999px;">Dec</p></div
+    ><div class="grid">{{#rows}}<div class="grid-row"><p class="day">{{day}}</p>{{#cells}}<div class="cell {{theme}}{{level}}"></div>{{/cells}}</div>{{/rows}}</div
+    ><div class="grow"></div
+    ><div class="stats"><div class="stat"><p class="value">{{daysActive}}</p><p class="label">DAYS ACTIVE</p></div
+      ><div class="stat"><p class="value" style="color: {{accent}};">{{streak}}</p><p class="label">LONGEST STREAK</p></div
+      ><div class="stat"><p class="value">{{hours}}</p><p class="label">HOURS SAT</p></div
+      ><div class="legend"><p class="legend-text">LESS</p
+        ><div class="swatch {{theme}}0"></div
+        ><div class="swatch {{theme}}1"></div
+        ><div class="swatch {{theme}}2"></div
+        ><div class="swatch {{theme}}3"></div
+        ><div class="swatch {{theme}}4"></div
+        ><p class="legend-text">MORE</p></div></div></main>
+</body>
+</html>

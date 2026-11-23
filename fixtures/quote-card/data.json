@@ -1,0 +1,32 @@
+{
+  "width": 1080,
+  "height": 1350,
+  "entries": [
+    {
+      "id": "noor",
+      "handle": "noor.underlines",
+      "paper": "#F4EDE1",
+      "accent": "#C8553D",
+      "passage": "We do not remember the days we were busy. We remember the afternoons we let the light move slowly across the floor.",
+      "book": "A Field Guide to Small Hours",
+      "author": "Wren Adeyemi",
+      "page": "112",
+      "pages": "340",
+      "size": 76,
+      "leading": 92
+    },
+    {
+      "id": "kai",
+      "handle": "kai.margins",
+      "paper": "#E6EEEA",
+      "accent": "#1F6F6B",
+      "passage": "Every map is a confession of what its maker was afraid to leave out.",
+      "book": "Maps of the Quiet Coast",
+      "author": "Lio Brandvik",
+      "page": "57",
+      "pages": "296",
+      "size": 96,
+      "leading": 112
+    }
+  ]
+}

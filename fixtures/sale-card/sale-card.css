@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Barlow SemiCondensed";
+  src: url("../shared/fonts/BarlowSemiCondensed-Bold.ttf");
+}
+
+p { margin: 0; }
+body { margin: 0; }
+
+.card { position: relative; display: flex; flex-direction: column; gap: 0px; width: 936px; height: 1206px; padding: 72px; }
+.grow { flex-grow: 1; }
+
+.header { display: flex; flex-direction: row; align-items: center; gap: 0px; height: 44px; }
+.mark { width: 24px; height: 24px; border-radius: 6px; }
+.shop { padding-left: 12px; font-family: "Hanken ExtraBold"; font-size: 36px; line-height: 44px; color: #FFFFFF; }
+.campaign { font-family: "JetBrains Mono"; font-size: 24px; line-height: 32px; }
+
+.stage { position: relative; width: 936px; height: 720px; margin-top: 32px; }
+.photo { width: 720px; height: 720px; margin-left: 108px; }
+.fill { position: absolute; top: 0px; display: flex; flex-direction: column; gap: 0px; width: 120px; height: 720px; }
+.fill-left { left: 0px; }
+.fill-right { left: 816px; }
+.cap { height: 40px; }
+.cap-top-left, .fade.fill-left { border-top-left-radius: 40px; }
+.cap-bottom-left, .fade.fill-left { border-bottom-left-radius: 40px; }
+.cap-top-right, .fade.fill-right { border-top-right-radius: 40px; }
+.cap-bottom-right, .fade.fill-right { border-bottom-right-radius: 40px; }
+
+.badge { position: absolute; left: 792px; top: 176px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0px; width: 200px; height: 200px; border-radius: 100px; transform: rotate(-10deg); }
+.badge-value { font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 68px; }
+.badge-label { font-family: "JetBrains Mono"; font-size: 24px; line-height: 28px; }
+
+.category { padding-top: 40px; font-family: "JetBrains Mono"; font-size: 24px; line-height: 32px; color: #FFFFFFB3; }
+.name { padding-top: 8px; font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 72px; color: #FFFFFF; }
+
+.prices { display: flex; flex-direction: row; align-items: flex-end; gap: 0px; padding-top: 16px; }
+.amount { font-family: "Barlow SemiCondensed"; font-size: 128px; line-height: 116px; }
+.currency { padding-left: 12px; padding-bottom: 12px; font-family: "Barlow SemiCondensed"; font-size: 44px; line-height: 48px; }
+.deal { display: flex; flex-direction: column; align-items: flex-end; gap: 0px; padding-bottom: 10px; }
+.was { display: flex; flex-direction: row; gap: 0px; }
+.old { position: relative; }
+.old-price { font-family: "Hanken Medium"; font-size: 40px; line-height: 48px; color: #FFFFFFB3; }
+.save { padding-top: 4px; font-family: "Hanken ExtraBold"; font-size: 30px; line-height: 38px; color: #FFFFFF; }
+.strike { position: absolute; left: 0px; top: 24px; width: 100%; height: 4px; background-color: #FFFFFFB3; }
+
+.rule { position: absolute; left: 72px; top: 1206px; width: 936px; height: 2px; background-color: #FFFFFF26; }
+
+.footer { position: absolute; left: 72px; top: 1246px; display: flex; flex-direction: row; align-items: center; gap: 0px; width: 936px; height: 32px; }
+.ends { font-family: "Hanken Medium"; font-size: 26px; line-height: 32px; color: #FFFFFF; }
+.site { font-family: "Hanken Medium"; font-size: 26px; line-height: 32px; color: #FFFFFFB3; }

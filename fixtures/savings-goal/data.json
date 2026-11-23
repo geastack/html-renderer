@@ -1,0 +1,124 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "lena",
+      "month": "NOV 2026",
+      "background": "#1D2FE0",
+      "accent": "#FFE45C",
+      "saved": "1,000",
+      "goalName": "Emergency fund",
+      "goalPct": "68",
+      "goalFill": 636,
+      "goalSaved": "3,400",
+      "goalTarget": "5,000",
+      "streak": "6",
+      "categories": [
+        {
+          "name": "Eating out",
+          "amount": "380"
+        },
+        {
+          "name": "Rides",
+          "amount": "240"
+        },
+        {
+          "name": "Shopping",
+          "amount": "190"
+        }
+      ],
+      "months": [
+        {
+          "letter": "J",
+          "fill": "#FFE45C",
+          "ink": "#1D2FE0"
+        },
+        {
+          "letter": "J",
+          "fill": "#FFE45C",
+          "ink": "#1D2FE0"
+        },
+        {
+          "letter": "A",
+          "fill": "#FFE45C",
+          "ink": "#1D2FE0"
+        },
+        {
+          "letter": "S",
+          "fill": "#FFE45C",
+          "ink": "#1D2FE0"
+        },
+        {
+          "letter": "O",
+          "fill": "#FFE45C",
+          "ink": "#1D2FE0"
+        },
+        {
+          "letter": "N",
+          "fill": "#FFE45C",
+          "ink": "#1D2FE0"
+        }
+      ]
+    },
+    {
+      "id": "omar",
+      "month": "NOV 2026",
+      "background": "#0B4535",
+      "accent": "#FF9E7A",
+      "saved": "640",
+      "goalName": "Lisbon trip",
+      "goalPct": "80",
+      "goalFill": 749,
+      "goalSaved": "1,920",
+      "goalTarget": "2,400",
+      "streak": "3",
+      "categories": [
+        {
+          "name": "Groceries",
+          "amount": "210"
+        },
+        {
+          "name": "Coffee",
+          "amount": "120"
+        },
+        {
+          "name": "Streaming",
+          "amount": "85"
+        }
+      ],
+      "months": [
+        {
+          "letter": "J",
+          "fill": "#FFFFFF1A",
+          "ink": "#FFFFFF99"
+        },
+        {
+          "letter": "J",
+          "fill": "#FFFFFF1A",
+          "ink": "#FFFFFF99"
+        },
+        {
+          "letter": "A",
+          "fill": "#FFFFFF1A",
+          "ink": "#FFFFFF99"
+        },
+        {
+          "letter": "S",
+          "fill": "#FF9E7A",
+          "ink": "#0B4535"
+        },
+        {
+          "letter": "O",
+          "fill": "#FF9E7A",
+          "ink": "#0B4535"
+        },
+        {
+          "letter": "N",
+          "fill": "#FF9E7A",
+          "ink": "#0B4535"
+        }
+      ]
+    }
+  ]
+}

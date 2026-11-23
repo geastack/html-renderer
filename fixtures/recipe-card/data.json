@@ -1,0 +1,162 @@
+{
+  "width": 1080,
+  "height": 1350,
+  "entries": [
+    {
+      "id": "lena",
+      "handle": "lena.cooks",
+      "accent": "#D9480F",
+      "tableFrom": "#F6E1CF",
+      "tableTo": "#EBC6A8",
+      "vessel": "pan",
+      "foodFrom": "#E8452C",
+      "foodTo": "#A8200F",
+      "course": "WEEKNIGHT DINNER",
+      "dish": "Harissa Shakshuka",
+      "time": "35 min",
+      "servings": "4",
+      "difficulty": "Easy",
+      "total": "9",
+      "ingredients": [
+        {
+          "name": "Ripe plum tomatoes",
+          "amount": "800 g"
+        },
+        {
+          "name": "Free-range eggs",
+          "amount": "6"
+        },
+        {
+          "name": "Rose harissa paste",
+          "amount": "2 tbsp"
+        },
+        {
+          "name": "Red onion, sliced",
+          "amount": "1 large"
+        },
+        {
+          "name": "Crumbled feta",
+          "amount": "1/2 cup"
+        }
+      ],
+      "saves": "12,480",
+      "scene": [
+        {"kind": "crust", "x": 752, "y": 44, "r": 12},
+        {"kind": "toast", "x": 762, "y": 54, "r": 12},
+        {"kind": "crust", "x": 764, "y": 284, "r": -10},
+        {"kind": "toast", "x": 774, "y": 294, "r": -10},
+        {"kind": "egg", "x": 352, "y": 88, "r": 8},
+        {"kind": "egg", "x": 482, "y": 96, "r": -12},
+        {"kind": "egg", "x": 338, "y": 214, "r": -6},
+        {"kind": "egg", "x": 470, "y": 232, "r": 14},
+        {"kind": "yolk", "x": 376, "y": 108, "r": 0},
+        {"kind": "yolk", "x": 510, "y": 116, "r": 0},
+        {"kind": "yolk", "x": 364, "y": 236, "r": 0},
+        {"kind": "yolk", "x": 494, "y": 252, "r": 0},
+        {"kind": "leaf", "x": 436, "y": 182, "r": 30},
+        {"kind": "leaf", "x": 458, "y": 204, "r": -40},
+        {"kind": "leaf", "x": 574, "y": 214, "r": 60},
+        {"kind": "leaf", "x": 416, "y": 316, "r": -20},
+        {"kind": "leaf", "x": 548, "y": 330, "r": 15},
+        {"kind": "leaf", "x": 334, "y": 170, "r": 75},
+        {"kind": "leaf", "x": 586, "y": 150, "r": -30},
+        {"kind": "feta", "x": 420, "y": 250, "r": 15},
+        {"kind": "feta", "x": 540, "y": 196, "r": 30},
+        {"kind": "feta", "x": 600, "y": 262, "r": 10},
+        {"kind": "feta", "x": 452, "y": 142, "r": 40},
+        {"kind": "feta", "x": 370, "y": 190, "r": 20},
+        {"kind": "feta", "x": 526, "y": 312, "r": 5},
+        {"kind": "feta", "x": 392, "y": 320, "r": 25},
+        {"kind": "feta", "x": 452, "y": 206, "r": 0},
+        {"kind": "flake", "x": 470, "y": 122, "r": 20},
+        {"kind": "flake", "x": 564, "y": 176, "r": 40},
+        {"kind": "flake", "x": 432, "y": 276, "r": 10},
+        {"kind": "flake", "x": 604, "y": 196, "r": 0},
+        {"kind": "flake", "x": 384, "y": 160, "r": 30},
+        {"kind": "flake", "x": 516, "y": 340, "r": 15},
+        {"kind": "flake", "x": 452, "y": 338, "r": 45},
+        {"kind": "flake", "x": 350, "y": 290, "r": 20},
+        {"kind": "flake", "x": 590, "y": 300, "r": 30}
+      ]
+    },
+    {
+      "id": "arjun",
+      "handle": "arjun.eats",
+      "accent": "#3F7D20",
+      "tableFrom": "#DCE6CC",
+      "tableTo": "#BFD0A6",
+      "vessel": "bowl",
+      "foodFrom": "#F5E6B5",
+      "foodTo": "#E0C47E",
+      "course": "SUNDAY LUNCH",
+      "dish": "Green Pea Risotto",
+      "time": "50 min",
+      "servings": "2",
+      "difficulty": "Medium",
+      "total": "11",
+      "ingredients": [
+        {
+          "name": "Arborio rice",
+          "amount": "200 g"
+        },
+        {
+          "name": "Frozen garden peas",
+          "amount": "300 g"
+        },
+        {
+          "name": "Warm vegetable stock",
+          "amount": "1 L"
+        },
+        {
+          "name": "Shallots, finely diced",
+          "amount": "2"
+        },
+        {
+          "name": "Aged parmesan, grated",
+          "amount": "60 g"
+        }
+      ],
+      "saves": "3,207",
+      "scene": [
+        {"kind": "side-bowl", "x": 762, "y": 40, "r": 0},
+        {"kind": "side-fill", "x": 778, "y": 56, "r": 0},
+        {"kind": "lemon", "x": 782, "y": 272, "r": 0},
+        {"kind": "lemon-flesh", "x": 792, "y": 282, "r": 0},
+        {"kind": "pea", "x": 410, "y": 120, "r": 0},
+        {"kind": "pea", "x": 436, "y": 136, "r": 0},
+        {"kind": "pea", "x": 520, "y": 112, "r": 0},
+        {"kind": "pea", "x": 548, "y": 140, "r": 0},
+        {"kind": "pea", "x": 372, "y": 200, "r": 0},
+        {"kind": "pea", "x": 398, "y": 226, "r": 0},
+        {"kind": "pea", "x": 560, "y": 200, "r": 0},
+        {"kind": "pea", "x": 570, "y": 236, "r": 0},
+        {"kind": "pea", "x": 450, "y": 268, "r": 0},
+        {"kind": "pea", "x": 478, "y": 290, "r": 0},
+        {"kind": "pea", "x": 530, "y": 280, "r": 0},
+        {"kind": "pea", "x": 420, "y": 310, "r": 0},
+        {"kind": "pea", "x": 500, "y": 180, "r": 0},
+        {"kind": "pea", "x": 440, "y": 180, "r": 0},
+        {"kind": "pea", "x": 390, "y": 150, "r": 0},
+        {"kind": "pea", "x": 540, "y": 306, "r": 0},
+        {"kind": "shaving", "x": 450, "y": 212, "r": 20},
+        {"kind": "shaving", "x": 486, "y": 232, "r": -30},
+        {"kind": "shaving", "x": 400, "y": 262, "r": 60},
+        {"kind": "shaving", "x": 520, "y": 240, "r": 10},
+        {"kind": "shaving", "x": 470, "y": 150, "r": -15},
+        {"kind": "shaving", "x": 540, "y": 170, "r": 45},
+        {"kind": "leaf", "x": 468, "y": 196, "r": 30},
+        {"kind": "leaf", "x": 494, "y": 184, "r": -50},
+        {"kind": "leaf", "x": 430, "y": 240, "r": 70},
+        {"kind": "leaf", "x": 526, "y": 214, "r": -20},
+        {"kind": "pepper", "x": 420, "y": 170, "r": 0},
+        {"kind": "pepper", "x": 520, "y": 150, "r": 0},
+        {"kind": "pepper", "x": 580, "y": 260, "r": 0},
+        {"kind": "pepper", "x": 380, "y": 270, "r": 0},
+        {"kind": "pepper", "x": 470, "y": 320, "r": 0},
+        {"kind": "pepper", "x": 540, "y": 300, "r": 0},
+        {"kind": "pepper", "x": 450, "y": 120, "r": 0},
+        {"kind": "pepper", "x": 600, "y": 180, "r": 0}
+      ]
+    }
+  ]
+}

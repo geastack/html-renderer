@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+body { margin: 0; background-color: #FFFFFF; }
+
+.page { position: relative; width: 1600px; height: 1131px; background-color: #FFFFFF; }
+
+.stripe { position: absolute; left: 0px; top: 0px; display: flex; flex-direction: row; gap: 0px; width: 1600px; height: 16px; }
+.band { flex-grow: 1; height: 16px; }
+
+.frame { position: absolute; left: 40px; top: 56px; width: 1516px; height: 1031px; border: 2px solid #E7E3EE; }
+
+.content { position: absolute; left: 104px; top: 112px; display: flex; flex-direction: column; gap: 0px; width: 1392px; height: 923px; }
+.grow { flex-grow: 1; }
+
+.header { display: flex; flex-direction: row; align-items: center; gap: 0px; height: 72px; }
+.logo { width: 381px; height: 72px; }
+.cert-id { font-family: "JetBrains Mono"; font-size: 32px; line-height: 40px; color: #8A8497; }
+
+.eyebrow { padding-top: 72px; font-family: "JetBrains Mono"; font-size: 36px; line-height: 44px; }
+.lead { padding-top: 24px; font-family: "Hanken Medium"; font-size: 40px; line-height: 48px; color: #5E5870; }
+.learner { padding-top: 8px; font-family: "Hanken ExtraBold"; font-size: 120px; line-height: 128px; color: #1C1730; }
+.course { padding-top: 8px; font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 72px; }
+
+.stats { display: flex; flex-direction: row; gap: 0px; padding-top: 64px; }
+.stat { display: flex; flex-direction: column; gap: 0px; width: 224px; }
+.date { width: 340px; }
+.label { font-family: "JetBrains Mono"; font-size: 32px; line-height: 40px; color: #8A8497; }
+.value { padding-top: 8px; font-family: "Hanken ExtraBold"; font-size: 52px; line-height: 60px; color: #1C1730; }
+
+.signature { display: flex; flex-direction: column; gap: 0px; width: 560px; }
+.sign-line { width: 560px; height: 3px; background-color: #1C1730; }
+.signer { padding-top: 20px; font-family: "Hanken ExtraBold"; font-size: 40px; line-height: 48px; color: #1C1730; }
+.signer-role { padding-top: 4px; font-family: "Hanken Medium"; font-size: 36px; line-height: 44px; color: #5E5870; }
+
+.seal { position: absolute; left: 1216px; top: 736px; width: 304px; height: 340px; }
+.burst { position: absolute; left: 42px; top: 42px; width: 200px; height: 200px; }
+.ring { position: absolute; left: 50px; top: 50px; width: 172px; height: 172px; border-radius: 92px; border: 6px solid #FFFFFF; }
+.core { position: absolute; left: 66px; top: 66px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0px; width: 152px; height: 152px; border-radius: 76px; }
+.check { width: 56px; height: 26px; border-left: 11px solid #FFFFFF; border-bottom: 11px solid #FFFFFF; transform: rotate(-45deg); }
+.seal-year { padding-top: 16px; font-family: "Hanken ExtraBold"; font-size: 36px; line-height: 40px; color: #FFFFFF; }
+.ribbon { position: absolute; top: 184px; width: 56px; height: 120px; }
+.left { left: 88px; transform: rotate(20deg); }
+.right { left: 140px; transform: rotate(-20deg); }

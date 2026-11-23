@@ -1,0 +1,46 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "entries": [
+    {
+      "id": "lena",
+      "handle": "lena.learns",
+      "background": "#14163A",
+      "accent": "#FFC53D",
+      "halo": "#FFC53D1F",
+      "badgeFrom": "#FFC53D",
+      "badgeTo": "#FF6A3D",
+      "level": "20",
+      "nextLevel": "21",
+      "course": "Spanish",
+      "streak": "146",
+      "totalXp": "48,200",
+      "weekXp": "1,250",
+      "lessons": "312",
+      "levelXp": "3,420",
+      "levelGoal": "5,000",
+      "fill": "640",
+      "date": "Unlocked 23 November 2026"
+    },
+    {
+      "id": "omar",
+      "handle": "omar.k",
+      "background": "#2A0E35",
+      "accent": "#5CE1E6",
+      "halo": "#5CE1E61F",
+      "badgeFrom": "#5CE1E6",
+      "badgeTo": "#8B5CFF",
+      "level": "20",
+      "nextLevel": "21",
+      "course": "Japanese",
+      "streak": "61",
+      "totalXp": "39,875",
+      "weekXp": "2,940",
+      "lessons": "254",
+      "levelXp": "1,180",
+      "levelGoal": "5,000",
+      "fill": "221",
+      "date": "Unlocked 19 November 2026"
+    }
+  ]
+}

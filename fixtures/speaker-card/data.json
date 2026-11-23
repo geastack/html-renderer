@@ -1,0 +1,30 @@
+{
+  "width": 1200,
+  "height": 630,
+  "entries": [
+    {
+      "id": "armagan",
+      "name": "Armagan Amcalar",
+      "role": "Founder, GeaStack",
+      "talk": "TypeScript on a $3 chip: native UIs without a browser",
+      "session": "DAY 2 / 10:30 / MAIN STAGE",
+      "photo": [{ "src": "../shared/images/armagan-amcalar.png" }]
+    },
+    {
+      "id": "priya",
+      "name": "Priya Raman",
+      "role": "Principal Engineer, Lumacore Systems",
+      "talk": "Rust in the bootloader: lessons from two million devices",
+      "session": "DAY 1 / 14:00 / HALL B",
+      "monogram": [{ "initials": "PR", "tone": "blue" }]
+    },
+    {
+      "id": "konstantina",
+      "name": "Konstantina Papadopoulou",
+      "role": "Head of Firmware, Veltrano Robotics",
+      "talk": "Control loops at 40 kHz: scheduling, jitter and the art of saying no to interrupts",
+      "session": "DAY 3 / 09:15 / MAIN STAGE",
+      "monogram": [{ "initials": "KP", "tone": "orange" }]
+    }
+  ]
+}

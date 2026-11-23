@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <title>Quote card</title>
+  <link rel="stylesheet" href="quote-card.css">
+</head>
+<body>
+  <main class="card" style="background-color: {{paper}};"
+    ><div class="header"
+      ><p class="brand" style="color: {{accent}};">marginal</p
+      ><p class="tag">SAVED HIGHLIGHT</p
+    ></div
+    ><div class="grow"></div
+    ><div class="mark"
+      ><div class="drop" style="background-color: {{accent}};"></div
+      ><div class="drop" style="background-color: {{accent}};"></div
+    ></div
+    ><p class="passage" style="font-size: {{size}}px; line-height: {{leading}}px;">{{passage}}</p
+    ><div class="source"
+      ><div class="rule" style="background-color: {{accent}};"></div
+      ><div class="source-copy"
+        ><p class="book">{{book}}</p
+        ><p class="author">{{author}}</p
+      ></div
+    ></div
+    ><div class="grow"></div
+    ><div class="line"></div
+    ><div class="footer"
+      ><p class="handle">Highlighted by @{{handle}}</p
+      ><p class="page" style="color: {{accent}};">PAGE {{page}} OF {{pages}}</p
+    ></div
+  ></main>
+</body>
+</html>

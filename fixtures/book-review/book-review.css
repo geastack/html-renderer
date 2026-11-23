@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Hanken ExtraBold";
+  src: url("../shared/fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Hanken Medium";
+  src: url("../shared/fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../shared/fonts/JetBrainsMono-Bold.ttf");
+}
+
+p { margin: 0; }
+
+.card { display: flex; flex-direction: column; gap: 0px; width: 936px; height: 936px; padding: 72px; }
+
+.header { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 0px; }
+.brand { width: 600px; font-family: "Hanken ExtraBold"; font-size: 44px; line-height: 52px; }
+.tag { width: 336px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 32px; color: #FFFFFFB3; }
+
+.book { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 48px; padding-top: 48px; }
+
+.book-art { position: relative; width: 256px; height: 392px; }
+.book-shadow { position: absolute; left: 16px; top: 12px; width: 240px; height: 380px; border-radius: 8px; background-color: #00000066; }
+.book-pages { position: absolute; left: 8px; top: 4px; width: 240px; height: 380px; border-radius: 4px 8px 8px 4px; background: linear-gradient(90deg, #D9D0BE 0%, #F4EEE0 100%); }
+.cover { position: absolute; left: 0px; top: 0px; width: 240px; height: 380px; border-radius: 4px 8px 8px 4px; }
+.cover-sheen { position: absolute; left: 0px; top: 0px; width: 240px; height: 380px; border-radius: 4px 8px 8px 4px; background: linear-gradient(115deg, #FFFFFF2E 0%, #FFFFFF00 45%, #00000000 70%, #00000033 100%); }
+.cover-spine { position: absolute; left: 0px; top: 0px; width: 18px; height: 380px; border-radius: 4px 0px 0px 4px; background: linear-gradient(90deg, #00000059 0%, #00000026 100%); }
+.cover-crease { position: absolute; left: 18px; top: 0px; width: 3px; height: 380px; background-color: #FFFFFF38; }
+.cover-content { position: absolute; left: 40px; top: 32px; display: flex; flex-direction: column; gap: 0px; width: 180px; height: 316px; }
+.emblem { display: flex; flex-direction: row; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 20px; background-color: #FFFFFF40; }
+.emblem-dot { width: 16px; height: 16px; border-radius: 8px; background-color: #FFFFFF; }
+.grow { flex-grow: 1; }
+.cover-title { width: 180px; font-family: "Hanken ExtraBold"; font-size: 32px; line-height: 36px; color: #FFFFFF; }
+.cover-rule { width: 40px; height: 4px; margin-top: 16px; background-color: #FFFFFF; }
+.cover-author { width: 180px; padding-top: 12px; font-family: "Hanken Medium"; font-size: 24px; line-height: 28px; color: #FFFFFFD9; }
+
+.book-copy { display: flex; flex-direction: column; gap: 0px; width: 632px; }
+.label { font-family: "JetBrains Mono"; font-size: 24px; line-height: 32px; color: #FFFFFFB3; }
+.title { width: 632px; padding-top: 8px; font-family: "Hanken ExtraBold"; font-size: 64px; line-height: 72px; color: #FFFFFF; }
+.author { padding-top: 8px; font-family: "Hanken Medium"; font-size: 32px; line-height: 40px; color: #FFFFFFCC; }
+
+.rating { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 8px; padding-top: 32px; }
+.star { width: 40px; height: 40px; border-radius: 20px; background-color: #FFFFFF33; }
+.star-fill { height: 40px; }
+.full { width: 40px; border-radius: 20px; }
+.half { width: 20px; border-radius: 20px 0px 0px 20px; }
+.empty { width: 0px; }
+.score { margin-left: 8px; padding: 8px 20px; border-radius: 24px; font-family: "JetBrains Mono"; font-size: 26px; line-height: 32px; }
+
+.meta { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 16px; padding-top: 24px; }
+.meta-text { font-family: "Hanken Medium"; font-size: 28px; line-height: 36px; color: #FFFFFFB3; }
+.dot { width: 8px; height: 8px; border-radius: 4px; background-color: #FFFFFF80; }
+
+.review { display: flex; flex-direction: column; justify-content: center; gap: 0px; flex-grow: 1; }
+.quote-row { display: flex; flex-direction: row; justify-content: flex-start; align-items: stretch; gap: 32px; }
+.bar { width: 6px; }
+.quote { width: 898px; font-family: "Hanken Medium"; font-size: 54px; line-height: 72px; color: #FFFFFF; }
+
+.footer { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 16px; padding-top: 32px; border-top: 2px solid #FFFFFF1F; }
+.avatar { width: 56px; height: 56px; border-radius: 28px; }
+.handle { width: 464px; font-family: "JetBrains Mono"; font-size: 26px; line-height: 32px; color: #FFFFFF; }
+.shelf { width: 400px; text-align: right; font-family: "JetBrains Mono"; font-size: 24px; line-height: 32px; color: #FFFFFFB3; }

@@ -1,0 +1,16 @@
+node:internal/child_process:287
+      const err = new ErrnoException(exitCode, syscall);
+                  ^
+
+Error: spawn /Users/baturyilmazarslan/dev/gea/gea-repos/html-renderer/dist/macos/html-renderer/Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer ENOENT
+    at ChildProcess._handle.onexit (node:internal/child_process:287:19)
+    at onErrorNT (node:internal/child_process:508:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'spawn /Users/baturyilmazarslan/dev/gea/gea-repos/html-renderer/dist/macos/html-renderer/Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer',
+  path: '/Users/baturyilmazarslan/dev/gea/gea-repos/html-renderer/dist/macos/html-renderer/Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer',
+  spawnargs: [ '--gea-prerender-worker' ]
+}
+
+Node.js v24.18.0
