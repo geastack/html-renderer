@@ -42,7 +42,8 @@ cpSync(
 
 const archive = `gea-html-renderer-${platform}.tar.gz`
 
-execFileSync('tar', ['-czf', path.join(stage, archive), '-C', stage, 'prebuilt'], {
+execFileSync('tar', ['-czf', archive, 'prebuilt'], {
+  cwd: stage,
   stdio: 'inherit',
 })
 writeFileSync(
