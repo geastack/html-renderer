@@ -1,6 +1,6 @@
 {
   "name": "@geastack/html-renderer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "format": "eslint . --fix && prettier . --write",
     "format:check": "eslint . && prettier . --check",
-    "smoke:package": "node scripts/smoke-package.mjs"
+    "smoke:package": "node scripts/smoke-package.mjs",
+    "visual:diff": "node scripts/visual-diff.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -24,6 +25,8 @@
     "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.14.0",
+    "playwright": "1.65.1",
+    "pngjs": "7.0.0",
     "prettier": "^3.10.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.73.0",

@@ -72,7 +72,10 @@ function renderHtml(source: string): void {
       const text = html.slice(cursor, end)
 
       if (!inHead && (text.trim() !== '' || nodes.length > 1)) {
-        nodes[nodes.length - 1].appendChild(document.createTextNode(decode(text)))
+        const node = document.createTextNode(decode(text))
+
+        htmlMarkText(node)
+        nodes[nodes.length - 1].appendChild(node)
       }
 
       cursor = end

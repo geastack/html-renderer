@@ -10,5 +10,6 @@ void htmlBeginRules();
 void htmlEndRules();
 void htmlFont(const std::string &family, const std::string &path);
 [[noreturn]] void htmlFail(const std::string &message);
+void htmlMarkText(gea::embedded::ui::NodeHandle node);
 void htmlMount(gea::embedded::ui::NodeHandle root);
 void htmlInline(gea::embedded::ui::NodeHandle element, const std::string &property, const std::string &value);

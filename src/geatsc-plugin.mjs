@@ -9,6 +9,7 @@ const functions = [
   'htmlEndRules',
   'htmlFont',
   'htmlFail',
+  'htmlMarkText',
   'htmlMount',
   'htmlInline',
 ]

@@ -37,6 +37,34 @@ to `dist/<fixture>/<id>.png` through a single worker.
 `gallery.png`, which is itself an HTML page rendered by the same renderer. Both
 use a local build when there is one and the downloaded renderer otherwise.
 
+## Visual comparison with Chromium
+
+Build the native renderer once and install the browser pinned by the lockfile.
+
+```sh
+npm ci --ignore-scripts
+npx playwright install chromium --only-shell
+mkdir -p dist
+npm run render -- fixtures/card/card.html --out dist/card.png
+npm run visual:diff
+```
+
+The comparison renders both static pages and every entry of every template at
+its declared size, including the 1920 × 1080 match-result TV layout.
+The two renderers read the same local HTML,
+stylesheets, images, and fonts. The Chromium screenshot removes the default
+body inset. Explicit fixture margins still apply.
+
+Open `dist/visual-diff/index.html` for the image comparisons and
+`dist/visual-diff/results.json` for the measurements. Magenta marks any
+difference in the four RGBA channels, including antialiasing. The report
+records the browser build and host OS. Compare results from the same host
+when tracking changes.
+
+Use `npm run visual:diff -- card campaign` to compare selected fixtures.
+Use `npm run visual:diff -- --strict` to exit nonzero on any differing pixel.
+A capture or comparison error always exits nonzero after writing the report.
+
 ## The fixtures
 
 **Basics**
@@ -110,10 +138,6 @@ use a local build when there is one and the downloaded renderer otherwise.
 
 The renderer is a prototype. These limits shaped every template here:
 
-- Whitespace between tags becomes a layout item: about 16 px between blocks in
-  a column and 8 px before each item in a row. Write sibling tags with no
-  whitespace between them, for example by breaking inside the closing tag
-  (`</div\n  ><div>`). Then `gap` and widths are exact.
 - Text must be plain ASCII. Other characters, such as accented letters, curly
   quotes and the euro sign, render as `?`. Only `&amp;`, `&lt;`, `&gt;`,
   `&quot;`, `&apos;` and `&nbsp;` are decoded.
