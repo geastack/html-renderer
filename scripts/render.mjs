@@ -2,6 +2,7 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { localExecutable } from './local-executable.mjs'
 
 const root = path.resolve(fileURLToPath(new URL('../', import.meta.url)))
 const workspace = path.dirname(root)
@@ -13,19 +14,7 @@ if (input === '--serve') {
     process.exit(2)
   }
 
-  const outputRoot = path.resolve(root, process.env.GEA_MACOS_OUTPUT_DIR || 'dist/macos')
-  const namespace = process.env.GEA_MACOS_OUTPUT_TAG
-    ? ['.namespaces', process.env.GEA_MACOS_OUTPUT_TAG]
-    : []
-  const exe = path.join(
-    outputRoot,
-    ...namespace,
-    'html-renderer',
-    'Gea HTML Renderer.app',
-    'Contents',
-    'MacOS',
-    'Gea HTML Renderer',
-  )
+  const exe = localExecutable(root)
 
   if (!existsSync(exe)) {
     console.error('Build the renderer once with npm run render before starting the worker.')
@@ -61,11 +50,28 @@ for (const [variable, directory] of [
   ['GEA_APPLE_ROOT', 'apple/packages/geastack-apple'],
   ['GEA_CORE', 'core/packages/core'],
   ['GEA_COMPILER', 'compiler'],
+  ['GEA_LINUX_ROOT', 'linux'],
+  ['GEA_WINDOWS_ROOT', 'windows/packages/geastack-windows'],
 ]) {
   const local = path.join(workspace, directory)
 
   if (!env[variable] && existsSync(path.join(local, 'package.json'))) {
     env[variable] = local
+  }
+}
+
+if (env.GEA_CORE && process.platform === 'win32') {
+  for (const [variable, name] of [
+    ['GEA_HOST_DIR', 'host'],
+    ['GEA_ENGINE_DIR', 'engine'],
+    ['GEA_ELEMENTS_DIR', 'elements'],
+    ['GEA_GEAOS_PACKAGE_DIR', 'geaos'],
+  ]) {
+    const local = path.resolve(env.GEA_CORE, '..', name)
+
+    if (!env[variable] && existsSync(path.join(local, 'package.json'))) {
+      env[variable] = local
+    }
   }
 }
 

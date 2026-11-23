@@ -1,13 +1,12 @@
 # Gea HTML Renderer
 
-Render local HTML and CSS to PNG with GeaStack's native macOS renderer.
+Render local HTML and CSS to PNG with GeaStack's native renderer.
 The Node client keeps a native worker open for repeated captures.
 
 ## Install and render
 
-On Apple Silicon with macOS 15 or later and Node.js 20.19 or later, install the
-[npm package](https://www.npmjs.com/package/@geastack/html-renderer) and
-render a local HTML file to PNG.
+Install the [npm package](https://www.npmjs.com/package/@geastack/html-renderer)
+with Node.js 20.19 or later and render a local HTML file to PNG.
 
 ```sh
 npm install @geastack/html-renderer
@@ -15,8 +14,12 @@ npx gea-html-render page.html --out page.png
 ```
 
 The npm install hook downloads the matching native renderer from GitHub Releases.
-If npm skips dependency scripts, the first render downloads it. The CLI defaults to 1920 × 1080 at
-DPR 1. Override the viewport with `--width`, `--height`, and `--dpr`.
+If npm skips dependency scripts, the first render downloads it. The CLI defaults
+to 1920 × 1080 at DPR 1. Override the viewport with `--width`, `--height`, and `--dpr`.
+
+The release workflow builds for Apple Silicon macOS, Linux x64, and Windows x64.
+Linux builds use the Ubuntu 24.04 runtime and need SDL2, libcurl, FreeType, and
+libpng shared libraries. Headless capture does not require a display server.
 
 ## Node API
 

@@ -8,7 +8,8 @@
     "postinstall": "node lib/install.mjs",
     "lint": "eslint .",
     "format": "eslint . --fix && prettier . --write",
-    "format:check": "eslint . && prettier . --check"
+    "format:check": "eslint . && prettier . --check",
+    "smoke:package": "node scripts/smoke-package.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -34,7 +35,17 @@
     "entry": "src/index.ts",
     "runtime": "gea",
     "targets": {
-      "macos": true
+      "macos": true,
+      "windows": {
+        "nativeIncludeDirectories": [
+          "src/native"
+        ]
+      },
+      "raspberry-pi-os": {
+        "nativeIncludeDirectories": [
+          "src/native"
+        ]
+      }
     },
     "nativeSources": [
       "src/native/html_host.cpp"

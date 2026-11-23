@@ -1,42 +1,59 @@
 name: Publish
 
 on:
+  workflow_dispatch:
   push:
     branches: [release]
 
 permissions:
-  contents: write
-  id-token: write
+  contents: read
 
 concurrency: publish
 
 jobs:
-  publish:
-    runs-on: macos-15
+  build:
+    strategy:
+      matrix:
+        include:
+          - runner: macos-15
+            platform: darwin-arm64
+            target: apple
+            ref: 6a50cda0854451e39a84f2996e1a1c005db60fdf
+          - runner: ubuntu-24.04
+            platform: linux-x64
+            target: linux
+            ref: df3d4e7681a0ba49b445dc2d3601491911f349a8
+          - runner: windows-2025
+            platform: win32-x64
+            target: windows
+            ref: 759df2e78b429c87559de38305280de6f8a438bf
+    runs-on: ${{ matrix.runner }}
     defaults:
       run:
+        shell: bash
         working-directory: html-renderer
     steps:
       - uses: actions/checkout@v4
         with:
           path: html-renderer
+          persist-credentials: false
       - uses: actions/checkout@v4
         with:
           repository: geastack/cli
-          ref: 285e7edaf677e514e3dadf063ac338574b9e9dee
+          ref: 16e5433b1a4590c03bdc599c9b85fc6fac6a
           path: cli
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
           repository: geastack/core
-          ref: 95c04a10360399426ffd9856215a256a46a56022
+          ref: 427f04fd7ca4b19551e88f8ebf49e059d0caa40d
           path: core
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
-          repository: geastack/apple
-          ref: 6a50cda0854451e39a84f2996e1a1c005db60fdf
-          path: apple
+          repository: geastack/${{ matrix.target }}
+          ref: ${{ matrix.ref }}
+          path: ${{ matrix.target }}
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
@@ -48,59 +65,70 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-      - name: Build native renderer
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsdl2-dev libcurl4-openssl-dev libfreetype-dev libpng-dev
+      - name: Prepare Apple bindings
+        if: runner.os == 'macOS'
+        run: |
+          npm ci --ignore-scripts --prefix ../apple
+          npm ci --ignore-scripts --prefix ../apple/packages/geastack-apple
+          npm run build --prefix ../apple/packages/geastack-apple
+      - name: Prepare Windows bindings
+        if: runner.os == 'Windows'
+        run: |
+          npm ci --ignore-scripts --prefix ../windows/packages/geastack-windows
+          npm run build --prefix ../windows/packages/geastack-windows
+      - name: Build and test the native renderer
         env:
           MACOSX_DEPLOYMENT_TARGET: '15.0'
           GEA_MACOS_JOBS: '3'
+          GEA_BUILD_JOBS: '3'
+          GEA_WINDOWS_JOBS: '3'
         run: |
           npm ci --ignore-scripts
           npm ci --ignore-scripts --prefix ../cli
           npm ci --ignore-scripts --prefix ../core/packages/core
-          npm ci --ignore-scripts --prefix ../apple
-          npm ci --ignore-scripts --prefix ../apple/packages/geastack-apple
-          npm run build --prefix ../apple/packages/geastack-apple
           npm ci --ignore-scripts --prefix ../compiler
           npm run build --prefix ../compiler
           npm run check
           npm run format:check
-          mkdir -p dist/prebuilt
+          mkdir -p dist
           npm run render -- fixtures/card.html --width 480 --height 220 --out dist/card.png
-          ditto 'dist/macos/html-renderer/Gea HTML Renderer.app' 'dist/prebuilt/Gea HTML Renderer.app'
-          cp ../core/NOTICE dist/prebuilt/NOTICE-core
-          cp ../compiler/NOTICE dist/prebuilt/NOTICE-compiler
-          cp fixtures/fonts/OFL.txt dist/prebuilt/OFL-Barlow.txt
-      - name: Upload the native renderer
+          node scripts/native-asset.mjs
+          npm run smoke:package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: renderer-${{ matrix.platform }}
+          path: |
+            html-renderer/dist/native-release/${{ matrix.platform }}.json
+            html-renderer/dist/native-release/gea-html-renderer-${{ matrix.platform }}.tar.gz
+          if-no-files-found: error
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: renderer-*
+          path: dist/native-release
+          merge-multiple: true
+      - name: Publish native release assets
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          version=$(node -p "require('./package.json').version")
-          tag="renderer-v$version"
-          asset="gea-html-renderer-darwin-arm64.tar.gz"
-          tar -czf "dist/$asset" -C dist prebuilt
-          url="https://github.com/$GITHUB_REPOSITORY/releases/download/$tag/$asset"
-          if ! gh release view "$tag" >/dev/null 2>&1; then
-            gh release create "$tag" --target "$GITHUB_SHA" --title "Renderer binaries $version"
-          elif [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq .object.sha)" != "$GITHUB_SHA" ]; then
-            echo "Renderer release tag $tag points to another commit" >&2
-            exit 1
-          fi
-          if gh release view "$tag" --json assets --jq '.assets[].name' | grep -Fxq "$asset"; then
-            gh release download "$tag" --pattern "$asset" --output "dist/$asset" --clobber
-          else
-            gh release upload "$tag" "dist/$asset"
-          fi
-          sha=$(shasum -a 256 "dist/$asset" | cut -d ' ' -f 1)
-          printf '{"darwin-arm64":{"url":"%s","sha256":"%s","executable":"Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer"}}\n' "$url" "$sha" > dist/renderer-assets.json
-      - name: Render from the packed npm package
-        run: |
-          tarball=$(npm pack --pack-destination dist)
-          node -e 'require("node:fs").writeFileSync("dist/package.json", JSON.stringify({private: true, allowScripts: {["file:" + process.argv[1]]: true}}))' "$PWD/dist/$tarball"
-          npm install --prefix dist --no-save --no-package-lock "$PWD/dist/$tarball"
-          test -x 'dist/node_modules/@geastack/html-renderer/dist/prebuilt/Gea HTML Renderer.app/Contents/MacOS/Gea HTML Renderer'
-          dist/node_modules/.bin/gea-html-render fixtures/card.html --out dist/installed.png
-          sips -g pixelWidth -g pixelHeight dist/installed.png
-          test "$(sips -g pixelWidth dist/installed.png | awk '/pixelWidth:/ {print $2}')" = 1920
-          test "$(sips -g pixelHeight dist/installed.png | awk '/pixelHeight:/ {print $2}')" = 1080
+        run: node .github/scripts/publish-native.mjs
       - run: npm install -g npm@latest
       - run: node .github/scripts/publish.mjs
         env:
