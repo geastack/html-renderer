@@ -1,19 +1,33 @@
 {
-  "name": "gea-render-benchmark",
-  "main": "src/benchmark-worker.ts",
+  "name": "gea-html-renderer",
+  "main": "src/worker.ts",
   "compatibility_date": "2026-11-24",
   "workers_dev": true,
+  "vars": { "RENDER_INSTANCE_TYPE": "lite" },
   "containers": [
     {
-      "class_name": "RenderBenchmark",
-      "image": "./Dockerfile",
-      "image_build_context": "../..",
-      "max_instances": 1,
-      "instance_type": "standard-2",
+      "class_name": "RendererContainer",
+      "scheduling_policy": "durable_object",
+      "images": {
+        "base": {
+          "dockerfile": "./Dockerfile",
+          "build_context": "../..",
+        },
+      },
     },
   ],
   "durable_objects": {
-    "bindings": [{ "name": "RENDER", "class_name": "RenderBenchmark" }],
+    "bindings": [
+      {
+        "name": "RENDER",
+        "class_name": "RendererContainer",
+      },
+    ],
   },
-  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RenderBenchmark"] }],
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["RendererContainer"],
+    },
+  ],
 }

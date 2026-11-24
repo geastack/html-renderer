@@ -1,5 +1,23 @@
 import { inertPluginInstance } from '@geastack/compiler/plugin'
 
+const functions = [
+  'capturePng',
+  'preparePage',
+  'abortPage',
+  'finishPage',
+  'startCaptureMetrics',
+  'finishCaptureMetrics',
+  'captureMetrics',
+  'httpPrerenderMode',
+  'openBundle',
+  'beginFileBundle',
+  'writeBundleFile',
+  'finishFileBundle',
+  'discardFileBundle',
+  'benchmarkFixturesEnabled',
+  'htmlSetAssetRoot',
+]
+
 export default {
   name: 'html-renderer-http-host',
   instantiate() {
@@ -7,14 +25,10 @@ export default {
       ...inertPluginInstance,
       capabilities: {
         ...inertPluginInstance.capabilities,
-        hostFunctions: new Map([
-          ['capturePng', 'capturePng'],
-          ['captureMetrics', 'captureMetrics'],
-        ]),
-        hostPreambles: new Map([
-          ['capturePng', ['#include "capture.h"']],
-          ['captureMetrics', ['#include "capture.h"']],
-        ]),
+        hostFunctions: new Map(functions.map((name) => [name, name])),
+        hostPreambles: new Map(
+          functions.map((name) => [name, ['#include "prerender-http.h"', '#include "bundle.h"']]),
+        ),
       },
     }
   },

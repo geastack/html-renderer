@@ -1,0 +1,7 @@
+FROM gea-html-renderer:local
+
+ENV GEA_RENDER_BENCHMARK=1
+COPY fixtures/card/ fixtures/card/
+COPY fixtures/promo/ fixtures/promo/
+COPY fixtures/shared/fonts/ fixtures/shared/fonts/
+COPY fixtures/shared/images/gea-logo.png fixtures/shared/images/gea-logo.png

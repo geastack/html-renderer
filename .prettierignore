@@ -1,4 +1,5 @@
 .gea/
+.wrangler/
 dist/
 fixtures/
 package-lock.json

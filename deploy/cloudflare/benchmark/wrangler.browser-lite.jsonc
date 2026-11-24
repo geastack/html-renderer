@@ -1,13 +1,13 @@
 {
   "name": "gea-render-browser-lowmem-lite",
-  "main": "src/worker.ts",
+  "main": "src/native-worker.ts",
   "compatibility_date": "2026-11-24",
   "workers_dev": true,
   "containers": [
     {
       "class_name": "RenderBenchmark",
       "image": "./Dockerfile.browser-lite",
-      "image_build_context": "../..",
+      "image_build_context": "../../..",
       "max_instances": 4,
       "instance_type": "lite",
     },

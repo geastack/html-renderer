@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <fstream>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <thread>
 
@@ -66,6 +67,19 @@ public:
 		firstCapture = false;
 	}
 };
+
+static std::optional<CaptureMetrics> captureSample;
+
+static void startCaptureMetrics()
+{
+	captureSample.emplace();
+}
+
+static void finishCaptureMetrics()
+{
+	captureSample->finish();
+	captureSample.reset();
+}
 
 static std::string captureMetrics()
 {

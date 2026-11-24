@@ -5,7 +5,7 @@ import prettier from 'eslint-config-prettier'
 import tseslint from 'typescript-eslint'
 
 export default [
-  { ignores: ['node_modules/**', '.gea/**', 'dist/**', 'fixtures/**'] },
+  { ignores: ['node_modules/**', '.gea/**', '**/.wrangler/**', 'dist/**', 'fixtures/**'] },
   { languageOptions: { globals: globals.node } },
   js.configs.recommended,
   ...tseslint.configs.recommended,

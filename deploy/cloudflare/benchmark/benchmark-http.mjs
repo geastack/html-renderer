@@ -5,24 +5,30 @@ import { setTimeout as delay } from 'node:timers/promises'
 const native = process.env.BENCHMARK_NATIVE_URL
 const browser = process.env.BENCHMARK_BROWSER_URL
 const lite = process.env.BENCHMARK_LITE_URL
+const baseline = process.env.BENCHMARK_BASELINE_URL
 const token = process.env.BENCHMARK_TOKEN
 
-if (!token || !native || (!lite && !browser)) {
+if (!token || !native || (!lite && !browser && !baseline)) {
   throw new Error(
-    'Set BENCHMARK_TOKEN and BENCHMARK_NATIVE_URL, plus BENCHMARK_LITE_URL or BENCHMARK_BROWSER_URL',
+    'Set BENCHMARK_TOKEN and BENCHMARK_NATIVE_URL, plus BENCHMARK_LITE_URL, BENCHMARK_BROWSER_URL, or BENCHMARK_BASELINE_URL',
   )
 }
 
-const engines = lite
+const engines = baseline
   ? [
-      { name: 'Gea Lite', origin: lite, prefix: '', cached: true },
-      { name: 'Gea Basic', origin: native, prefix: '', cached: true },
+      { name: 'Candidate', origin: native, prefix: '', cached: true },
+      { name: 'Baseline', origin: baseline, prefix: '', cached: true },
     ]
-  : [
-      { name: 'Gea', origin: native, prefix: '', cached: true },
-      { name: 'Playwright', origin: browser, prefix: '/playwright' },
-      { name: 'Chrome', origin: browser, prefix: '/chrome' },
-    ]
+  : lite
+    ? [
+        { name: 'Gea Lite', origin: lite, prefix: '', cached: true },
+        { name: 'Gea Basic', origin: native, prefix: '', cached: true },
+      ]
+    : [
+        { name: 'Gea', origin: native, prefix: '', cached: true },
+        { name: 'Playwright', origin: browser, prefix: '/playwright' },
+        { name: 'Chrome', origin: browser, prefix: '/chrome' },
+      ]
 const agent = new Agent({ keepAlive: true, maxSockets: 3 })
 
 const p = (xs, q) => [...xs].sort((a, b) => a - b)[Math.ceil(xs.length * q) - 1]
@@ -223,8 +229,10 @@ try {
         }
       }
 
-      if (lite && new Set(hashes.values()).size !== 1) {
-        throw new Error(fixture + ': Lite and Basic produced different PNGs')
+      if ((lite || baseline) && new Set(hashes.values()).size !== 1) {
+        throw new Error(
+          `${fixture}: ${engines.map((engine) => engine.name).join(' and ')} produced different PNGs`,
+        )
       }
 
       for (const phase of phases) {

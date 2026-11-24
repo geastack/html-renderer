@@ -2,8 +2,10 @@
 !deploy/
 !deploy/cloudflare/
 !deploy/cloudflare/Dockerfile
-!deploy/cloudflare/src/
-!deploy/cloudflare/src/benchmark-server.mjs
+!deploy/cloudflare/benchmark/
+!deploy/cloudflare/benchmark/Dockerfile*
+!deploy/cloudflare/benchmark/src/
+!deploy/cloudflare/benchmark/src/*.mjs
 !fixtures/
 !fixtures/card/
 !fixtures/card/**
@@ -14,12 +16,6 @@
 !fixtures/shared/fonts/**
 !fixtures/shared/images/
 !fixtures/shared/images/gea-logo.png
-!deploy/cloudflare/Dockerfile.native
 !dist/
-!dist/raspberry-pi-os/
-!dist/raspberry-pi-os/html-renderer/
-!dist/raspberry-pi-os/html-renderer/html-renderer
-
-!deploy/cloudflare/Dockerfile.browser-lite
-!deploy/cloudflare/src/browser.mjs
-!deploy/cloudflare/Dockerfile.browser-basic
+!dist/cloudflare/
+!dist/cloudflare/html-renderer

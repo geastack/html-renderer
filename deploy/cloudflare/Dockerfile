@@ -1,29 +1,26 @@
-FROM ubuntu:24.04
-
-ARG NODE_VERSION=24.21.0
-ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright
+FROM ubuntu:24.04 AS dependencies
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl libcurl4t64 libfreetype6 libpng16-16t64 libsdl2-2.0-0 unzip xz-utils \
-    && curl -fsSLO "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" \
-    && curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/SHASUMS256.txt" \
-      | grep " node-v${NODE_VERSION}-linux-x64.tar.xz$" | sha256sum -c - \
-    && tar -xJf "node-v${NODE_VERSION}-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
-    && rm "node-v${NODE_VERSION}-linux-x64.tar.xz"
-
-WORKDIR /app
-RUN npm install --ignore-scripts --no-audit @geastack/html-renderer@0.0.5 playwright@1.65.1 \
-    && npx playwright install --with-deps --no-shell chromium \
-    && node node_modules/@geastack/html-renderer/lib/install.mjs \
-    && useradd --create-home render \
+    libarchive13t64 libcurl4t64 libfreetype6 libpng16-16t64 libsdl2-2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY fixtures/card/ fixtures/card/
-COPY fixtures/promo/ fixtures/promo/
-COPY fixtures/shared/fonts/ fixtures/shared/fonts/
-COPY fixtures/shared/images/gea-logo.png fixtures/shared/images/gea-logo.png
-COPY deploy/cloudflare/src/benchmark-server.mjs deploy/cloudflare/src/benchmark-server.mjs
+WORKDIR /app
+COPY dist/cloudflare/html-renderer /app/html-renderer
 
-USER render
+# Keep the ELF loader and the actual dependency closure. The headless path
+# does not load SDL's optional graphics drivers.
+RUN mkdir -p /app-root/tmp \
+    && chmod 1777 /app-root/tmp \
+    && ldd /app/html-renderer > /tmp/gea-libraries \
+    && ! grep -q 'not found' /tmp/gea-libraries \
+    && awk '$3 ~ /^\// {print $3} NF > 1 && $1 ~ /^\// {print $1}' /tmp/gea-libraries \
+      | sort -u | xargs -r cp -L --parents -t /app-root
+
+FROM scratch
+COPY --from=dependencies /app-root/ /
+COPY --from=dependencies /app /app
+WORKDIR /app
+ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/pulseaudio
+USER 65534:65534
 EXPOSE 8080
-CMD ["node", "deploy/cloudflare/src/benchmark-server.mjs"]
+ENTRYPOINT ["/app/html-renderer", "--gea-prerender-http"]

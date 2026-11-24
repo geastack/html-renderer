@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 build=true
 dry_run=false
 for option in "$@"; do
@@ -13,19 +13,23 @@ for option in "$@"; do
 done
 
 if ! "$dry_run"; then
-  : "${BENCHMARK_TOKEN:?Set BENCHMARK_TOKEN to protect the renderer endpoint}"
+  : "${RENDER_TOKEN:?Set RENDER_TOKEN to protect the renderer endpoint}"
 fi
 
 if "$build"; then
-  bash build-native.sh
+  bash scripts/build-in-docker.sh
 fi
 
-npm ci --no-audit
+if [[ ! -x ../../dist/cloudflare/html-renderer ]]; then
+  echo "Missing executable at dist/cloudflare/html-renderer. Run without --skip-build to build it." >&2
+  exit 1
+fi
+
 wrangler=(npx --yes wrangler@4.167.0)
-config=wrangler.native.jsonc
+config=wrangler.jsonc
 if "$dry_run"; then
   "${wrangler[@]}" deploy --config "$config" --dry-run
 else
   "${wrangler[@]}" deploy --config "$config"
-  printf '%s' "$BENCHMARK_TOKEN" | "${wrangler[@]}" secret put BENCHMARK_TOKEN --config "$config"
+  printf '%s' "$RENDER_TOKEN" | "${wrangler[@]}" secret put RENDER_TOKEN --config "$config"
 fi

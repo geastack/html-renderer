@@ -1,6 +1,6 @@
 {
-  "name": "gea-render-native-colocated-lite",
-  "main": "src/worker.ts",
+  "name": "gea-render-native-benchmark-lite",
+  "main": "src/native-worker.ts",
   "compatibility_date": "2026-11-24",
   "workers_dev": true,
   "vars": { "RENDER_INSTANCE_TYPE": "lite" },
@@ -11,7 +11,7 @@
       "images": {
         "base": {
           "dockerfile": "./Dockerfile.native",
-          "build_context": "../..",
+          "build_context": "../../..",
         },
       },
     },

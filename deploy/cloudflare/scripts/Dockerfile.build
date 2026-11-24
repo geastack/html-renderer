@@ -1,0 +1,28 @@
+FROM node:24-bookworm-slim AS node
+FROM ubuntu:24.04 AS build
+
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/npm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential clang file pkg-config libsdl2-dev libfreetype-dev libpng-dev \
+    libcurl4-openssl-dev libarchive-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+
+WORKDIR /workspace
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts --no-audit --no-fund
+
+COPY src ./src
+COPY deploy/cloudflare/src/native ./deploy/cloudflare/src/native
+COPY deploy/cloudflare/scripts/build-native.sh deploy/cloudflare/scripts/emit-native.mjs ./deploy/cloudflare/scripts/
+COPY fixtures/card ./fixtures/card
+COPY fixtures/shared/fonts ./fixtures/shared/fonts
+COPY fixtures/shared/images/gea-logo.png ./fixtures/shared/images/
+
+ARG GEA_BUILD_JOBS=2
+RUN bash deploy/cloudflare/scripts/build-native.sh
+
+FROM scratch
+COPY --from=build /workspace/dist/native/html-renderer/html-renderer /html-renderer

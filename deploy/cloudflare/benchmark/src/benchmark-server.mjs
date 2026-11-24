@@ -7,13 +7,13 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { chromium } from 'playwright'
 
 const { openRenderer } = await import(
-  process.env.GEA_RENDERER ? '../../../lib/worker.mjs' : '@geastack/html-renderer'
+  process.env.GEA_RENDERER ? '../../../../lib/worker.mjs' : '@geastack/html-renderer'
 )
 const viewport = { width: 1920, height: 1080 }
 const fixtures = new Map(
   ['card', 'promo'].map((name) => [
     name,
-    fileURLToPath(new URL(`../../../fixtures/${name}/${name}.html`, import.meta.url)),
+    fileURLToPath(new URL(`../../../../fixtures/${name}/${name}.html`, import.meta.url)),
   ]),
 )
 const modes = new Set(['gea-cold', 'gea-warm', 'playwright-cold', 'playwright-warm', 'chrome-cold'])

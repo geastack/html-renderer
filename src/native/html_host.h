@@ -4,6 +4,7 @@
 
 void htmlVideo(gea::embedded::ui::NodeHandle node, const std::string &document, const std::string &media);
 std::string htmlInput();
+void htmlSetAssetRoot(const std::string &root);
 std::string htmlRead(const std::string &path);
 std::string htmlResolve(const std::string &source, const std::string &relative);
 void htmlRule(const std::string &selector, const std::string &property, const std::string &value);
