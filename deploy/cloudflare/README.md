@@ -22,14 +22,14 @@ root:
 npm run cloudflare:deploy
 ```
 
-Docker installs the npm build dependencies from the lockfile and targets
-Linux x86-64 on both Intel and Apple Silicon hosts. Wrangler then packages
-and deploys the runtime image. The lockfile includes Core 0.1.62,
-Linux 0.1.9, and node-compat 1.0.22. The build checks that the Card fixture
-renders its uploaded font and that the executable serves health checks.
+Both deployment paths use the versioned release image pinned in
+`deploy/cloudflare/Dockerfile.release`. Wrangler imports the image into
+the deploying account's Cloudflare registry. The hosted build pulls the
+image and deploys the Worker.
 
-Use `-- --dry-run` to validate locally. Use `-- --skip-build` to deploy
-an existing executable at `dist/cloudflare/html-renderer`.
+Use `-- --dry-run` to validate locally. To build the Linux executable
+from source on macOS or Linux, run
+`bash deploy/cloudflare/scripts/build-in-docker.sh`.
 
 ## Render a page
 

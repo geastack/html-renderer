@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
-    "deploy": "npm run cloudflare:deploy -- --managed-secret",
+    "deploy": "npx --yes wrangler@4.167.0 deploy",
     "cloudflare:deploy": "bash deploy/cloudflare/scripts/deploy-native.sh",
     "render": "node scripts/render.mjs",
     "postinstall": "node lib/install.mjs",

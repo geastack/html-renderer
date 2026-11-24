@@ -1,0 +1,2 @@
+# Wrangler imports the public release image into the deploying account.
+FROM ghcr.io/geastack/html-renderer:0.0.8

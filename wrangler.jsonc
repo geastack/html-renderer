@@ -10,7 +10,7 @@
       "scheduling_policy": "durable_object",
       "images": {
         "base": {
-          "dockerfile": "deploy/cloudflare/Dockerfile",
+          "dockerfile": "deploy/cloudflare/Dockerfile.release",
           "build_context": ".",
         },
       },
