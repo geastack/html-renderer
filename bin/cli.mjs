@@ -4,7 +4,7 @@ import { videoTime } from '../lib/video.mjs'
 import { openRenderer, renderFrames, renderVideo } from '../lib/worker.mjs'
 
 const usage =
-  'Usage: gea-html-render page.html --out page.png [--width 1920 --height 1080 --dpr 1]\n' +
+  'Usage: gea-html-render page.html --out page.png [--width 1920 --height 1080 --dpr 1 --png-compression fast|compact (Linux)]\n' +
   '       gea-html-render page.html --out page.mp4 --end TIME [--start TIME --fps 60 --quality 8]\n' +
   '       gea-html-render page.html --frames-dir DIR --end TIME [--start TIME --fps 60]'
 
@@ -21,6 +21,7 @@ try {
       end: { type: 'string' },
       fps: { type: 'string' },
       quality: { type: 'string' },
+      'png-compression': { type: 'string' },
       dpr: { type: 'string', default: '1' },
     },
   })
@@ -48,6 +49,10 @@ try {
     }
 
     if (frames || out.toLowerCase().endsWith('.mp4')) {
+      if (values['png-compression'] !== undefined) {
+        throw new Error('--png-compression requires a single PNG output')
+      }
+
       const start = videoTime(values.start ?? '0')
       const end = videoTime(values.end)
       const fps = Number(values.fps ?? 60)
@@ -87,7 +92,7 @@ try {
         )
       }
 
-      const renderer = openRenderer()
+      const renderer = openRenderer(undefined, { pngCompression: values['png-compression'] })
 
       try {
         await renderer.capture({ input, out, width, height, dpr })

@@ -18,7 +18,10 @@ export interface Renderer {
   close(): Promise<void>
 }
 
-export function openRenderer(executable?: string, options?: { cwd?: string }): Renderer
+export function openRenderer(
+  executable?: string,
+  options?: { cwd?: string; pngCompression?: 'fast' | 'compact' },
+): Renderer
 
 export interface VideoRequest {
   input: string

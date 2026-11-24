@@ -7,28 +7,54 @@ const browser = process.env.BENCHMARK_BROWSER_URL
 const lite = process.env.BENCHMARK_LITE_URL
 const baseline = process.env.BENCHMARK_BASELINE_URL
 const token = process.env.BENCHMARK_TOKEN
+const coldSamples = Number(process.env.BENCHMARK_COLD_SAMPLES ?? 3)
+const warmSamples = Number(process.env.BENCHMARK_WARM_SAMPLES ?? 20)
+const pngPresets = process.argv.includes('--png-presets')
 
-if (!token || !native || (!lite && !browser && !baseline)) {
+if (![coldSamples, warmSamples].every((count) => Number.isSafeInteger(count) && count > 0)) {
+  throw new Error('Benchmark sample counts must be positive integers')
+}
+
+if (!token || !native || (!pngPresets && !lite && !browser && !baseline)) {
   throw new Error(
-    'Set BENCHMARK_TOKEN and BENCHMARK_NATIVE_URL, plus BENCHMARK_LITE_URL, BENCHMARK_BROWSER_URL, or BENCHMARK_BASELINE_URL',
+    'Set BENCHMARK_TOKEN and BENCHMARK_NATIVE_URL, plus a comparison URL or --png-presets',
   )
 }
 
-const engines = baseline
-  ? [
-      { name: 'Candidate', origin: native, prefix: '', cached: true },
-      { name: 'Baseline', origin: baseline, prefix: '', cached: true },
-    ]
-  : lite
-    ? [
-        { name: 'Gea Lite', origin: lite, prefix: '', cached: true },
-        { name: 'Gea Basic', origin: native, prefix: '', cached: true },
-      ]
-    : [
-        { name: 'Gea', origin: native, prefix: '', cached: true },
-        { name: 'Playwright', origin: browser, prefix: '/playwright' },
-        { name: 'Chrome', origin: browser, prefix: '/chrome' },
-      ]
+const engines = [
+  {
+    name: lite ? 'Gea Basic' : baseline ? 'Candidate' : 'Gea',
+    origin: native,
+    prefix: '',
+    native: true,
+  },
+]
+
+if (lite) {
+  engines.push({ name: 'Gea Lite', origin: lite, prefix: '', native: true })
+}
+
+if (baseline) {
+  engines.push({ name: 'Baseline', origin: baseline, prefix: '', native: true })
+}
+
+if (pngPresets) {
+  const nativeEngines = engines.splice(0)
+
+  for (const engine of nativeEngines) {
+    for (const compression of ['fast', 'compact']) {
+      engines.push({ ...engine, name: engine.name + ' ' + compression, compression })
+    }
+  }
+}
+
+if (browser) {
+  engines.push(
+    { name: 'Playwright', origin: browser, prefix: '/playwright' },
+    { name: 'Chrome', origin: browser, prefix: '/chrome' },
+  )
+}
+
 const agent = new Agent({ keepAlive: true, maxSockets: 3 })
 
 const p = (xs, q) => [...xs].sort((a, b) => a - b)[Math.ceil(xs.length * q) - 1]
@@ -50,7 +76,11 @@ function get(engine, path, id, method = 'GET') {
       {
         agent,
         method,
-        headers: { Authorization: 'Bearer ' + token, 'x-gea-benchmark-instance': id },
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'x-gea-benchmark-instance': id,
+          ...(engine.compression && { 'x-gea-png-compression': engine.compression }),
+        },
       },
       (res) => {
         const headers = performance.now()
@@ -157,7 +187,7 @@ const coldOnly = process.argv.includes('--cold-only')
 
 try {
   for (const fixture of ['card', 'promo']) {
-    const phases = coldOnly ? ['Cold start'] : ['Cold start', 'Reuse', 'Remount']
+    const phases = coldOnly ? ['Cold start'] : ['Cold start', 'Remount']
     const samples = new Map(
       engines.map((e) => [e.name, Object.fromEntries(phases.map((phase) => [phase, []]))]),
     )
@@ -181,8 +211,10 @@ try {
     }
 
     try {
-      for (let i = 0; i < 3; i++) {
-        for (const engine of [...engines.slice(i), ...engines.slice(0, i)]) {
+      for (let i = 0; i < coldSamples; i++) {
+        const offset = i % engines.length
+
+        for (const engine of [...engines.slice(offset), ...engines.slice(0, offset)]) {
           if (active.has(engine.name)) {
             await get(engine, '/__benchmark/reset', active.get(engine.name), 'POST')
           }
@@ -201,54 +233,49 @@ try {
 
       if (!coldOnly) {
         for (const engine of engines) {
-          for (const suffix of ['', '', '/cold', '']) {
-            await fetchSample(
-              engine,
-              engine.prefix + '/' + fixture + suffix,
-              active.get(engine.name),
-            )
-          }
+          await fetchSample(
+            engine,
+            engine.prefix + '/' + fixture + '/cold',
+            active.get(engine.name),
+          )
         }
 
-        for (let i = 0; i < 40; i++) {
-          const phase = i % 2 ? 'Remount' : 'Reuse'
-          const offset = Math.floor(i / 2) % engines.length
+        for (let i = 0; i < warmSamples; i++) {
+          const offset = i % engines.length
 
           for (const engine of [...engines.slice(offset), ...engines.slice(0, offset)]) {
-            const suffix = phase === 'Remount' ? '/cold' : ''
             const row = await fetchSample(
               engine,
-              engine.prefix + '/' + fixture + suffix,
+              engine.prefix + '/' + fixture + '/cold',
               active.get(engine.name),
             )
 
-            add(engine, phase, row)
+            add(engine, 'Remount', row)
+          }
+
+          if ((i + 1) % 10 === 0) {
+            console.error(fixture, 'remount', i + 1)
           }
 
           await delay(10)
         }
       }
 
-      if ((lite || baseline) && new Set(hashes.values()).size !== 1) {
-        throw new Error(
-          `${fixture}: ${engines.map((engine) => engine.name).join(' and ')} produced different PNGs`,
+      for (const compression of pngPresets ? ['fast', 'compact'] : [undefined]) {
+        const geaEngines = engines.filter(
+          (engine) => engine.native && engine.compression === compression,
         )
+
+        if (new Set(geaEngines.map((engine) => hashes.get(engine.name))).size !== 1) {
+          throw new Error(
+            `${fixture}: ${geaEngines.map((engine) => engine.name).join(' and ')} produced different PNGs`,
+          )
+        }
       }
 
       for (const phase of phases) {
         for (const engine of engines) {
           const rows = samples.get(engine.name)[phase]
-
-          if (
-            engine.cached &&
-            phase === 'Reuse' &&
-            p(
-              rows.map((row) => row.capture),
-              0.5,
-            ) >= 5
-          ) {
-            throw new Error(engine.name + ': Gea cache inactive')
-          }
 
           const record = {
             fixture,
@@ -281,7 +308,11 @@ try {
               Math.max(...rows.map((r) => r.ramPeak)).toFixed(1),
           }
 
-          console.log(JSON.stringify(record))
+          console.log(
+            JSON.stringify(
+              process.env.BENCHMARK_INCLUDE_SAMPLES === '1' ? { ...record, samples: rows } : record,
+            ),
+          )
         }
       }
     } finally {

@@ -23,7 +23,7 @@ jobs:
           - runner: ubuntu-24.04
             platform: linux-x64
             target: linux
-            ref: a02b775c110e8c79ab88f9d3b36e41fea3cb30d5
+            ref: 75f942773783814fa8cac26cc2b2d135af94b555
           - runner: windows-2025
             platform: win32-x64
             target: windows
@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: geastack/core
-          ref: 382a20483fb792c9d9678ec74b63ed2fc4d0674b
+          ref: cbfd50b92ad0823d5d671a9dc40ea471a2cf8780
           path: core
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -70,7 +70,9 @@ jobs:
         if: runner.os == 'Linux'
         timeout-minutes: 25
         run: |
-          packages=(libsdl2-dev libcurl4-openssl-dev libfreetype-dev libpng-dev)
+          rustup toolchain install 1.96 --profile minimal
+          echo 'RUSTUP_TOOLCHAIN=1.96' >> "$GITHUB_ENV"
+          packages=(libsdl2-dev libcurl4-openssl-dev libfreetype-dev)
           if ! command -v ffmpeg || ! command -v ffprobe; then packages+=(ffmpeg); fi
           # Use the archive directly. The runner's mirror list can select a
           # regional endpoint even when ubuntu.sources has no regional URL.

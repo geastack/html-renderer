@@ -2,7 +2,7 @@ import { createServer } from 'node:http'
 import { Buffer } from 'node:buffer'
 import { renderHtml } from '../../../../src/render'
 
-declare function capturePng(): Uint8Array
+declare function capturePng(fast: boolean): Uint8Array
 declare function preparePage(): void
 declare function abortPage(): void
 declare function finishPage(): void
@@ -19,10 +19,11 @@ declare function benchmarkFixturesEnabled(): boolean
 declare function htmlSetAssetRoot(root: string): void
 
 let mountedInput = ''
+let mountedFast = true
 let mountedPng: Uint8Array = new Uint8Array()
 
-function capture(input: string, reuse: boolean): Uint8Array {
-  if (reuse && mountedInput === input) {
+function capture(input: string, reuse: boolean, fast: boolean): Uint8Array {
+  if (reuse && mountedInput === input && mountedFast === fast) {
     return mountedPng
   }
 
@@ -38,10 +39,11 @@ function capture(input: string, reuse: boolean): Uint8Array {
 
   finishPage()
 
-  const png = capturePng()
+  const png = capturePng(fast)
 
   if (png.length > 0) {
     mountedInput = input
+    mountedFast = fast
     mountedPng = png
   }
 
@@ -55,6 +57,15 @@ function serve(): void {
 
     if (request.method === 'GET' && route === '/health') {
       response.end('ok')
+
+      return
+    }
+
+    const compression = request.headers['x-gea-png-compression'] ?? 'fast'
+
+    if (compression !== 'fast' && compression !== 'compact') {
+      response.statusCode = 400
+      response.end('X-Gea-Png-Compression must be fast or compact')
 
       return
     }
@@ -120,7 +131,7 @@ function serve(): void {
 
     startCaptureMetrics()
     try {
-      png = capture(input, reuse)
+      png = capture(input, reuse, compression === 'fast')
     } catch {
       response.statusCode = 500
       response.end('Capture failed')

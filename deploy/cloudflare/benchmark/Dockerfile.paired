@@ -1,0 +1,12 @@
+FROM gea-html-renderer:local AS gea
+FROM gea-browser-benchmark-base:local
+
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends libarchive13t64 \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=gea /app/html-renderer /app/gea-html-renderer
+COPY deploy/cloudflare/benchmark/src/chrome.mjs deploy/cloudflare/benchmark/src/paired.mjs /app/deploy/cloudflare/benchmark/src/
+ENV GEA_RENDER_BENCHMARK=1
+USER render
+EXPOSE 8081
+CMD ["node", "deploy/cloudflare/benchmark/src/paired.mjs"]

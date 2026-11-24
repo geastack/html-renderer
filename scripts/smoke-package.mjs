@@ -87,6 +87,30 @@ try {
     throw new Error('Expected a 1920 × 1080 PNG from the installed renderer after one download')
   }
 
+  if (process.platform === 'linux') {
+    const cli = path.join(installed, 'bin/cli.mjs')
+    const input = 'fixtures/card/card.html'
+    const fast = 'dist/installed-fast.png'
+    const frames = 'dist/installed-frames'
+
+    execFileSync(process.execPath, [cli, input, '--out', fast, '--png-compression', 'fast'])
+    execFileSync(process.execPath, [
+      cli,
+      input,
+      '--frames-dir',
+      frames,
+      '--fps',
+      '10',
+      '--end',
+      '100ms',
+    ])
+    const frame = readFileSync(path.join(frames, 'frame-000000.png'))
+
+    if (readFileSync(fast).equals(png) || !frame.equals(png)) {
+      throw new Error('Expected distinct Fast encoding and a matching Compact PNG frame')
+    }
+  }
+
   console.log(`${platform}: npm installed the renderer and the CLI wrote a 1920 × 1080 PNG`)
 } finally {
   server.close()

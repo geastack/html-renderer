@@ -79,7 +79,6 @@ for (const fixture of ['card', 'promo']) {
 
   for (const [mode, suffix, count] of [
     ['Cold start', '', Number(coldCount)],
-    ['Mounted page reused', '', Number(warmCount)],
     ['Page remounted', '/cold', Number(warmCount)],
   ]) {
     const cold = mode === 'Cold start'

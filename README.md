@@ -77,6 +77,7 @@ output directory.
 
 PNG sequence export needs no FFmpeg for CSS animation or static content.
 Local `<video>` sources still need FFmpeg for decoding.
+The bundled Linux renderer writes PNG sequences directly with the Rust PNG encoder.
 
 The Node API also exposes `renderFrames({ input, framesDir, start, end, fps })`.
 Times are in milliseconds, and it returns the number of frames written.
@@ -98,6 +99,11 @@ Calls to `capture()` run in order. A failed capture rejects its promise and
 the worker can handle the next request. Each capture reloads the document by
 default. Set `reusePage: true` to capture the already mounted page again when
 the input path, viewport, and DPR match.
+
+On Linux, use `--png-compression fast` for a single CLI screenshot or
+`openRenderer(undefined, { pngCompression: 'fast' })` in Node. File captures
+default to `compact`. Both presets preserve the decoded pixels. The Cloudflare service supports a
+[per-request preset](deploy/cloudflare/README.md#render-a-page).
 
 Use `renderVideo()` to export a clip from Node. The time range is in milliseconds.
 

@@ -49,7 +49,12 @@ curl --fail-with-body "$RENDER_URL/render" \
 Uploads can contain up to 256 files and 8 MiB of request data. ZIP
 entries can expand to a total of 24 MiB. Gea renders local assets inside
 the bundle. The service retains the last encoded PNG for identical
-uploads.
+uploads with the same compression preset.
+
+HTTP responses default to `fast` PNG compression. Send
+`X-Gea-Png-Compression: compact` for a smaller file, or `fast` to request
+the default explicitly. Both presets produce lossless PNGs. The native Rust PNG
+encoder uses its Fast setting for `fast` and Balanced for `compact`.
 
 The [benchmark](benchmark/README.md) has its own configs and fixture
 images. Use `GET /health` to check the renderer service.

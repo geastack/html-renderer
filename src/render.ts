@@ -18,19 +18,17 @@ function isSpace(c: string): boolean {
 }
 
 function decode(text: string): string {
+  if (text.indexOf('&') < 0) {
+    return text
+  }
+
   return text
-    .split('&lt;')
-    .join('<')
-    .split('&gt;')
-    .join('>')
-    .split('&quot;')
-    .join('"')
-    .split('&apos;')
-    .join("'")
-    .split('&nbsp;')
-    .join('\u00a0')
-    .split('&amp;')
-    .join('&')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&apos;', "'")
+    .replaceAll('&nbsp;', '\u00a0')
+    .replaceAll('&amp;', '&')
 }
 
 function isVoid(tag: string): boolean {

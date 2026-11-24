@@ -31,7 +31,7 @@ const percentile = (values, level) => {
 }
 
 for (const fixture of health.fixtures) {
-  for (const engine of health.modes) {
+  for (const engine of health.modes.filter((mode) => mode.endsWith('-cold'))) {
     const render = []
     const total = []
     let size = 0

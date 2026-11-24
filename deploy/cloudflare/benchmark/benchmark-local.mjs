@@ -118,7 +118,7 @@ async function openEngine(engine, input) {
     const session = openRenderer(renderer)
 
     return {
-      capture: (reusePage) => session.capture({ input, out: output, ...viewport, reusePage }),
+      capture: () => session.capture({ input, out: output, ...viewport }),
       close: () => session.close(),
     }
   }
@@ -137,10 +137,8 @@ async function openEngine(engine, input) {
     let mounts = 0
 
     return {
-      async capture(reuse) {
-        if (!reuse) {
-          await browser.mount(url + '?benchmarkMount=' + ++mounts)
-        }
+      async capture() {
+        await browser.mount(url + '?benchmarkMount=' + ++mounts)
 
         await writeFile(output, await browser.capture())
       },
@@ -154,13 +152,11 @@ async function openEngine(engine, input) {
     const page = await browser.newPage({ viewport, deviceScaleFactor: 1 })
 
     return {
-      async capture(reuse) {
-        if (!reuse) {
-          await page.goto(url, { waitUntil: 'load' })
-          await page
-            .locator('html')
-            .evaluate((element) => element.ownerDocument.fonts.ready.then(() => true))
-        }
+      async capture() {
+        await page.goto(url, { waitUntil: 'load' })
+        await page
+          .locator('html')
+          .evaluate((element) => element.ownerDocument.fonts.ready.then(() => true))
 
         await page.screenshot({ path: output })
       },
@@ -180,7 +176,6 @@ for (const fixture of ['card', 'promo']) {
 
   for (const engine of ['Gea', 'Chrome', 'Playwright']) {
     const cold = []
-    const reuse = []
     const remount = []
 
     for (let i = 0; i < coldSamples; i++) {
@@ -190,7 +185,7 @@ for (const fixture of ['card', 'promo']) {
         cold.push(
           await measure(async () => {
             session = await openEngine(engine, input)
-            await session.capture(false)
+            await session.capture()
           }),
         )
       } finally {
@@ -201,10 +196,9 @@ for (const fixture of ['card', 'promo']) {
     const session = await openEngine(engine, input)
 
     try {
-      await session.capture(false)
+      await session.capture()
       for (let i = 0; i < warmSamples; i++) {
-        reuse.push(await measure(() => session.capture(true)))
-        remount.push(await measure(() => session.capture(false)))
+        remount.push(await measure(() => session.capture()))
       }
     } finally {
       await session.close()
@@ -212,7 +206,6 @@ for (const fixture of ['card', 'promo']) {
 
     for (const [mode, rows] of [
       ['Cold start', cold],
-      ['Reuse', reuse],
       ['Remount', remount],
     ]) {
       console.log(
