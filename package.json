@@ -1,6 +1,6 @@
 {
   "name": "@geastack/html-renderer",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
@@ -21,9 +21,9 @@
     "@geastack/apple": "^0.2.26",
     "@geastack/cli": "0.1.124",
     "@geastack/compiler": "1.0.63",
-    "@geastack/core": "0.1.60",
+    "@geastack/core": "0.1.62",
     "@geastack/geatsc-plugin-gea": "0.1.29",
-    "@geastack/linux": "0.1.8",
+    "@geastack/linux": "0.1.9",
     "@geastack/node-compat": "1.0.22",
     "@stylistic/eslint-plugin": "^5.10.0",
     "eslint": "^10.15.0",

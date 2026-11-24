@@ -2,6 +2,7 @@ import { DurableObject } from 'cloudflare:workers'
 
 export interface ContainerEnv {
   RENDER_INSTANCE_TYPE?: 'lite' | 'basic'
+  RENDER_PORT?: number
 }
 
 export function timedResponse(response: Response, name: string, started: number) {
@@ -34,7 +35,7 @@ export class RendererContainer extends DurableObject<ContainerEnv> {
       await container.setInactivityTimeout(120_000)
     }
 
-    const port = container.getTcpPort(8080)
+    const port = container.getTcpPort(this.env.RENDER_PORT ?? 8080)
 
     for (let attempt = 0; attempt < 120; attempt++) {
       const health = await port.fetch('http://container/health').catch(() => undefined)
@@ -68,7 +69,7 @@ export class RendererContainer extends DurableObject<ContainerEnv> {
     try {
       await this.readiness
       const response = await container
-        .getTcpPort(8080)
+        .getTcpPort(this.env.RENDER_PORT ?? 8080)
         .fetch(new Request('http://container' + url.pathname + url.search, request))
 
       return timedResponse(response, 'x-bench-do-ms', started)

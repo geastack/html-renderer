@@ -4,6 +4,12 @@ The container serves the bundled Card and Promo fixtures as 1920 × 1080 PNGs.
 It runs Gea, Playwright, and direct headless Chrome in the same container.
 Playwright and direct Chrome use the same pinned browser executable.
 
+## Results from the npm-only Cloudflare build
+
+The [results](results/README.md) include the Cloudflare Basic three-engine
+comparison, the Gea release checks, the local Apple Silicon comparison,
+and the underlying JSONL.
+
 ## Benchmark on macOS
 
 From the renderer checkout, run `npm ci --ignore-scripts` and build the
@@ -17,7 +23,7 @@ node deploy/cloudflare/benchmark/benchmark-local.mjs
 Set `GEA_RENDERER` to use an existing native worker or `CHROME_PATH` to use
 a different Chrome installation. Playwright and direct CDP use the same
 Chrome binary. Run on a quiet machine. Each fixture uses five fresh-process
-captures and 20 samples each for reuse and remount. Wall time ends when a
+captures and 20 remount samples. Wall time ends when a
 1920 × 1080 PNG is written. CPU and peak RSS are sampled from the renderer
 process tree using macOS `ps`. Its CPU counters have 10 ms resolution.
 
@@ -62,17 +68,15 @@ only the bundled fixtures.
 ## Read the results
 
 `/health` lists the fixtures and engine modes. For example, GET
-`/render?fixture=card&engine=gea-warm` returns a PNG and a `Server-Timing`
+`/render?fixture=card&engine=gea-cold` returns a PNG and a `Server-Timing`
 duration. The benchmark sends requests serially, discards two warmups
 per fixture and mode, and reports render and HTTP medians and p95s.
 
-| Mode            | What is measured                                      |
-| --------------- | ----------------------------------------------------- |
-| Gea cold        | Launch native worker, mount, capture, and close       |
-| Gea warm        | Capture again with the worker and mounted page reused |
-| Playwright cold | Launch browser, load page, capture, and close         |
-| Playwright warm | Capture again with the browser and page reused        |
-| Chrome cold     | Run the Chrome screenshot command with a new profile  |
+| Mode            | What is measured                                     |
+| --------------- | ---------------------------------------------------- |
+| Gea cold        | Launch native worker, mount, capture, and close      |
+| Playwright cold | Launch browser, load page, capture, and close        |
+| Chrome cold     | Run the Chrome screenshot command with a new profile |
 
 The server timing includes PNG generation and reading the finished file.
 HTTP timing also includes request handling and download. The warmup requests
@@ -92,8 +96,7 @@ The sampler runs five measured captures per mode and fixture after two
 warmups. CPU is the change in Linux cgroup CPU time during the capture,
 including child processes. Memory is the container's anonymous and shared
 memory, excluding regular file cache. The sampler records the starting
-value and estimates the peak at 10 ms intervals. It closes any previously
-reused browser or renderer before switching modes.
+value and estimates the peak at 10 ms intervals.
 
 ## Run the browser Lite compatibility check
 
@@ -131,8 +134,8 @@ For the interleaved comparison with timing at each hop, set
 run `node benchmark-http.mjs` from this directory. It writes one JSON row
 per engine, fixture, and mode.
 
-Each cold sample starts a new container and browser. Reuse captures the
-already-loaded page. Remount navigates the same tab to the fixture again.
+Each cold sample starts a new container. A remount
+loads the fixture again inside the running renderer or browser.
 Capture time ends when the PNG bytes are ready. It includes PNG encoding
 and browser protocol work. HTTP latency includes the image download and,
 for cold samples, Cloudflare startup.
@@ -169,7 +172,7 @@ per engine, fixture, and mode.
 
 | Configuration                         | vCPU |     RAM | Disk | Cloudflare result                                                                                                                                                                           |
 | ------------------------------------- | ---: | ------: | ---: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Gea on Lite                           | 1/16 | 256 MiB | 2 GB | Completed all modes. One native process in a 46 MiB runtime image.                                                                                                                          |
+| Gea on Lite                           | 1/16 | 256 MiB | 2 GB | Completed all modes with one native process.                                                                                                                                                |
 | Playwright and direct Chrome on Lite  | 1/16 | 256 MiB | 2 GB | Neither driver completed its first capture, including trials with Chrome Headless Shell.                                                                                                    |
 | Gea on Basic                          |  1/4 |   1 GiB | 4 GB | Completed all modes with the same native image as Lite.                                                                                                                                     |
 | Playwright and direct Chrome on Basic |  1/4 |   1 GiB | 4 GB | Completed all modes. Both used full Chrome for Testing 159.0.8154.6 on Ubuntu 24.04, with GPU and browser sandbox disabled. Playwright 1.65.1 used its own API, and direct Chrome used CDP. |
@@ -185,91 +188,39 @@ Rates verified on November 24, 2026. The Workers Paid plan starts at $5 per mont
 | Lite  |                                 $0.002754 |                        $0.0000918 |
 | Basic |                                 $0.010008 |                        $0.0003336 |
 
-## HTTP comparison after colocating containers
+## Reading the results
 
-The old default scheduler could place a container separately from its Durable
-Object. On the slow native probe, the Worker-only ping took 16.7 ms median
-from the client. The Durable Object ping took 37.1 ms. Card's median time to
-headers was 147.1 ms, with 110 ms inside the Durable Object around the
-container call and 0.87 ms inside the renderer. Promo showed the same delay
-on that placement. The earlier benchmark did not retain the object ID, so
-this diagnostic reproduces the symptom on a new instance.
-[Cloudflare container placement](https://developers.cloudflare.com/containers/concepts/placement/)
+The Basic configurations use Durable Object scheduling. Each object starts
+a container with the `basic` instance type and waits for it to be ready.
+An optional `BENCHMARK_BASELINE_URL` adds another native Gea deployment to
+the same interleaved test. The harness checks that the two Gea deployments
+return byte-identical PNGs for each fixture.
 
-Across eight fresh native instances under each scheduling policy, the
-Card warm Durable Object–container hop had an instance-median range of
-2.8–108.3 ms before and 0.7–2.6 ms after.
-The Basic configurations now use Durable Object scheduling on both engines.
-Each object starts its container with the named `basic` instance, waits
-for its health endpoint, and sets a two-minute inactivity timeout.
+Set `BENCHMARK_COLD_SAMPLES` and `BENCHMARK_WARM_SAMPLES` to set the sample
+counts per fixture, engine, and mode. Defaults are three cold starts and
+20 remounts. Set `BENCHMARK_INCLUDE_SAMPLES=1` to retain
+individual timings and image hashes alongside the summaries.
 
-The table uses 3 cold and 20 samples per warm mode, per fixture and engine.
-All requests used the TXL edge and reused client HTTPS connections. Stage
-durations are calculated per request from nested timers, then summarized.
-Client–Worker includes edge transport. Worker–DO includes forwarding to the
-object. DO–container includes readiness and provisioning on cold starts.
-Container time covers the application request up to response creation.
-Capture and CPU cover only the measured capture interval. PNG download
-runs from response headers to the final byte. RAM is anonymous and shared
-memory excluding file cache. Cold p95 is the maximum of three samples.
+Run `node benchmark-http.mjs --png-presets` to measure Gea's `fast` and
+`compact` PNG encoders in separate containers. Set `BENCHMARK_NATIVE_URL`
+to the tier being tested. Include `BENCHMARK_BROWSER_URL` when measuring
+Chrome and Playwright on Basic. Leave it unset for the Gea-only Lite run.
 
-| Fixture | Mode       | Engine     | Client–Worker ms p50 / p95 | Worker–DO ms p50 / p95 | DO–container ms p50 / p95 | Container ms p50 / p95 | Capture ms p50 / p95 | Download ms p50 / p95 | HTTP ms p50 / p95 | CPU ms p50 / p95 | RAM before MiB p50 | RAM peak MiB p50 / max | PNG bytes |
-| ------- | ---------- | ---------- | -------------------------: | ---------------------: | ------------------------: | ---------------------: | -------------------: | --------------------: | ----------------: | ---------------: | -----------------: | ---------------------: | --------: |
-| Card    | Cold start | Gea        |                19.4 / 36.3 |            18.0 / 44.0 |            344.7 / 1111.3 |       84.344 / 138.661 |     84.147 / 138.365 |             2.2 / 4.1 |    466.4 / 1311.8 |     80.1 / 133.9 |                2.7 |            12.1 / 12.1 |     18221 |
-| Card    | Cold start | Playwright |                13.6 / 18.7 |            34.0 / 43.0 |           699.5 / 10744.7 |    3441.275 / 3532.504 |  3440.653 / 3531.840 |             2.6 / 3.5 |  4292.1 / 14239.2 |  2592.8 / 2646.0 |               15.2 |          230.5 / 232.7 |     16388 |
-| Card    | Cold start | Chrome     |                18.6 / 42.8 |            21.0 / 21.0 |          5601.1 / 11817.6 |    2099.429 / 2190.896 |  2098.872 / 2190.375 |             0.3 / 0.6 |  7526.0 / 13981.4 |  1487.7 / 1572.2 |               15.3 |          232.2 / 233.2 |     16388 |
-| Card    | Reuse      | Gea        |                14.8 / 20.8 |            18.0 / 20.0 |                 1.8 / 2.8 |          0.243 / 0.286 |        0.160 / 0.184 |             0.1 / 2.2 |       35.6 / 41.3 |        0.2 / 0.3 |               12.2 |            12.2 / 12.3 |     18221 |
-| Card    | Reuse      | Playwright |                15.2 / 19.5 |            17.0 / 23.0 |                 1.9 / 2.3 |       79.089 / 131.714 |     78.650 / 131.423 |            0.1 / 39.0 |     122.3 / 214.5 |      56.4 / 69.4 |              241.3 |          272.7 / 290.8 |     16388 |
-| Card    | Reuse      | Chrome     |                14.7 / 19.6 |            17.0 / 24.0 |                 2.1 / 2.9 |        51.542 / 80.679 |      50.393 / 64.037 |             0.1 / 0.7 |      87.5 / 119.7 |      42.4 / 50.4 |              218.5 |          236.1 / 248.4 |     16388 |
-| Card    | Remount    | Gea        |                15.8 / 20.8 |            15.0 / 24.0 |                 2.3 / 2.8 |        66.518 / 81.192 |      66.411 / 81.096 |            0.1 / 32.2 |     102.1 / 146.9 |      64.5 / 67.5 |               12.3 |            12.3 / 12.3 |     18221 |
-| Card    | Remount    | Playwright |                14.9 / 18.7 |            16.0 / 22.0 |                 1.9 / 3.0 |      251.564 / 431.127 |    251.225 / 430.629 |             0.1 / 1.5 |     295.8 / 463.4 |    125.2 / 167.7 |              256.9 |          262.1 / 277.7 |     16388 |
-| Card    | Remount    | Chrome     |                15.4 / 19.2 |            18.0 / 25.0 |                 2.4 / 4.0 |      231.929 / 312.236 |    229.846 / 311.971 |             0.1 / 0.3 |     278.3 / 357.0 |    104.4 / 119.3 |              220.4 |          237.3 / 253.4 |     16388 |
-| Promo   | Cold start | Gea        |                14.2 / 16.1 |            18.0 / 43.0 |             342.2 / 355.4 |      118.559 / 175.839 |    118.376 / 175.499 |            8.3 / 16.4 |     514.5 / 590.9 |    115.8 / 171.1 |                2.7 |            14.1 / 14.2 |     66716 |
-| Promo   | Cold start | Playwright |                19.3 / 19.8 |            34.0 / 35.0 |             694.8 / 707.8 |    3595.166 / 3637.177 |  3594.185 / 3635.931 |           30.3 / 34.1 |   4374.1 / 4433.4 |  2715.9 / 2744.4 |               15.2 |          232.7 / 236.9 |     90161 |
-| Promo   | Cold start | Chrome     |                22.4 / 22.4 |            23.0 / 43.0 |             692.0 / 716.3 |    2291.975 / 3461.709 |  2291.395 / 3460.555 |            9.9 / 43.7 |   3033.8 / 4287.0 |  1672.0 / 2585.2 |               15.2 |          246.8 / 246.9 |     90161 |
-| Promo   | Reuse      | Gea        |                15.3 / 29.8 |            17.0 / 20.0 |                 1.7 / 1.7 |          0.279 / 0.351 |        0.175 / 0.232 |            5.4 / 13.6 |       41.2 / 58.9 |        0.2 / 0.3 |               14.6 |            14.6 / 14.8 |     66716 |
-| Promo   | Reuse      | Playwright |                18.4 / 63.8 |            33.0 / 35.0 |                 2.5 / 5.0 |      263.058 / 323.346 |    262.308 / 322.322 |           15.3 / 37.5 |     344.5 / 415.2 |    107.6 / 126.0 |              255.0 |          274.1 / 292.4 |     90161 |
-| Promo   | Reuse      | Chrome     |                18.6 / 94.3 |            17.0 / 21.0 |                 2.2 / 3.6 |       78.777 / 114.401 |     75.156 / 113.197 |            7.7 / 80.9 |     129.4 / 259.6 |      58.6 / 66.9 |              222.1 |          237.4 / 258.3 |     90161 |
-| Promo   | Remount    | Gea        |                14.8 / 21.1 |            18.0 / 20.0 |                 1.5 / 2.4 |      147.768 / 237.534 |    147.629 / 237.359 |            6.4 / 73.8 |     201.3 / 278.0 |     93.1 / 103.3 |               14.6 |            14.6 / 14.8 |     66716 |
-| Promo   | Remount    | Playwright |                18.0 / 28.0 |            32.0 / 33.0 |                 2.8 / 3.5 |    1140.427 / 1309.507 |  1132.456 / 1308.959 |           13.1 / 33.2 |   1260.5 / 1380.7 |    341.2 / 376.5 |              257.5 |          275.3 / 294.8 |     90161 |
-| Promo   | Remount    | Chrome     |                18.6 / 29.4 |            17.0 / 21.0 |                 2.3 / 3.4 |      394.540 / 508.545 |    388.634 / 504.952 |            7.1 / 63.7 |     439.4 / 555.6 |    145.6 / 168.8 |              211.6 |          239.5 / 260.8 |     90161 |
+Capture time ends when the PNG is ready. HTTP time includes transport and
+download. Cold HTTP time also includes container startup. Each remount
+produces a fresh PNG on all engines.
+Memory is the container’s anonymous plus shared memory, excluding file cache.
 
-### Colocated Lite versus Basic
+## Gea and Chrome in the same Basic container
 
-Both services use the same Gea image and place the container with its
-Durable Object. Lite requests 1/16 vCPU and 256 MiB RAM. Basic requests
-1/4 vCPU and 1 GiB RAM.
+`wrangler.paired-basic.jsonc` runs the release Gea executable and direct
+headless Chrome on the same Basic instance. Build the Gea and browser base
+images above, deploy the paired configuration, and set `BENCHMARK_TOKEN`.
+Send authenticated requests to `/paired/card` and `/paired/promo`. Use a
+fresh UUID in `x-gea-benchmark-instance` for each container and reset it
+with `POST /__benchmark/reset` when finished.
 
-The benchmark alternates tiers from the same client through the TXL edge
-using existing HTTPS connections. It uses three cold starts and 20 requests
-in each warm mode per fixture and tier. Cold p95 is the slowest of three.
-HTTP includes provisioning on cold starts. CPU covers capture only, and
-RAM excludes file cache. The benchmark emits individual hop timings in its JSON output. All requests returned the same fixture PNG bytes across tiers
-and modes.
-
-Set `BENCHMARK_LITE_URL`, `BENCHMARK_NATIVE_URL` (Basic), and
-`BENCHMARK_TOKEN`, then run `node benchmark-http.mjs` from this directory
-to reproduce the comparison.
-
-Chrome and Playwright results use the colocated Basic browser deployment. Both failed before the first PNG on Lite. Gea reuse serves a
-cached PNG, and browser reuse captures the mounted tab again.
-
-Each cell shows **HTTP p50 / p95 (ms) · CPU p50 (ms) · peak RAM (MiB) · estimated USD per million requests**.
-
-Cost uses Cloudflare's overage rates for active CPU and provisioned RAM
-and disk. The warm estimate assumes an already-running container receives
-one request every two seconds. The cold estimate uses median HTTP time
-as a proxy for billable uptime and assumes immediate shutdown. Both use
-median capture CPU. Cold startup CPU outside capture is unavailable.
-These estimates exclude the Workers Paid plan fee and included usage,
-post-request idle time, Worker and Durable Object charges, and egress.
-[Cloudflare Containers pricing](https://developers.cloudflare.com/containers/platform/pricing/)
-
-| Fixture | Mode       |                                  Gea Lite |                                Gea Basic |                            Direct Chrome Basic |                               Playwright Basic |
-| ------- | ---------- | ----------------------------------------: | ---------------------------------------: | ---------------------------------------------: | ---------------------------------------------: |
-| Card    | Cold start | 2537.8 / 3437.9 · 80.3 · 12.1 · **$3.55** |  471.5 / 563.6 · 94.1 · 12.1 · **$3.19** | 7526.0 / 13981.4 · 1487.7 · 233.2 · **$50.68** | 4292.1 / 14239.2 · 2592.8 · 232.7 · **$63.79** |
-| Card    | Reuse      |      37.3 / 64.8 · 0.2 · 12.3 · **$1.53** |     33.7 / 38.6 · 0.2 · 12.2 · **$5.56** |        87.5 / 119.7 · 42.4 · 248.4 · **$6.41** |       122.3 / 214.5 · 56.4 · 290.8 · **$6.69** |
-| Card    | Remount    |   108.8 / 133.8 · 69.0 · 12.3 · **$2.91** |  109.5 / 139.7 · 70.8 · 12.2 · **$6.98** |      278.3 / 357.0 · 104.4 · 253.4 · **$7.65** |      295.8 / 463.4 · 125.2 · 277.7 · **$8.06** |
-| Promo   | Cold start |  498.6 / 972.4 · 110.7 · 14.2 · **$2.60** | 563.1 / 566.8 · 169.7 · 14.1 · **$4.96** |  3033.8 / 4287.0 · 1672.0 · 246.9 · **$41.87** |  4374.1 / 4433.4 · 2715.9 · 236.9 · **$66.48** |
-| Promo   | Reuse      |      46.1 / 52.8 · 0.2 · 14.8 · **$1.53** |     40.8 / 48.6 · 0.3 · 14.8 · **$5.57** |       129.4 / 259.6 · 58.6 · 258.3 · **$6.73** |      344.5 / 415.2 · 107.6 · 292.4 · **$7.71** |
-| Promo   | Remount    |   140.4 / 151.6 · 96.3 · 14.8 · **$3.46** |  143.2 / 150.2 · 98.4 · 14.8 · **$7.53** |      439.4 / 555.6 · 145.6 · 260.8 · **$8.47** |   1260.5 / 1380.7 · 341.2 · 294.8 · **$12.38** |
+Each request alternates 12 warmed remounts per engine and returns each
+PNG hash, in-container wall time, CPU time, and cgroup throttling counters.
+Wall time includes receiving the PNG within the container. Keep the edge
+HTTP time separate. See the [paired benchmark results](results/cloudflare-basic-paired.jsonl).

@@ -21,7 +21,7 @@ const format = (value) => value.toFixed(1)
 const rows = []
 
 for (const fixture of fixtures) {
-  for (const engine of modes) {
+  for (const engine of modes.filter((mode) => mode.endsWith('-cold'))) {
     const samples = []
 
     for (let i = -2; i < 5; i++) {

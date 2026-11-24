@@ -1,0 +1,18 @@
+{
+  "name": "gea-render-paired-basic",
+  "main": "src/native-worker.ts",
+  "compatibility_date": "2026-11-24",
+  "workers_dev": true,
+  "vars": { "RENDER_INSTANCE_TYPE": "basic", "RENDER_PORT": 8081 },
+  "containers": [
+    {
+      "class_name": "ColocatedRenderBenchmark",
+      "scheduling_policy": "durable_object",
+      "images": { "base": { "dockerfile": "./Dockerfile.paired", "build_context": "../../.." } },
+    },
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "RENDER", "class_name": "ColocatedRenderBenchmark" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ColocatedRenderBenchmark"] }],
+}

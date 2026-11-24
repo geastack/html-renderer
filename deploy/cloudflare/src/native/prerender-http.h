@@ -10,4 +10,4 @@ bool httpPrerenderMode();
 void preparePage();
 void abortPage();
 void finishPage();
-std::vector<std::uint8_t> capturePng();
+std::vector<std::uint8_t> capturePng(bool fast);
