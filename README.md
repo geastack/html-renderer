@@ -138,8 +138,25 @@ named entities, local images, inline styles, style blocks, linked stylesheets,
 single-source local `@font-face` rules, and `@keyframes`. HTML assets resolve
 relative to the HTML file. Font paths resolve relative to their stylesheet.
 Rendering uses Gea's selector, property, layout, animation, and paint support.
-The prototype does not execute page JavaScript, fetch remote assets, implement
-browser HTML error recovery, or handle nested conditional CSS rules.
+
+## Current limitations
+
+HTML Renderer does not execute page JavaScript or fetch remote assets. It
+supports a subset of HTML and CSS, including local fonts and CSS keyframes.
+Use well-formed markup and test layouts that depend on browser behavior.
+Nested conditional CSS rules and browser-style HTML error recovery are
+currently unsupported. FFmpeg is required for embedded video decoding and
+silent MP4 export.
+
+For scripted visuals, build the scene as a Gea app and use [`gea prerender`](https://github.com/geastack/cli#native-prerender).
+The CLI compiles and runs the app natively, including its JavaScript or
+TypeScript logic. App timers, frame callbacks, and CSS animations follow the
+simulated timeline. Use it to produce animated explainers, data-driven
+sequences, or product demos, then export a still, PNG frames, or an MP4.
+
+```sh
+gea prerender --app css-animation-showcase --end 5s --fps 30 --out preview.mp4
+```
 
 ## Fixtures
 
