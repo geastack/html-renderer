@@ -39,3 +39,13 @@ export function renderVideo(
   request: VideoRequest,
   options?: { executable?: string; cwd?: string },
 ): Promise<void>
+
+export interface FrameSequenceRequest extends Omit<VideoRequest, 'out' | 'quality'> {
+  framesDir: string
+}
+
+/** Returns the number of PNG frames written to the new directory. */
+export function renderFrames(
+  request: FrameSequenceRequest,
+  options?: { executable?: string; cwd?: string },
+): Promise<number>
