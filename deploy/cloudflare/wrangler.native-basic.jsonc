@@ -1,0 +1,32 @@
+{
+  "name": "gea-render-native-colocated-basic",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-11-24",
+  "workers_dev": true,
+  "containers": [
+    {
+      "class_name": "ColocatedRenderBenchmark",
+      "scheduling_policy": "durable_object",
+      "images": {
+        "base": {
+          "dockerfile": "./Dockerfile.native",
+          "build_context": "../..",
+        },
+      },
+    },
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "RENDER",
+        "class_name": "ColocatedRenderBenchmark",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["ColocatedRenderBenchmark"],
+    },
+  ],
+}

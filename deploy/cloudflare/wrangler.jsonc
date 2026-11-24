@@ -1,0 +1,19 @@
+{
+  "name": "gea-render-benchmark",
+  "main": "src/benchmark-worker.ts",
+  "compatibility_date": "2026-11-24",
+  "workers_dev": true,
+  "containers": [
+    {
+      "class_name": "RenderBenchmark",
+      "image": "./Dockerfile",
+      "image_build_context": "../..",
+      "max_instances": 1,
+      "instance_type": "standard-2",
+    },
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "RENDER", "class_name": "RenderBenchmark" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RenderBenchmark"] }],
+}

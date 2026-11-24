@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
+    "cloudflare:deploy": "bash deploy/cloudflare/deploy-native.sh",
     "render": "node scripts/render.mjs",
     "postinstall": "node lib/install.mjs",
     "lint": "eslint .",
