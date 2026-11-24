@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { randomUUID } from 'node:crypto'
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { renderVideo } from '../lib/worker.mjs'
+import { PNG } from 'pngjs'
+import { renderFrames, renderVideo } from '../lib/worker.mjs'
 import { localExecutable } from './local-executable.mjs'
 
 const width = 128
@@ -106,4 +108,40 @@ for (const [name, page] of Object.entries(examples)) {
   }
 
   console.log(`${name}: 8 H.264 frames at 8 fps`)
+}
+
+const framesDir = resolve(`dist/video-smoke-frames-${randomUUID()}`)
+const frameRequest = {
+  input: 'dist/video-smoke-animation.html',
+  framesDir,
+  width: 127,
+  height: 71,
+  fps,
+  start: 250,
+  end: 1250,
+}
+const options = { executable: localExecutable(process.cwd()) }
+
+try {
+  assert.equal(await renderFrames(frameRequest, options), 8)
+  await assert.rejects(renderFrames(frameRequest, options), { code: 'EEXIST' })
+
+  const files = readdirSync(framesDir).sort()
+
+  assert.deepEqual(
+    files,
+    Array.from({ length: 8 }, (_, i) => `frame-00000${i}.png`),
+  )
+
+  const frames = files.map((name) => PNG.sync.read(readFileSync(resolve(framesDir, name))))
+
+  assert.ok(frames.every((frame) => frame.width === 127 && frame.height === 71))
+  const red = (frame, x) => frames[frame].data[(8 * 127 + x) * 4]
+
+  assert.ok(red(0, 16) > 180 && red(0, 50) < 40, 'First PNG is at 250 ms')
+  assert.ok(red(7, 16) < 40 && red(7, 50) > 180, 'Last PNG is at 1125 ms')
+
+  console.log('PNG sequence: 8 RGBA frames at the original viewport size')
+} finally {
+  rmSync(framesDir, { recursive: true, force: true })
 }

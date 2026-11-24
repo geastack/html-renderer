@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util'
 import { videoTime } from '../lib/video.mjs'
-import { openRenderer, renderVideo } from '../lib/worker.mjs'
+import { openRenderer, renderFrames, renderVideo } from '../lib/worker.mjs'
 
 const usage =
   'Usage: gea-html-render page.html --out page.png [--width 1920 --height 1080 --dpr 1]\n' +
-  '       gea-html-render page.html --out page.mp4 --end TIME [--start TIME --fps 60 --quality 8]'
+  '       gea-html-render page.html --out page.mp4 --end TIME [--start TIME --fps 60 --quality 8]\n' +
+  '       gea-html-render page.html --frames-dir DIR --end TIME [--start TIME --fps 60]'
 
 try {
   const { values, positionals } = parseArgs({
@@ -13,6 +14,7 @@ try {
     options: {
       help: { type: 'boolean', short: 'h' },
       out: { type: 'string', short: 'o' },
+      'frames-dir': { type: 'string' },
       width: { type: 'string', default: '1920' },
       height: { type: 'string', default: '1080' },
       start: { type: 'string' },
@@ -23,12 +25,13 @@ try {
     },
   })
   const [input] = positionals
-  const { out } = values
+  const { out, 'frames-dir': framesDir } = values
+  const frames = framesDir !== undefined
 
   if (values.help) {
     console.log(usage)
   } else {
-    if (positionals.length !== 1 || !out) {
+    if (positionals.length !== 1 || (frames ? out !== undefined || !framesDir.trim() : !out)) {
       throw new Error(usage)
     }
 
@@ -44,22 +47,34 @@ try {
       throw new Error('DPR must be a positive number')
     }
 
-    if (out.toLowerCase().endsWith('.mp4')) {
+    if (frames || out.toLowerCase().endsWith('.mp4')) {
       const start = videoTime(values.start ?? '0')
       const end = videoTime(values.end)
       const fps = Number(values.fps ?? 60)
 
       if (!(start >= 0 && end > start && end <= 2147483647)) {
-        throw new Error('MP4 export requires --end after --start (for example --start 1s --end 5s)')
+        throw new Error(
+          'Sequence export requires --end after --start (for example --start 1s --end 5s)',
+        )
       }
 
-      const quality = Number(values.quality ?? 8)
+      const request = { input, width, height, dpr, fps, start, end }
 
-      if (values.quality?.trim() === '') {
-        throw new Error('Quality must be an integer between 1 and 10')
+      if (frames) {
+        if (values.quality !== undefined) {
+          throw new Error('--quality requires an MP4 output')
+        }
+
+        await renderFrames({ ...request, framesDir })
+      } else {
+        const quality = Number(values.quality ?? 8)
+
+        if (values.quality?.trim() === '') {
+          throw new Error('Quality must be an integer between 1 and 10')
+        }
+
+        await renderVideo({ ...request, out, quality })
       }
-
-      await renderVideo({ input, out, width, height, dpr, fps, quality, start, end })
     } else {
       if (
         values.start !== undefined ||
@@ -67,7 +82,9 @@ try {
         values.fps !== undefined ||
         values.quality !== undefined
       ) {
-        throw new Error('--start, --end, --fps and --quality require an MP4 output')
+        throw new Error(
+          'Time and FPS settings require an MP4 output or --frames-dir. Quality is MP4 only.',
+        )
       }
 
       const renderer = openRenderer()

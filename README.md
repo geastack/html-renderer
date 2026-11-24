@@ -24,7 +24,9 @@ npx gea-html-render page.html --out page.png
 ```
 
 The npm install hook downloads the matching native renderer from GitHub Releases.
-If npm skips dependency scripts, the first render downloads it. The CLI defaults
+If npm skips dependency scripts, the first render downloads it.
+Install FFmpeg separately for MP4 export or to decode embedded video.
+Static pages and CSS animations can export PNGs without FFmpeg. The CLI defaults
 to 1920 × 1080 at DPR 1. Override the viewport with `--width`, `--height`, and `--dpr`.
 
 The release workflow builds for Apple Silicon macOS, Linux x64, and Windows x64.
@@ -59,6 +61,25 @@ source with a `src`. Media paths are relative to the HTML file. Playback starts
 at page time zero, and the last video frame holds after the clip ends. The output
 contains the rendered video frames only. Playback controls and an audio track
 are outside the export path.
+
+## Export PNG frames
+
+```sh
+npx gea-html-render page.html --start 500ms --end 4s --fps 30 --frames-dir frames
+```
+
+Use a directory that does not exist yet. Export opens the app or page once
+and writes lossless RGBA PNGs at the requested dimensions, starting with
+`frame-000000.png`. The first frame is at `--start` (zero by default).
+`--end` is required and exclusive. Import the frames at the same FPS in
+your editor or encoder. If export fails, completed frames remain in the
+output directory.
+
+PNG sequence export needs no FFmpeg for CSS animation or static content.
+Local `<video>` sources still need FFmpeg for decoding.
+
+The Node API also exposes `renderFrames({ input, framesDir, start, end, fps })`.
+Times are in milliseconds, and it returns the number of frames written.
 
 ## Node API
 
