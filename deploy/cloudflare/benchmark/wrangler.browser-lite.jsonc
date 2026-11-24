@@ -1,0 +1,19 @@
+{
+  "name": "gea-render-browser-lowmem-lite",
+  "main": "src/native-worker.ts",
+  "compatibility_date": "2026-11-24",
+  "workers_dev": true,
+  "containers": [
+    {
+      "class_name": "RenderBenchmark",
+      "image": "./Dockerfile.browser-lite",
+      "image_build_context": "../../..",
+      "max_instances": 4,
+      "instance_type": "lite",
+    },
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "RENDER", "class_name": "RenderBenchmark" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RenderBenchmark"] }],
+}

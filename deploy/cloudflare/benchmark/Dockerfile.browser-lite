@@ -1,0 +1,8 @@
+FROM gea-browser-benchmark-base:local
+
+USER root
+RUN npx playwright install --only-shell chromium
+COPY deploy/cloudflare/benchmark/src/browser.mjs deploy/cloudflare/benchmark/src/chrome.mjs /app/deploy/cloudflare/benchmark/src/
+
+USER render
+CMD ["node", "deploy/cloudflare/benchmark/src/browser.mjs"]

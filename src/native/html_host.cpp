@@ -58,11 +58,29 @@ std::string htmlInput()
     return utf8Path(fs::absolute(pathFromUtf8(input)).lexically_normal());
 }
 
+static fs::path assetRoot;
+
+void htmlSetAssetRoot(const std::string &root)
+{
+    assetRoot = pathFromUtf8(root);
+}
+
+static void checkAssetPath(const fs::path &path)
+{
+    if (assetRoot.empty()) return;
+    const auto normalized = path.lexically_normal();
+    const auto relative = normalized.lexically_relative(assetRoot);
+    if (relative.empty() || relative.has_root_path() || *relative.begin() == "..") {
+        htmlFail("Asset is outside the uploaded bundle");
+    }
+}
+
 std::string htmlRead(const std::string &path)
 {
     constexpr std::uintmax_t limit = 4 * 1024 * 1024;
     std::error_code error;
     const auto file = pathFromUtf8(path);
+    checkAssetPath(file);
     const auto size = fs::file_size(file, error);
     if (error || size > limit) htmlFail("Cannot read file: " + path);
     std::ifstream stream(file, std::ios::binary);
@@ -79,7 +97,9 @@ std::string htmlResolve(const std::string &source, const std::string &relative)
         relative.rfind("//", 0) == 0 || pathFromUtf8(relative).has_root_path()) {
         htmlFail("Expected a relative local asset path: " + relative);
     }
-    return utf8Path((pathFromUtf8(source).parent_path() / pathFromUtf8(relative)).lexically_normal());
+    const auto path = (pathFromUtf8(source).parent_path() / pathFromUtf8(relative)).lexically_normal();
+    checkAssetPath(path);
+    return utf8Path(path);
 }
 
 namespace {

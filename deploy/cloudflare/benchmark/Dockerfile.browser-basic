@@ -1,0 +1,5 @@
+FROM gea-browser-benchmark-base:local
+
+ENV GEA_BENCHMARK_FULL_CHROME=1
+COPY deploy/cloudflare/benchmark/src/browser.mjs deploy/cloudflare/benchmark/src/chrome.mjs /app/deploy/cloudflare/benchmark/src/
+CMD ["node", "deploy/cloudflare/benchmark/src/browser.mjs"]
