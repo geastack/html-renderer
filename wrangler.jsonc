@@ -1,6 +1,6 @@
 {
   "name": "gea-html-renderer",
-  "main": "src/worker.ts",
+  "main": "deploy/cloudflare/src/worker.ts",
   "compatibility_date": "2026-11-24",
   "workers_dev": true,
   "vars": { "RENDER_INSTANCE_TYPE": "lite" },
@@ -10,8 +10,8 @@
       "scheduling_policy": "durable_object",
       "images": {
         "base": {
-          "dockerfile": "./Dockerfile",
-          "build_context": "../..",
+          "dockerfile": "deploy/cloudflare/Dockerfile",
+          "build_context": ".",
         },
       },
     },

@@ -98,6 +98,10 @@ including child processes. Memory is the container's anonymous and shared
 memory, excluding regular file cache. The sampler records the starting
 value and estimates the peak at 10 ms intervals.
 
+The HTTP benchmark also reports two cgroup v2 memory peaks sampled every 5 ms.
+`ramPeak` is `anon + shmem` from `memory.stat`. `ramTotalPeak` is
+`memory.current` and includes file cache and kernel memory. Both values are in MiB.
+
 ## Run the browser Lite compatibility check
 
 The Lite service uses the same 1920 × 1080 fixtures as the

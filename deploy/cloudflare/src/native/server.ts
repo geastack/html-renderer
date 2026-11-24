@@ -10,6 +10,7 @@ declare function startCaptureMetrics(): void
 declare function finishCaptureMetrics(): void
 declare function httpPrerenderMode(): boolean
 declare function captureMetrics(): string
+declare function captureTotalMemory(): string
 declare function openBundle(bytes: Uint8Array): string
 declare function beginFileBundle(): void
 declare function writeBundleFile(name: string, bytes: Uint8Array): void
@@ -149,6 +150,7 @@ function serve(): void {
     }
 
     response.setHeader('x-gea-capture', captureMetrics())
+    response.setHeader('x-gea-memory-current-peak', captureTotalMemory())
     response.setHeader('content-type', 'image/png')
     response.setHeader('content-length', String(png.length))
     response.setHeader('x-bench-container-ms', String(performance.now() - started))

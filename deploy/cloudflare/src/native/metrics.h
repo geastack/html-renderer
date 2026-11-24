@@ -34,20 +34,34 @@ static std::int64_t anonymousMemory()
 }
 
 static std::string lastCaptureMetrics;
+static std::int64_t lastTotalMemoryPeak = -1;
 static bool firstCapture = true;
+
+static std::int64_t totalMemory()
+{
+	std::ifstream stream("/sys/fs/cgroup/memory.current");
+	std::int64_t value;
+	return stream >> value ? value : -1;
+}
 
 class CaptureMetrics {
 	const std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 	const std::int64_t cpuBefore = cgroupCounter("cpu.stat", "usage_usec");
 	const std::int64_t baseline = anonymousMemory();
 	std::int64_t peak = baseline;
+	std::int64_t totalPeak = totalMemory();
+	void sample()
+	{
+		peak = std::max(peak, anonymousMemory());
+		totalPeak = std::max(totalPeak, totalMemory());
+	}
 	std::mutex timerMutex;
 	std::condition_variable_any timer;
 	std::jthread sampler{[this](std::stop_token stop) {
 		std::unique_lock lock(timerMutex);
 		while (!stop.stop_requested()) {
 			timer.wait_for(lock, stop, std::chrono::milliseconds(5), [] { return false; });
-			if (!stop.stop_requested()) peak = std::max(peak, anonymousMemory());
+			if (!stop.stop_requested()) sample();
 		}
 	}};
 
@@ -58,7 +72,8 @@ public:
 		const auto cpuAfter = cgroupCounter("cpu.stat", "usage_usec");
 		sampler.request_stop();
 		sampler.join();
-		peak = std::max(peak, anonymousMemory());
+		sample();
+		lastTotalMemoryPeak = totalPeak;
 		const auto wall = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 		lastCaptureMetrics = std::to_string(wall) + "," +
 			std::to_string(cpuBefore < 0 ? -1 : cpuAfter - cpuBefore) + "," +
@@ -84,4 +99,9 @@ static void finishCaptureMetrics()
 static std::string captureMetrics()
 {
 	return lastCaptureMetrics;
+}
+
+static std::string captureTotalMemory()
+{
+	return std::to_string(lastTotalMemoryPeak);
 }

@@ -8,6 +8,7 @@ const functions = [
   'startCaptureMetrics',
   'finishCaptureMetrics',
   'captureMetrics',
+  'captureTotalMemory',
   'httpPrerenderMode',
   'openBundle',
   'beginFileBundle',
