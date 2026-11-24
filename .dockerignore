@@ -20,3 +20,4 @@
 !dist/
 !dist/cloudflare/
 !dist/cloudflare/html-renderer
+!dist/cloudflare/renderer-rootfs.tar

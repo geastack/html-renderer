@@ -22,10 +22,9 @@ root:
 npm run cloudflare:deploy
 ```
 
-Both deployment paths use the versioned release image pinned in
-`deploy/cloudflare/Dockerfile.release`. Wrangler imports the image into
-the deploying account's Cloudflare registry. The hosted build pulls the
-image and deploys the Worker.
+Both deployment paths download the versioned image from the renderer's
+public GitHub release. Wrangler imports its filesystem into the deploying
+account's Cloudflare registry and deploys the Worker.
 
 Use `-- --dry-run` to validate locally. To build the Linux executable
 from source on macOS or Linux, run
