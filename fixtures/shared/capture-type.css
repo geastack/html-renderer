@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Capture Display";
+  src: url("fonts/HankenGrotesk-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Capture Text";
+  src: url("fonts/HankenGrotesk-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Capture Label";
+  src: url("fonts/JetBrainsMono-Bold.ttf");
+}
+
+body, p {
+  font-family: "Capture Text";
+}
+
+h1, .capture-title {
+  font-family: "Capture Display";
+  font-weight: normal;
+}
+
+.capture-label {
+  font-family: "Capture Label";
+  letter-spacing: 0.4px;
+}

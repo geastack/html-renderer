@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: geastack/core
-          ref: e746d11531a8a8845a497bbe87b9843e4bff45eb
+          ref: 974a702e26238b5dd3db46c1a91b37d9d26029ee
           path: core
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -164,12 +164,16 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
       - name: Build and test the Linux renderer image
         run: |
           version=$(node -p 'require("./package.json").version')
           image="gea-html-renderer:$version"
           echo "RENDERER_IMAGE=$image" >> "$GITHUB_ENV"
           echo "RENDERER_VERSION=$version" >> "$GITHUB_ENV"
+          npm ci --ignore-scripts
           GEA_BUILD_JOBS=3 bash deploy/cloudflare/scripts/build-in-docker.sh
           docker build --platform linux/amd64 --file deploy/cloudflare/Dockerfile \
             --label "org.opencontainers.image.source=https://github.com/$GITHUB_REPOSITORY" \
@@ -188,6 +192,7 @@ jobs:
               throw new Error("Expected a 1920 × 1080 PNG")
             }
           '
+          node scripts/smoke-svg.mjs "http://$address"
       - name: Package the versioned image
         run: |
           asset=dist/cloudflare/gea-html-renderer-container-linux-x64.tar.gz

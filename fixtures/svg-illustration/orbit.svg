@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Local image with transparent corners, a gradient, and a stroked orbit. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="100" viewBox="0 0 160 100">
+  <defs>
+    <linearGradient id="planet" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#6be2ea"/>
+      <stop offset="100%" stop-color="#696ee8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="80" cy="50" r="36" fill="url(#planet)"/>
+  <ellipse cx="80" cy="50" rx="69" ry="17" transform="rotate(-20 80 50)" fill="none" stroke="#ffe6a8" stroke-width="3"/>
+  <circle cx="129" cy="29" r="5" fill="#fff4d5"/>
+</svg>

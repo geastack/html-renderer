@@ -73,6 +73,12 @@ try {
     throw new Error('The npm install hook did not download and install the renderer')
   }
 
+  execFileSync(
+    process.execPath,
+    ['scripts/smoke-svg.mjs', path.resolve(installed, 'dist/prebuilt', asset.executable)],
+    { stdio: 'inherit' },
+  )
+
   const output = 'dist/installed.png'
 
   execFileSync(
