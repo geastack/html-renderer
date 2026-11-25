@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: geastack/core
-          ref: cbfd50b92ad0823d5d671a9dc40ea471a2cf8780
+          ref: e746d11531a8a8845a497bbe87b9843e4bff45eb
           path: core
           persist-credentials: false
       - uses: actions/checkout@v4
