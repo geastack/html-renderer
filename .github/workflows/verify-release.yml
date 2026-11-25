@@ -1,0 +1,53 @@
+name: Verify public release
+
+on:
+  workflow_run:
+    workflows: [Publish]
+    branches: [release]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Render with the published npm package
+        run: |
+          npm ci --ignore-scripts
+          mkdir -p dist
+          printf '%s\n' '{"private":true,"allowScripts":{"@geastack/html-renderer":true}}' > dist/package.json
+          version=$(node -p 'require("./package.json").version')
+          tarball="https://registry.npmjs.org/@geastack/html-renderer/-/html-renderer-$version.tgz"
+          curl --fail --silent --show-error --range 0-0 --retry 36 --retry-all-errors \
+            --retry-delay 10 --max-time 15 --output /dev/null "$tarball"
+          npm install --prefix dist --no-save --no-package-lock --foreground-scripts --prefer-online \
+            "@geastack/html-renderer@$version"
+          package=dist/node_modules/@geastack/html-renderer
+          executable=$(node -p 'require("./dist/node_modules/@geastack/html-renderer/dist/renderer-assets.json")["linux-x64"].executable')
+          test -x "$package/dist/prebuilt/$executable"
+          node scripts/smoke-svg.mjs "$PWD/$package/dist/prebuilt/$executable"
+      - name: Render with the published Cloudflare image
+        run: |
+          version=$(node -p 'require("./package.json").version')
+          asset=gea-html-renderer-container-linux-x64.tar.gz
+          curl --fail --silent --show-error --location --retry 5 --retry-all-errors \
+            "https://github.com/$GITHUB_REPOSITORY/releases/download/renderer-v$version/$asset" \
+            --output "dist/$asset"
+          docker load --input "dist/$asset"
+          container=$(docker run --rm --detach --publish 127.0.0.1::8080 "gea-html-renderer:$version")
+          trap 'docker stop "$container" >/dev/null' EXIT
+          address=$(docker port "$container" 8080/tcp)
+          curl --fail --silent --show-error --retry 10 --retry-all-errors "http://$address/health"
+          node scripts/smoke-svg.mjs "http://$address"
