@@ -21,6 +21,7 @@ namespace fs = std::filesystem;
 using gea::embedded::ui::StyleSheet;
 
 #if defined(__linux__)
+#include "platform/file_cache.h"
 #include "platform/prerender_fonts.h"
 #elif defined(_WIN32)
 extern "C" void gea_windows_begin_runtime_fonts();
@@ -77,6 +78,11 @@ static void checkAssetPath(const fs::path &path)
 
 std::string htmlRead(const std::string &path)
 {
+#if defined(__linux__)
+    // The headless Linux target reads local assets from the process filesystem.
+    // Preserve any storage provider explicitly installed by the platform.
+    gea::platform::storage::setFallbackMountProvider(+[]() { return true; });
+#endif
     constexpr std::uintmax_t limit = 4 * 1024 * 1024;
     std::error_code error;
     const auto file = pathFromUtf8(path);

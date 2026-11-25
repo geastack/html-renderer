@@ -1,6 +1,6 @@
 {
   "name": "@geastack/html-renderer",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
@@ -22,8 +22,8 @@
     "@geastack/apple": "^0.2.26",
     "@geastack/cli": "0.1.124",
     "@geastack/compiler": "1.0.63",
-    "@geastack/core": "0.1.65",
-    "@geastack/engine": "0.1.32",
+    "@geastack/core": "0.1.66",
+    "@geastack/engine": "0.1.33",
     "@geastack/geatsc-plugin-gea": "0.1.29",
     "@geastack/linux": "0.1.9",
     "@geastack/node-compat": "1.0.22",
