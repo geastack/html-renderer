@@ -1,0 +1,8 @@
+# Wrangler packages the filesystem of the prebuilt release image into the account registry.
+FROM scratch
+ADD dist/cloudflare/renderer-rootfs.tar /
+WORKDIR /app
+ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/pulseaudio
+USER 65534:65534
+EXPOSE 8080
+ENTRYPOINT ["/app/html-renderer", "--gea-prerender-http"]

@@ -2,6 +2,11 @@ name: Publish
 
 on:
   workflow_dispatch:
+    inputs:
+      image_only:
+        description: Publish the container image without publishing npm
+        type: boolean
+        default: false
   push:
     branches: [release]
 
@@ -12,6 +17,7 @@ concurrency: publish
 
 jobs:
   build:
+    if: inputs.image_only != true
     strategy:
       fail-fast: false
       matrix:
@@ -47,7 +53,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: geastack/core
-          ref: cbfd50b92ad0823d5d671a9dc40ea471a2cf8780
+          ref: e746d11531a8a8845a497bbe87b9843e4bff45eb
           path: core
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -151,9 +157,56 @@ jobs:
             html-renderer/dist/native-release/gea-html-renderer-${{ matrix.platform }}.tar.gz
           if-no-files-found: error
 
+  publish-image:
+    if: github.event_name == 'push' || inputs.image_only == true
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test the Linux renderer image
+        run: |
+          version=$(node -p 'require("./package.json").version')
+          image="gea-html-renderer:$version"
+          echo "RENDERER_IMAGE=$image" >> "$GITHUB_ENV"
+          echo "RENDERER_VERSION=$version" >> "$GITHUB_ENV"
+          GEA_BUILD_JOBS=3 bash deploy/cloudflare/scripts/build-in-docker.sh
+          docker build --platform linux/amd64 --file deploy/cloudflare/Dockerfile \
+            --label "org.opencontainers.image.source=https://github.com/$GITHUB_REPOSITORY" \
+            --tag "$image" .
+          container=$(docker run --rm --detach --publish 127.0.0.1::8080 "$image")
+          trap 'docker stop "$container" >/dev/null' EXIT
+          address=$(docker port "$container" 8080/tcp)
+          curl --fail --silent --show-error --retry 10 --retry-all-errors "http://$address/health"
+          printf '<html><body style="background:#123456">Gea</body></html>' |
+            curl --fail --silent --show-error --form 'files=@-;filename=index.html' \
+              "http://$address/render" --output dist/cloudflare/release-smoke.png
+          node -e '
+            const png = require("node:fs").readFileSync("dist/cloudflare/release-smoke.png")
+            if (png.subarray(0, 8).toString("hex") !== "89504e470d0a1a0a" ||
+              png.readUInt32BE(16) !== 1920 || png.readUInt32BE(20) !== 1080) {
+              throw new Error("Expected a 1920 × 1080 PNG")
+            }
+          '
+      - name: Package the versioned image
+        run: |
+          asset=dist/cloudflare/gea-html-renderer-container-linux-x64.tar.gz
+          docker save "$RENDERER_IMAGE" | gzip > "$asset"
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'push'
+        with:
+          name: cloudflare-container
+          path: dist/cloudflare/gea-html-renderer-container-linux-x64.tar.gz
+          if-no-files-found: error
+      - name: Attach the image to the published renderer release
+        if: inputs.image_only == true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "renderer-v$RENDERER_VERSION" dist/cloudflare/gea-html-renderer-container-linux-x64.tar.gz
+
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/release'
-    needs: build
+    needs: [build, publish-image]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -173,6 +226,20 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: node .github/scripts/publish-native.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: cloudflare-container
+          path: dist/cloudflare
+      - name: Attach the image to the renderer release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p 'require("./package.json").version')
+          tag="renderer-v$version"
+          if ! gh release view "$tag" --json assets --jq '.assets[].name' |
+            grep -Fxq gea-html-renderer-container-linux-x64.tar.gz; then
+            gh release upload "$tag" dist/cloudflare/gea-html-renderer-container-linux-x64.tar.gz
+          fi
       - run: npm install -g npm@latest
       - run: node .github/scripts/publish.mjs
         env:

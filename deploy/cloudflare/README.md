@@ -7,7 +7,13 @@ TypeScript HTTP server and HTML renderer together. The final image uses
 
 ## Deploy
 
-Install Node.js 20.19 or later and start Docker on macOS or Linux.
+Use the [Deploy to Cloudflare button](https://deploy.workers.cloudflare.com/?url=https://github.com/geastack/html-renderer)
+to import the repository and deploy through Workers Builds. Enable Containers
+on your account and enter a strong, unique value for the Worker secret
+`RENDER_TOKEN` when prompted. You can also set it under the Worker’s
+**Settings → Variables and Secrets**.
+
+For a local deployment, install Node.js 20.19 or later and start Docker on macOS or Linux.
 Authenticate Wrangler to a Cloudflare account with Containers enabled and
 set `RENDER_TOKEN` in your shell. Run this from the HTML Renderer repository
 root:
@@ -16,14 +22,13 @@ root:
 npm run cloudflare:deploy
 ```
 
-Docker installs the npm build dependencies from the lockfile and targets
-Linux x86-64 on both Intel and Apple Silicon hosts. Wrangler then packages
-and deploys the runtime image. The lockfile includes Core 0.1.60,
-Linux 0.1.8, and node-compat 1.0.22. The build checks that the Card fixture
-renders its uploaded font and that the executable serves health checks.
+Both deployment paths download the versioned image from the renderer's
+public GitHub release. Wrangler imports its filesystem into the deploying
+account's Cloudflare registry and deploys the Worker.
 
-Use `-- --dry-run` to validate locally. Use `-- --skip-build` to deploy
-an existing executable at `dist/cloudflare/html-renderer`.
+Use `-- --dry-run` to validate locally. To build the Linux executable
+from source on macOS or Linux, run
+`bash deploy/cloudflare/scripts/build-in-docker.sh`.
 
 ## Render a page
 

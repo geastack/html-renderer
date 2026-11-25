@@ -81,6 +81,7 @@ async function counters(file, keys) {
 }
 
 const memory = () => counters('memory.stat', ['anon', 'shmem'])
+const totalMemory = async () => Number(await readFile('/sys/fs/cgroup/memory.current', 'utf8'))
 const cpu = () => counters('cpu.stat', ['usage_usec'])
 let browser
 let mounted
@@ -121,15 +122,20 @@ createServer(async (request, response) => {
     const before = await cpu()
     const baseline = await memory()
     let peak = baseline
+    let totalPeak = await totalMemory()
+
+    async function sampleMemory() {
+      const [anonymous, total] = await Promise.all([memory(), totalMemory()])
+
+      peak = Math.max(peak, anonymous)
+      totalPeak = Math.max(totalPeak, total)
+    }
+
     let pending
     const sampler = setInterval(() => {
-      pending ??= memory()
-        .then((bytes) => {
-          peak = Math.max(peak, bytes)
-        })
-        .finally(() => {
-          pending = undefined
-        })
+      pending ??= sampleMemory().finally(() => {
+        pending = undefined
+      })
     }, 5)
 
     let png
@@ -161,12 +167,13 @@ createServer(async (request, response) => {
     const elapsed = Math.round((performance.now() - start) * 1000)
     const after = await cpu()
 
-    peak = Math.max(peak, await memory())
+    await sampleMemory()
     response
       .writeHead(200, {
         'Content-Type': 'image/png',
         'Content-Length': png.length,
         'x-bench-container-ms': String(performance.now() - started),
+        'x-gea-memory-current-peak': String(totalPeak),
         'X-Gea-Capture': [elapsed, after - before, baseline, peak, first ? after : -1].join(','),
       })
       .end(png)

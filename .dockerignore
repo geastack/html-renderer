@@ -2,6 +2,7 @@
 !deploy/
 !deploy/cloudflare/
 !deploy/cloudflare/Dockerfile
+!deploy/cloudflare/Dockerfile.release
 !deploy/cloudflare/benchmark/
 !deploy/cloudflare/benchmark/Dockerfile*
 !deploy/cloudflare/benchmark/src/
@@ -19,3 +20,4 @@
 !dist/
 !dist/cloudflare/
 !dist/cloudflare/html-renderer
+!dist/cloudflare/renderer-rootfs.tar

@@ -1,9 +1,10 @@
 {
   "name": "@geastack/html-renderer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
+    "deploy": "bash deploy/cloudflare/scripts/deploy-release.sh",
     "cloudflare:deploy": "bash deploy/cloudflare/scripts/deploy-native.sh",
     "render": "node scripts/render.mjs",
     "postinstall": "node lib/install.mjs",
@@ -21,7 +22,8 @@
     "@geastack/apple": "^0.2.26",
     "@geastack/cli": "0.1.124",
     "@geastack/compiler": "1.0.63",
-    "@geastack/core": "0.1.62",
+    "@geastack/core": "0.1.65",
+    "@geastack/engine": "0.1.32",
     "@geastack/geatsc-plugin-gea": "0.1.29",
     "@geastack/linux": "0.1.9",
     "@geastack/node-compat": "1.0.22",

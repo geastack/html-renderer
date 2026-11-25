@@ -15,20 +15,22 @@ if (![coldSamples, warmSamples].every((count) => Number.isSafeInteger(count) && 
   throw new Error('Benchmark sample counts must be positive integers')
 }
 
-if (!token || !native || (!pngPresets && !lite && !browser && !baseline)) {
+if (!token || (!native && !browser) || (native && !pngPresets && !lite && !browser && !baseline)) {
   throw new Error(
-    'Set BENCHMARK_TOKEN and BENCHMARK_NATIVE_URL, plus a comparison URL or --png-presets',
+    'Set BENCHMARK_TOKEN. Provide BENCHMARK_BROWSER_URL, or BENCHMARK_NATIVE_URL with a comparison URL or --png-presets',
   )
 }
 
-const engines = [
-  {
+const engines = []
+
+if (native) {
+  engines.push({
     name: lite ? 'Gea Basic' : baseline ? 'Candidate' : 'Gea',
     origin: native,
     prefix: '',
     native: true,
-  },
-]
+  })
+}
 
 if (lite) {
   engines.push({ name: 'Gea Lite', origin: lite, prefix: '', native: true })
@@ -137,6 +139,7 @@ function get(engine, path, id, method = 'GET') {
           }
 
           const ttfb = headers - start
+          const totalMemory = Number(res.headers['x-gea-memory-current-peak'])
 
           resolve({
             capture: capture / 1000,
@@ -144,6 +147,7 @@ function get(engine, path, id, method = 'GET') {
             startup: startup / 1000,
             ramBefore: ramBefore / 1048576,
             ramPeak: ramPeak / 1048576,
+            ...(totalMemory > 0 && { ramTotalPeak: totalMemory / 1048576 }),
             ttfb,
             worker,
             durable,
@@ -266,7 +270,7 @@ try {
           (engine) => engine.native && engine.compression === compression,
         )
 
-        if (new Set(geaEngines.map((engine) => hashes.get(engine.name))).size !== 1) {
+        if (new Set(geaEngines.map((engine) => hashes.get(engine.name))).size > 1) {
           throw new Error(
             `${fixture}: ${geaEngines.map((engine) => engine.name).join(' and ')} produced different PNGs`,
           )
@@ -306,6 +310,15 @@ try {
               ).toFixed(1) +
               ' / ' +
               Math.max(...rows.map((r) => r.ramPeak)).toFixed(1),
+            ...(rows.every((r) => Number.isFinite(r.ramTotalPeak)) && {
+              ramTotalPeak:
+                p(
+                  rows.map((r) => r.ramTotalPeak),
+                  0.5,
+                ).toFixed(1) +
+                ' / ' +
+                Math.max(...rows.map((r) => r.ramTotalPeak)).toFixed(1),
+            }),
           }
 
           console.log(
